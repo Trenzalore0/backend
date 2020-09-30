@@ -15,7 +15,7 @@ class CreateEstoquesTable extends Migration
     {
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
-            $table->foreign('cd_produto')->references('id')->on('produtos');
+            $table->foreign('id')->references('id')->on('produtos');
             $table->integer('quantidade_estoque');
             $table->timestamps();
         });

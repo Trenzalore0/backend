@@ -16,7 +16,7 @@ class CreateUfsTable extends Migration
         Schema::create('ufs', function (Blueprint $table) {
             $table->id();
             $table->string('ds_uf');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

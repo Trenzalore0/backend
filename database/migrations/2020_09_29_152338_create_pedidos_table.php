@@ -15,8 +15,8 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreign('cd_pagamento')->references('id')->on('pagamentos');
-            $table->foreign('cd_cliente')->references('id')->on('clientes');
+            // $table->foreign('id')->references('id')->on('pagamentos');
+            $table->foreign('id')->references('id')->on('clientes');
             $table->timestamps();
         });
     }

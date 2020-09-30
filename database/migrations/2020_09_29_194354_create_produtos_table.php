@@ -22,7 +22,7 @@ class CreateProdutosTable extends Migration
             $table->float('desconto_produto');
             $table->foreign('pais_origem')->references('id')->on('pais_origem');
             $table->foreign('cd_categoria')->references('id')->on('categorias');
-            $table->foreign('cd_tabela_imagem')->references('id')->on('imagens');
+            $table->foreign('id')->references('id')->on('imagens');
             $table->timestamps();
         });
     }

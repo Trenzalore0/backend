@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class categoria extends Model
+class Status_pedido extends Model
 {
     //
 }

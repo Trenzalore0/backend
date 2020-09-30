@@ -23,7 +23,7 @@ class CreateClientesTable extends Migration
             $table->enum('genero', ['Masculino', 'Feminino', 'Prefiro não informar']);
             $table->string('login');
             $table->string('senha');
-            $table->foreign('cd_tipo_usuario')->references('id')->on('tipo_usuario');
+            // $table->foreign('id')->references('id')->on('logins');
             $table->timestamps();
         });
     }

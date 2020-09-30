@@ -16,7 +16,7 @@ class CreateStatusPedidosTable extends Migration
         Schema::create('status_pedidos', function (Blueprint $table) {
             $table->id();
             $table->string('ds_status');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

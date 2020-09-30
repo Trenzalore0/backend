@@ -14,8 +14,8 @@ class CreateItemPedidosTable extends Migration
     public function up()
     {
         Schema::create('item_pedido', function (Blueprint $table) {
-            $table->foreign('cd_produto')->references('id')->on('produtos');
-            $table->foreign('cd_pedido')->references('id')->on('pedidos');
+            $table->foreign('id')->references('id')->on('produtos');
+            $table->foreign('id')->references('id')->on('pedidos');
             $table->integer('quantidade_produto');
             $table->float('valor_produto');
             $table->timestamps();

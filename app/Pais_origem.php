@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class imagem extends Model
+class Pais_origem extends Model
 {
     //
 }
