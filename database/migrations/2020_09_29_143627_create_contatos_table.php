@@ -16,7 +16,8 @@ class CreateContatosTable extends Migration
         Schema::create('contatos', function (Blueprint $table) {
             $table->id();
             $table->string('ds_contato');
-            $table->foreign('id')->references('id')->on('clientes');
+            $table->unsignedBigInteger('cd_cliente');
+            $table->foreign('cd_cliente')->references('id')->on('clientes');
             $table->timestamps();
         });
     }

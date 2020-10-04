@@ -19,10 +19,12 @@ class CreateEnderecosTable extends Migration
             $table->integer('numero');
             $table->string('bairro');
             $table->string('cep');
-            // $table->foreign('id')->references('id')->on('ufs');
+            $table->unsignedBigInteger('cd_uf');
+            $table->foreign('cd_uf')->references('id')->on('ufs');
             $table->string('referencia');
             $table->string('complemento');
-            $table->foreign('id')->references('id')->on('clientes');
+            $table->unsignedBigInteger('cd_cliente');
+            $table->foreign('cd_cliente')->references('id')->on('clientes');
             $table->timestamps();
         });
     }

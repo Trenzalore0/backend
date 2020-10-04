@@ -17,7 +17,8 @@ class CreateLoginsTable extends Migration
             $table->id();
             $table->string('login');
             $table->string('senha');
-            $table->foreign('id')->references('id')->on('perfils');
+            $table->unsignedBigInteger('cd_perfil');
+            $table->foreign('cd_perfil')->references('id')->on('perfils');
             $table->timestamps();
         });
     }
