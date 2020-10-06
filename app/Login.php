@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Facade\FlareClient\Http\Client;
 use Illuminate\Database\Eloquent\Model;
 
 class Login extends Model
@@ -10,7 +9,17 @@ class Login extends Model
     
     public function cliente()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
+    public function perfil()
+    {
+        return $this->hasOne(Perfil::class);
     }
     
 }
