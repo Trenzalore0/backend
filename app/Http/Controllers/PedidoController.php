@@ -14,4 +14,21 @@ class PedidoController extends Controller
         return view('/Pedido.index', compact('pedidos','mensagem'));
     }
 
+    public function adicionarPedido() {
+        return view('Pedido.adicionarPedido');
+    }
+
+    public function detalharPedido() {
+        return view('Pedido.detalhePedido');
+    }
+
+    public function atualizarPedido() {
+        return 'teste';
+    }
+
+    public function deletarPedido() {
+        return 'teste';
+    }
+
+
 }

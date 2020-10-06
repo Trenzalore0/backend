@@ -20,5 +20,8 @@ Route::get('/', function () {
 
 
 Route::get('Pedido','PedidoController@index')->name('pedidos');
-// Route::get('Pedido','PedidoController@detalharPedido')->name('detalhePedido');
-    
+Route::get('Pedido/adicionar','PedidoController@adicionarPedido')->name('adicionar.pedido');
+Route::get('Pedido/detalharPedido', 'PedidoController@detalharPedido')->name('detalhar.pedido');
+Route::put('Pedido/atualizarPedido', 'PedidoController@atualizarPedido')->name('atualizar.pedido');
+Route::put('Pedido/cancelarPedido', 'PedidoController@cancelarPedido')->name('cancelar.pedido');
+Route::delete('Pedido/deletarPedido', 'PedidoController@deletarPedido')->name('deletar.pedido');

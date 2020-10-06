@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Bebidas</a>
+    <a class="navbar-brand" href="#">Desvinho Manager</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +10,13 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href=" #">Pedidos</a>
+            <a class="nav-link" href="{{route('pedidos')}}">Pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Produtos</a>
             </li>
         </ul>
     </div>

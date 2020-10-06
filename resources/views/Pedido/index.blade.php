@@ -8,7 +8,7 @@
                 <h2>Lista de Pedidos</h2>
             </div>
             <div class="col-2">
-                <a href="" class="btn btn-success">Add. pedido manual</a>
+            <a href="{{route('adicionar.pedido')}}" class="btn btn-success">Add. pedido manual</a>
             </div>
         </div>
         <div class="row">
@@ -43,7 +43,7 @@
                         <td>R$500.00</td>
                         <td>Aberto</td>
                         <td>
-                        <div><a href="#" class="btn btn-primary">Ver Pedido</a></div>
+                        <div><a href="{{route('detalhar.pedido')}}" class="btn btn-primary">Ver Pedido</a></div>
                             <div><button class="btn btn-danger">Cancelar</button></div>
                         </td>
                     </tr>
