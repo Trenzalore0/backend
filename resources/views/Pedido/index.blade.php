@@ -28,6 +28,7 @@
                         <th class="scope">Cd. Pagamento</th>
                         <th class="scope">Nome Cliente</th>
                         <th class="scope">Quantidade de itens</th>
+                        <th class="scope">Total da compra</th>
                         <th class="scope">Status</th>
                         <th class="scope">Ação</th>
                     </tr>
@@ -39,6 +40,7 @@
                         <td>01</td>
                         <td>Fulano</td>
                         <td>6</td>
+                        <td>R$500.00</td>
                         <td>Aberto</td>
                         <td>
                         <div><a href="#" class="btn btn-primary">Ver Pedido</a></div>
