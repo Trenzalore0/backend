@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    //
+    protected $fillable = [
+        'nome', 'email', 'rg', 'cpf', 'data de nascimento', 'genero', 'login', 'senha'
+        ];    
 
     public function login()
     {
