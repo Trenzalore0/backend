@@ -36,10 +36,10 @@
 
 <div class="form-group">
     <label for="sel1">Pais origem do Produto:</label>
-    <select class="form-control" id="sel1">
+    <select class="form-control" id="sel1" name="cd_pais_origem">
         {{-- fazer um each para os tipos de pagamento --}}
         @foreach ($paises as $pais)
-            <option>{{$pais->ds_pais_origem}}</option>
+    <option value="{{$pais->id}}">{{$pais->ds_pais_origem}}</option>
         @endforeach
     </select>
 </div>
