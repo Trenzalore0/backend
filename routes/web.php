@@ -64,6 +64,9 @@ Route::get('/pedido', 'Site\PedidoController@index')
 Route::get('/pedido/adicionar', 'Site\PedidoController@adicionar')
     ->name('pedido.create');
 
+Route::post('/pedido/salvar', 'Site\PedidoController@salvar')
+    ->name('pedido.store');
+
 Route::get('/pedido/detalharPedido', 'Site\PedidoController@detalhar')
     ->name('pedido.edit');
 

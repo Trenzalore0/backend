@@ -1,5 +1,5 @@
-<h1 class="display-4">Listagem</h1>
-<a href="{{ route('produto.create') }}" class="btn btn-success float-right ">Criar</a>
+<label class="display-4">Listagem</label>
+<a href="{{ route('produto.create') }}" class="btn btn-success float-right mt-3">Criar</a>
 <table class="table">
   <thead>
     <tr>

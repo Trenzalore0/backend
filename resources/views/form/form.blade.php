@@ -1,13 +1,16 @@
-@if ($tipo == 'cliente')
+<form action="{{ route($tipo.'.store') }}" method="post" class="form">
+  @if ($tipo == 'cliente')
 
-  @include('form.includes.cliente')
+    @include('form.includes.cliente')
 
-@elseif($tipo == 'produto')
+  @elseif($tipo == 'produto')
 
-  @include('form.includes.produto')
+    @include('form.includes.produto')
 
-@else
+  @else
 
-  @include('form.includes.pedido')
+    @include('form.includes.pedido')
 
-@endif
+  @endif
+  <button type="submit" class="btn btn-success">Salvar</button>
+</form>
