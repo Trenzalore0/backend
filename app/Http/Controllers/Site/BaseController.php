@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Pais_origem;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -11,6 +10,8 @@ class BaseController extends Controller
     protected $classe;
 
     protected $tipo;
+
+    protected $importar;
 
     public function index(Request $req)
     {
@@ -26,8 +27,6 @@ class BaseController extends Controller
     public function adicionar()
     {
         $tipo = $this->tipo;
-
-        // $paises = Pais_origem::all();
 
         return view("site.adicionar", compact('tipo'));
     }
@@ -52,9 +51,7 @@ class BaseController extends Controller
 
         $editar = true;
 
-        $paises = Pais_origem::all();
-
-        return view("site.adicionar", compact('dados', 'tipo', 'editar', 'paises'));
+        return view("site.adicionar", compact('dados', 'tipo', 'editar'));
     }
 
     public function atualizar(Request $req, $id)

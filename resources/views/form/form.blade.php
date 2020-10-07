@@ -1,4 +1,6 @@
 <form action="{{ route($tipo.'.store') }}" method="post" class="form">
+  @csrf
+  @method('put')
   @if ($tipo == 'cliente')
 
     @include('form.includes.cliente')
