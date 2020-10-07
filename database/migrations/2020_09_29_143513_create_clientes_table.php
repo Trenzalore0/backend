@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('email');
             $table->string('rg');
             $table->string('cpf');
-            $table->date('data_de_nascimento');
+            $table->date('data de nascimento');
             $table->enum('genero', ['Masculino', 'Feminino', 'Prefiro não informar']);
             $table->string('login');
             $table->string('senha');
