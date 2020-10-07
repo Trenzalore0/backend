@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Categoria;
+use App\Imagem;
 use App\Pais_origem;
 use App\Produto;
 use Illuminate\Http\Request;
@@ -10,89 +11,96 @@ use Illuminate\Support\Facades\Hash;
 
 class ProdutoController extends BaseController
 {
-    public function __construct()
-    {
-        $this->classe = Produto::class;
-        $this->tipo = 'produto';
+  public function __construct()
+  {
+    $this->classe = Produto::class;
+    $this->tipo = 'produto';
+  }
+
+  public function adicionar()
+  {
+    $tipo = $this->tipo;
+
+    $paises = Pais_origem::all();
+
+    $categorias = Categoria::all();
+
+    return view(
+      "site.adicionar",
+      compact(
+        'tipo',
+        'paises',
+        'categorias'
+      )
+    );
+  }
+
+  public function salvar(Request $req)
+  {
+    $data = $req->all();
+
+    if ($req->hasFile('cd_imagem')) {
+      $image = Imagem::create([
+        'ds_imagem' => $this->transformImage($req)
+      ]);
+
+      $data['cd_imagem'] = $image->id;
     }
 
-    public function adicionar()
-    {
-        $tipo = $this->tipo;
+    $this->classe::create($data);
 
-        $paises = Pais_origem::all();
+    $req->session()
+      ->flash(
+        'mensagem',
+        "$req->nome adicionado com sucesso"
+      );
 
-        $categorias = Categoria::all();
+    return redirect()->route("$this->tipo.index");
+  }
 
-        return view(
-            "site.adicionar",
-            compact(
-                'tipo',
-                'paises',
-                'categorias'
-            )
-        );
-    }
+  public function editar($id)
+  {
+    $dados = $this->classe::find($id);
 
-    public function salvar(Request $req)
-    {
-        $data = $req->all();
+    $tipo = $this->tipo;
 
-        $$data['cd_imagem'] = $this->transformImage($req);
+    $editar = true;
 
-        $this->classe::create($data);
-        $req->session()
-            ->flash(
-                'mensagem',
-                "$req->nome adicionado com sucesso"
-            );
+    $paises = Pais_origem::all();
 
-        return redirect()->route("$this->tipo.index");
-    }
+    $categorias = Categoria::all();
 
-    public function editar($id)
-    {
-        $dados = $this->classe::find($id);
+    return view(
+      "site.adicionar",
+      compact(
+        'dados',
+        'tipo',
+        'editar',
+        'paises',
+        'categorias'
+      )
+    );
+  }
 
-        $tipo = $this->tipo;
+  public function transformImage(Request $req)
+  {
+    $image = $req->file('cd_imagem');
 
-        $editar = true;
+    $extension = $image->guessClientExtension();
 
-        $paises = Pais_origem::all();
+    $directory = 'img/products/';
 
-        $categorias = Categoria::all();
+    $hash = Hash::make(\rand(1, 9999999));
 
-        return view(
-            "site.adicionar",
-            compact(
-                'dados',
-                'tipo',
-                'editar',
-                'paises',
-                'categorias'
-            )
-        );
-    }
+    $fileName = 'img_' . $hash . '.' . $extension;
 
-    public function transformImage(Request $req)
-    {
-        $image = $req->file('image');
+    $image->move($directory, $fileName);
 
-        $extension = $image->guessClientExtension();
+    return $directory . $fileName;
+  }
 
-        $directory = 'img/products/';
-
-        $hash = Hash::make(\rand(1, 9999999));
-
-        $fileName = 'img_' . $hash . '.' . $extension;
-
-        $image->move($directory, $fileName);
-
-        return $directory . $fileName;
-    }
-
-    public function deleteImage($image)
-    {
-        \unlink($image);
-    }
+  public function deleteImage($image)
+  {
+    unlink($image);
+  }
 }

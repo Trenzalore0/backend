@@ -47,6 +47,6 @@
 </div>
 
 <div class="form-group">
-  <label for="">Imagem: </label>
-  <input type="file" name="Imagem" id="">
+  <label for="cd_imagem">Imagem: </label>
+  <input type="file" name="cd_imagem" id="cd_imagem">
 </div>
