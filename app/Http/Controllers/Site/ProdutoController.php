@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Site;
 use App\Categoria;
 use App\Pais_origem;
 use App\Produto;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProdutoController extends BaseController
 {
@@ -32,6 +34,22 @@ class ProdutoController extends BaseController
         );
     }
 
+    public function salvar(Request $req)
+    {
+        $data = $req->all();
+
+        $$data['cd_imagem'] = $this->transformImage($req);
+
+        $this->classe::create($data);
+        $req->session()
+            ->flash(
+                'mensagem',
+                "$req->nome adicionado com sucesso"
+            );
+
+        return redirect()->route("$this->tipo.index");
+    }
+
     public function editar($id)
     {
         $dados = $this->classe::find($id);
@@ -54,5 +72,27 @@ class ProdutoController extends BaseController
                 'categorias'
             )
         );
+    }
+
+    public function transformImage(Request $req)
+    {
+        $image = $req->file('image');
+
+        $extension = $image->guessClientExtension();
+
+        $directory = 'img/products/';
+
+        $hash = Hash::make(\rand(1, 9999999));
+
+        $fileName = 'img_' . $hash . '.' . $extension;
+
+        $image->move($directory, $fileName);
+
+        return $directory . $fileName;
+    }
+
+    public function deleteImage($image)
+    {
+        \unlink($image);
     }
 }
