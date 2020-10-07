@@ -13,10 +13,10 @@
             <a class="nav-link" href="{{route('pedidos')}}">Pedidos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Clientes</a>
+            <a class="nav-link" href="{{route('cliente')}}">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Produtos</a>
+            <a class="nav-link" href="{{route('produto.index')}}">Produtos</a>
             </li>
         </ul>
     </div>

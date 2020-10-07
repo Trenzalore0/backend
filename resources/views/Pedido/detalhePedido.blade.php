@@ -24,12 +24,14 @@
                     <tr>
                         <td>Itens :</td>
                     </tr>
+                    @foreach ($produtos as $produto)
                     <tr>
-                        <td>Nome do produto</td>
-                        <td>Foto do produto</td>
+                        <td>{{$produto->nome_produto}}</td>
+                        <td>{{$produto->cd_imagem}}imagem</td>
                         <td>Quantidade comprada</td>
-                        <td>Valor total</td>
-                    </tr>
+                        <td>{{$produto->valor_produto}}</td>
+                    </tr>                        
+                    @endforeach
                 </tbody>
             </table>
         </div>

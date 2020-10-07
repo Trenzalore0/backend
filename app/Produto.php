@@ -30,4 +30,8 @@ class Produto extends Model
     {
         return $this->belongsTo(Item_pedido::class);
     }
+
+    protected $fillable = [
+        'ds_produto', 'nome_produto', 'ano_produto', 'valor_produto', 'desconto_produto','ds_pais_origem',
+    ];
 }

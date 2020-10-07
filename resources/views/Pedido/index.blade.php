@@ -35,30 +35,20 @@
                 </thead>
                 <tbody>
                     {{-- colocar for each aqui --}}
-                    <tr>
-                        {{-- @foreach ($pedidos as $pedido)
-                            <td>$pedido->nr_pedido</td>
-                            <td>$pedido->cd_pagamento</td>
-                            <td>$pedido->cd_cliente</td>
-                            <td>$pedido->cd_item_pedido</td>
-                            <td>$pedido->valor</td>
-                            <td>$pedido->status_pedido</td>
+                    @foreach ($produtos as $produto)  
+                        <tr>
+                            <td>000001</td>
+                            <td>01</td>
+                            <td>Fulano</td>
+                            <td>qtd</td>
+                            <td></td>
+                            <td>Aberto</td>
                             <td>
                             <div><a href="{{route('detalhar.pedido')}}" class="btn btn-primary">Ver Pedido</a></div>
                                 <div><button class="btn btn-danger">Cancelar</button></div>
                             </td>
-                        @endforeach --}}
-                        <td>000001</td>
-                        <td>01</td>
-                        <td>Fulano</td>
-                        <td>6</td>
-                        <td>R$500.00</td>
-                        <td>Aberto</td>
-                        <td>
-                        <div><a href="{{route('detalhar.pedido')}}" class="btn btn-primary">Ver Pedido</a></div>
-                            <div><button class="btn btn-danger">Cancelar</button></div>
-                        </td>
-                    </tr>
+                        </tr>
+                    @endforeach
                     {{-- fechar o each --}}
                 </tbody>
             </table>
