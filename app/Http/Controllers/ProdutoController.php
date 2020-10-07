@@ -38,7 +38,7 @@ class ProdutoController extends Controller
 
 
         Produto::create($produto);
-
+        
         $req->session()
           ->flash(
               'mensagem',
