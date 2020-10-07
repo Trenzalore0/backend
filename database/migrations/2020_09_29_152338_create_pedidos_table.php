@@ -19,6 +19,7 @@ class CreatePedidosTable extends Migration
             $table->unsignedBigInteger('cd_tipo_pagamento');
             $table->foreign('cd_tipo_pagamento')->references('id')->on('pagamentos');
             $table->foreign('cd_cliente')->references('id')->on('clientes');
+            $table->unsignedBigInteger('cd_status_pedido')->references('id')->on('status_pedidos');
             $table->timestamps();
         });
     }
