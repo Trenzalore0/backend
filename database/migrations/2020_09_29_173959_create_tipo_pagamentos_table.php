@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoginsTable extends Migration
+class CreateTipoPagamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateLoginsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logins', function (Blueprint $table) {
+        Schema::create('tipo_pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('login');
-            $table->string('senha');
-            $table->foreign('id')->references('id')->on('perfils');
+            $table->string('ds_tipo_pagamento');
+            $table->unsignedBigInteger('cd_boleto');
+            $table->foreign('cd_boleto')->references('id')->on('boletos');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateLoginsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logins');
+        Schema::dropIfExists('tipo_pagamentos');
     }
 }

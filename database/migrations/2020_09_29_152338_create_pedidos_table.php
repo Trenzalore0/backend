@@ -14,9 +14,12 @@ class CreatePedidosTable extends Migration
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            // $table->foreign('id')->references('id')->on('pagamentos');
-            $table->foreign('id')->references('id')->on('clientes');
+            $table->id();
+            $table->unsignedBigInteger('cd_cliente');
+            $table->unsignedBigInteger('cd_tipo_pagamento');
+            $table->foreign('cd_tipo_pagamento')->references('id')->on('pagamentos');
+            $table->foreign('cd_cliente')->references('id')->on('clientes');
+            $table->unsignedBigInteger('cd_status_pedido')->references('id')->on('status_pedidos');
             $table->timestamps();
         });
     }
