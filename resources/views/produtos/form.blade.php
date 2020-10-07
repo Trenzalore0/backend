@@ -24,19 +24,28 @@
 <div class="form-group">
     <label for="desconto_produto"><b>Desconto do Produto: </b></label>
     <input style="border-radius: 10px;" type="text" class="form-control" id="desconto_produto" name="desconto_produto"
-           value="{{$produto->valor_produto ?? ''}}">
+           value="{{$produto->desconto_produto ?? ''}}">
 </div>
 
-<div class="form-group">
-    <label for="cd_pais_origem"><b>Pais origem produto: </b></label>
+<div class="form-group">    
+    <label for="cd_pais_origem"><b>Pais de Origem: </b></label>
     <input style="border-radius: 10px;" type="text" class="form-control" id="cd_pais_origem" name="cd_pais_origem"
-           value="{{$produto->cd_pais_origem ?? ''}}">
+           value="{{ $produto->cd_pais_origem ?? ''}}">    
+       
 </div>
 
+                        
 <div class="form-group">
     <label for="cd_categoria"><b>Categoria: </b></label>
     <input style="border-radius: 10px;" type="text" class="form-control" id="cd_categoria" name="cd_categoria"
-           value="{{$produto->cd_categoria ?? ''}}">
+           value="{{ $produto->cd_categoria ?? ''}}">
+         
 </div>
 
+<div class="form-group">
+    <label for="cd_imagem"><b>Imagem: </b></label>
+    <input style="border-radius: 10px;" type="text" class="form-control" id="cd_imagem" name="cd_imagem"
+           value="{{ $produto->cd_imagem ?? ''}}">
+     
+</div>
 

@@ -31,3 +31,4 @@ Route::put('produtos/atualizar/{id}', 'ProdutoController@atualizar')->name('prod
 
 Route::delete('/produtos/deletar/{id}', 'ProdutoController@deletar')
 ->name('produto.deletar');
+
