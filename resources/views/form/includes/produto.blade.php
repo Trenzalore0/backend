@@ -3,6 +3,7 @@
   <input style="border-radius: 10px;" type="text" class="form-control" id="ds_produto" name="ds_produto"
     value="{{ $dados->ds_produto ?? '' }}">
 </div>
+
 <div class="form-group">
   <label for="nome_produto"><b>Nome do Produto: </b></label>
   <input style="border-radius: 10px;" type="text" class="form-control" id="nome_produto" name="nome_produto"
@@ -27,25 +28,25 @@
     value="{{ $dados->valor_produto ?? '' }}">
 </div>
 
-{{-- <div class="form-group">
-  <label for="cd_pais_origem"><b>Pais origem produto: </b></label>
-  <select name="" id=""></select>
-  <input style="border-radius: 10px;" type="text" class="form-control" id="cd_pais_origem" name="cd_pais_origem"
-    value="{{ $produto->cd_pais_origem ?? '' }}">
-</div> --}}
-
-{{-- <div class="form-group">
+<div class="form-group">
   <label for="sel1">Pais origem do Produto:</label>
   <select class="form-control" id="sel1" name="cd_pais_origem">
-
     @foreach ($paises as $pais)
       <option value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
     @endforeach
   </select>
-</div> --}}
+</div>
 
 <div class="form-group">
-  <label for="cd_categoria"><b>Categoria: </b></label>
-  <input style="border-radius: 10px;" type="text" class="form-control" id="cd_categoria" name="cd_categoria"
-    value="{{ $dados->cd_categoria ?? '' }}">
+  <label for="">Categoria: </label>
+  <select class="form-control" name="cd_categoria" id="">
+    @foreach ($categorias as $categoria)
+        <option value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>
+    @endforeach
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="">Imagem: </label>
+  <input type="file" name="Imagem" id="">
 </div>

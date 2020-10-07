@@ -21,8 +21,8 @@
         <td>{{ $cliente->dataDeNascimento }}</td>
         <td>
           <div class="d-flex">
-            <a class="btn btn-primary" href="{{ route('editar', $cliente->id) }}">Editar</a>
-            <form action="{{ route('deletar', $cliente->id) }}" method="POST">
+            <a class="btn btn-primary" href="{{ route('cliente.edit', $cliente->id) }}">Editar</a>
+            <form action="{{ route('cliente.delete', $cliente->id) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-secondary">Excluir</button>

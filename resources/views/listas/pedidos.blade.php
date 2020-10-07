@@ -14,7 +14,7 @@
   </thead>
   <tbody>
     {{-- colocar for each aqui --}}
-    @foreach ($dados as $produto)
+    @foreach ($dados as $pedido)
       <tr>
         <td>000001</td>
         <td>01</td>
@@ -23,8 +23,12 @@
         <td></td>
         <td>Aberto</td>
         <td>
-          <div><a href="{{ route('pedido.edit') }}" class="btn btn-primary">Ver Pedido</a></div>
-          <div><button class="btn btn-danger">Cancelar</button></div>
+          <div><a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-primary">Ver Pedido</a></div>
+          <form action="{{ route('pedido.update.cancel', $pedido->id) }}">
+            @csrf
+            @method('put')
+            <button class="btn btn-danger">Cancelar</button>
+          </form>
         </td>
       </tr>
     @endforeach

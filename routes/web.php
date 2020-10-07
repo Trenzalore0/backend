@@ -44,7 +44,7 @@ Route::get('/produto', 'Site\ProdutoController@index')
 Route::get('/produto/adicionar', 'Site\ProdutoController@adicionar')
     ->name('produto.create');
 
-Route::post('/produto/salvar', 'Site\ProdutoController@salvar')
+Route::put('/produto/salvar', 'Site\ProdutoController@salvar')
     ->name('produto.store');
 
 Route::get('/produto/editar/{id}', 'Site\ProdutoController@editar')
