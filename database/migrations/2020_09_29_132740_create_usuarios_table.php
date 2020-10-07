@@ -15,6 +15,7 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
             $table->unsignedBigInteger('cd_login');
             $table->foreign('cd_login')->references('id')->on('logins');
             $table->timestamps();

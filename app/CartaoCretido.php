@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contato extends Model
+class CartaoCretido extends Model
 {
     public function cliente()
     {
-        return $this->hasMany(Cliente::class);
+        return $this->hasOne(Cliente::class);
     }
 }
