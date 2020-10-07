@@ -47,8 +47,8 @@
                             <td>{{ $cliente->dataDeNascimento }}</td>
                             <td>{{ $produto->publicado }}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{ route('editar', $produto->id )}}">Editar</a>
-                            <form action="{{ route('deletar' , $produto->id) }}" method="POST">
+                                <a class="btn btn-primary" href="{{ route('editar', $cliente->id )}}">Editar</a>
+                            <form action="{{ route('deletar' , $cliente->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-secondary">Excluir</button>

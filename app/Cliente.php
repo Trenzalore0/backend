@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-<<<<<<< HEAD
     protected $fillable = [
         'nome', 'email', 'rg', 'cpf', 'data de nascimento', 'genero', 'login', 'senha'
         ];    
 
-=======
->>>>>>> ce3733e033b581b065c372d73e900f659bb1b38e
     public function login()
     {
         return $this->hasOne(Login::class);
