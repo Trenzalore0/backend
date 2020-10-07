@@ -15,7 +15,7 @@ class ClienteController extends Controller
 
         $mensagem = $req->session()->get('mensagem');
 
-        return view('produtos.index', compact('produtos', 'mensagem'));
+        return view('cliente.index', compact('cliente', 'mensagem'));
     }
 
     public function adicionar()
