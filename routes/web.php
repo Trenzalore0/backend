@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/clientes', 'ClienteController@index')->name('cliente');
+Route::get('/clientes/adicionar', 'ClienteController@adicionar')->name('adicionar');
+Route::post('/clientes/salvar', 'ClienteController@salvar')->name('salvar');
+Route::get('/clientes/editar', 'ClienteController@editar')->name('editar');
+Route::put('/clientes/atualizar', 'ClienteController@atualizar')->name('atualizar');
+Route::delete('/clientes/deletar', 'ClienteController@deletar')->name('deletar');
+
