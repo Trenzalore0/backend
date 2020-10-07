@@ -17,12 +17,9 @@ class ProdutoController extends Controller
 
     public function adicionar()
     {
-<<<<<<< HEAD
 
         
 
-=======
->>>>>>> devMaster
         return view('produtos.adicionar');
     }
 
