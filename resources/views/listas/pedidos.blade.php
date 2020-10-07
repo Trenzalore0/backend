@@ -23,7 +23,7 @@
         <td></td>
         <td>Aberto</td>
         <td>
-          <div><a href="{{ route('detalhar.pedido') }}" class="btn btn-primary">Ver Pedido</a></div>
+          <div><a href="{{ route('pedido.edit') }}" class="btn btn-primary">Ver Pedido</a></div>
           <div><button class="btn btn-danger">Cancelar</button></div>
         </td>
       </tr>
