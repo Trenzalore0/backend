@@ -78,3 +78,7 @@ Route::put('/pedido/cancelarPedido', 'Site\PedidoController@cancelar')
 
 Route::delete('/pedido/deletarPedido', 'Site\PedidoController@deletar')
     ->name('pedido.delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
