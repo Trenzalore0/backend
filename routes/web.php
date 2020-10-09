@@ -54,7 +54,7 @@ Route::put('/produto/atualizar/{id}', 'Site\ProdutoController@atualizar')
     ->name('produto.update');
 
 Route::delete('/produto/deletar/{id}', 'Site\ProdutoController@deletar')
-    ->name('produto.deletar');
+    ->name('produto.delete');
 
 
 // Rotas de pedido

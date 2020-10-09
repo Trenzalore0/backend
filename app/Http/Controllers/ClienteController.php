@@ -20,7 +20,7 @@ class ClienteController extends Controller
 
     public function adicionar()
     {
-        return view('clientes.adicionar');
+        return view('cliente.create');
     }
 
     public function salvar(Request $req)
@@ -39,7 +39,7 @@ class ClienteController extends Controller
     public function editar($id)
     {
         $cliente = Cliente::find($id);
-        return view('clientes.editar', compact('cliente'));
+        return view('cliente.edit', compact('cliente'));
     }
 
     public function atualizar(Request $req, $id)
@@ -50,10 +50,10 @@ class ClienteController extends Controller
         $req->session()
             ->flash(
                 'mensagem',
-                "O produto $req->nome foi atualizado com sucesso"
+                "Os dados de $req->nome foram atualizados com sucesso"
             );
 
-        return redirect()->route('produtos');
+        return redirect()->route('cliente');
     }
 
     public function deletar(Request $req, $id)
