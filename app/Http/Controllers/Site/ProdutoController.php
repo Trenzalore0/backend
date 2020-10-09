@@ -17,6 +17,28 @@ class ProdutoController extends BaseController
     $this->tipo = 'produto';
   }
 
+  public function index(Request $req)
+  {
+    $dados = $this->classe::all();
+
+    $tipo = $this->tipo;
+
+    foreach ($dados as $dado) {
+      $img = Imagem::find($dado['cd_imagem']);
+      $dado['cd_imagem'] = url($img->ds_imagem);
+
+      $cate = Categoria::find($dado['cd_categoria']);
+      $dado['cd_categoria'] = $cate->ds_categoria;
+
+      $pais = Pais_origem::find($dado['cd_pais_origem']);
+      $dado['cd_pais_origem'] = $pais->ds_pais_origem;
+    }
+
+    $mensagem = $req->session()->get('mensagem');
+
+    return view("site.index", compact('dados', 'tipo', 'mensagem'));
+  }
+
   public function adicionar()
   {
     $tipo = $this->tipo;
@@ -82,6 +104,27 @@ class ProdutoController extends BaseController
     );
   }
 
+  public function deletar(Request $req, $id)
+  {
+    $dado = $this->classe::find($id);
+
+    $img = Imagem::find($dado['cd_imagem']);
+
+    $this->deleteImage($img->ds_imagem);
+
+    $this->classe::destroy($id);
+
+    Imagem::destroy($img->id);
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "Dados de $dado->nome excluido com sucesso!"
+      );
+
+    return redirect()->route("$this->tipo.index");
+  }
+
   public function transformImage(Request $req)
   {
     $image = $req->file('cd_imagem');
@@ -90,7 +133,7 @@ class ProdutoController extends BaseController
 
     $directory = 'img/products/';
 
-    $hash = Hash::make(\rand(1, 9999999));
+    $hash = rand(1, 9999999);
 
     $fileName = 'img_' . $hash . '.' . $extension;
 

@@ -27,7 +27,7 @@
         <td>{{ $produto->cd_pais_origem }}</td>
         <td>{{ $produto->cd_categoria }}</td>
         <td>
-          <img width="70" class="w-100" src="">
+          <img width="70" height="60" class="w-100" src="{{ $produto->cd_imagem }}">
         </td>
         <td>
           <div class="d-flex justify-content-between">
