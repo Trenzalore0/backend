@@ -9,15 +9,24 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('home.index') }}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('pedido.index') }}">Pedidos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('cliente.index') }}">Clientes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('produto.index') }}">Produtos</a>
-      </li>
+      @guest
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">Register</a>
+        </li> 
+      @else
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('pedido.index') }}">Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('cliente.index') }}">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('produto.index') }}">Produtos</a>
+        </li>
+      @endguest
     </ul>
   </div>
 
