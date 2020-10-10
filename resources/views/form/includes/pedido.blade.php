@@ -2,14 +2,14 @@
   <label for="nome">Nome cliente</label>
   <input type="text" class="form-control" id="nome" name="nome">
 </div>
-{{-- <div class="form-group">
+<div class="form-group">
   <label for="sel1">Produto</label>
   <select class="form-control" id="sel1">
-    @foreach ($dados as $produto)
-      <option>{{ $dados->nome_produto ?? ''}}</option>
+    @foreach ($produtos as $produto)
+      <option>{{ $produto->nome_produto ?? ''}}</option>
     @endforeach
   </select>
-</div> --}}
+</div>
 <div class="form-group">
   <label for="quantidade">Quantidade</label>
   <input type="text" class="form-control" id="quantidade" name="quantidade">
