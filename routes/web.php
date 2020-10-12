@@ -78,3 +78,25 @@ Route::put('/pedido/cancelarPedido', 'Site\PedidoController@cancelar')
 
 Route::delete('/pedido/deletarPedido', 'Site\PedidoController@deletar')
     ->name('pedido.delete');
+
+
+// Rotas de endereço
+Route::get('/endereco', 'Site\EnderecoController@index')
+    ->name('endereco.index');
+
+Route::get('/endereco/adicionar', 'Site\EnderecoController@adicionar')
+    ->name('endereco.create');
+
+Route::post('/endereco/salvar', 'Site\EnderecoController@salvar')
+    ->name('endereco.store');
+
+Route::get('/endereco/editar/{id}', 'Site\EnderecoController@editar')
+    ->name('endereco.edit');
+
+Route::put('/endereco/atualizar/{id}', 'Site\EnderecoController@atualizar')
+    ->name('endereco.update');
+
+Route::delete('/endereco/deletar/{id}', 'Site\EnderecoController@deletar')
+    ->name('endereco.deletar');
+
+    

@@ -7,6 +7,10 @@
 
     @include('form.includes.produto')
 
+  @elseif($tipo == 'endereco')
+
+    @include('form.includes.endereco')  
+
   @else
 
     @include('form.includes.pedido')
