@@ -133,9 +133,9 @@ Route::put(
 )->name('endereco.store');
 
 Route::get(
-    '/produto/editar/{id}',
+    '/endereco/editar/{id}',
     'Site\EnderecoController@editar'
-)->name('produto.edit');
+)->name('endereco.edit');
 
 Route::put(
     '/endereco/atualizar/{id}',
