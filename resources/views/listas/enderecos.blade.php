@@ -11,7 +11,7 @@
       <th scope="col">UF</th>
       <th scope="col">Referência</th>
       <th scope="col">Complemento</th>
-      <th scope="col">Cliente</th>
+      {{-- <th scope="col">Cliente</th> --}}
     </tr>
   </thead>
   <tbody>
@@ -25,11 +25,11 @@
         <td>{{ $endereco->cd_uf }}</td>
         <td>{{ $endereco->referencia }}</td>
         <td>{{ $endereco->complemento }}</td>
-        <td>{{ $endereco->cd_cliente }}</td>
+        {{-- <td>{{ $endereco->cd_cliente }}</td> --}}
         <td>
           <div class="d-flex">
-            <a class="btn btn-primary" href="{{ route('editar', $endereco->id) }}">Editar</a>
-            <form action="{{ route('deletar', $endereco->id) }}" method="POST">
+            <a class="btn btn-primary" href="{{ route('endereco.edit', $endereco->id) }}">Editar</a>
+            <form action="{{ route('endereco.delete', $endereco->id) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-secondary">Excluir</button>

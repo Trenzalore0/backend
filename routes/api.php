@@ -33,3 +33,18 @@ Route::post(
     '/itemPedido/criarLista',
     'Api\ItemPedidoController@createItem'
 );
+
+Route::get(
+    '/endereco/listar',
+    'Api\EnderecoController@listAll'
+);
+
+Route::post(
+    '/endereco/pedido',
+    'Api\EnderecoController@selectProdutosPedido'
+);
+
+Route::post(
+    '/endereco/criarLista',
+    'Api\EnderecoController@createItem'
+);

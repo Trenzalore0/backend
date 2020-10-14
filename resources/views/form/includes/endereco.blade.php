@@ -21,11 +21,11 @@
       value="{{ $dados->cep ?? '' }}">
   </div>
   
-  <div class="form-group">
+  {{-- <div class="form-group">
     <label for="cd_uf"><b>UF: </b></label>
     <input style="border-radius: 10px;" type="text" class="form-control" id="cd_uf" name="cd_uf"
       value="{{ $dados->cd_uf ?? '' }}">
-  </div>
+  </div> --}}
 
   <div class="form-group">
     <label for="referencia"><b>Referência: </b></label>
