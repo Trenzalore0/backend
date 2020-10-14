@@ -46,7 +46,15 @@
   </select>
 </div>
 
+<<<<<<< HEAD
 <div class="form-group">
   <label for="cd_imagem">Imagem: </label>
   <input type="file" name="cd_imagem" id="cd_imagem">
 </div>
+=======
+{{-- <div class="form-group">
+  <label for="cd_categoria"><b>Categoria: </b></label>
+  <input style="border-radius: 10px;" type="text" class="form-control" id="cd_categoria" name="cd_categoria"
+    value="{{ $dados->cd_categoria ?? '' }}">
+</div> --}}
+>>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58

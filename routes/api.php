@@ -48,3 +48,8 @@ Route::post(
     '/endereco/criarLista',
     'Api\EnderecoController@createItem'
 );
+Route::get('/listar', 'API\ClienteController@listar');
+Route::post('/salvar', 'API\ClienteController@salvar');
+Route::get('/buscar/{id}', 'API\ClienteController@buscar');
+Route::put('/atualizar/{id}', 'Api\ClienteController@atualizar');
+

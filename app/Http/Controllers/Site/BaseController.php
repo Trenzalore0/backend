@@ -11,6 +11,8 @@ abstract class BaseController extends Controller
 
     protected $tipo;
 
+    protected $importar;
+
     public function index(Request $req)
     {
         $dados = $this->classe::all();

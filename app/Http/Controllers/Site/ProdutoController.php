@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Categoria;
+<<<<<<< HEAD
 use App\Imagem;
+=======
+>>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58
 use App\Pais_origem;
 use App\Produto;
 use Illuminate\Http\Request;
@@ -69,6 +72,7 @@ class ProdutoController extends BaseController
       $data['cd_imagem'] = $image->id;
     }
 
+<<<<<<< HEAD
     $this->classe::create($data);
 
     $req->session()
@@ -146,4 +150,47 @@ class ProdutoController extends BaseController
   {
     unlink($image);
   }
+=======
+    public function adicionar()
+    {
+        $tipo = $this->tipo;
+
+        $paises = Pais_origem::all();
+
+        $categorias = Categoria::all();
+
+        return view(
+            "site.adicionar",
+            compact(
+                'tipo',
+                'paises',
+                'categorias'
+            )
+        );
+    }
+
+    public function editar($id)
+    {
+        $dados = $this->classe::find($id);
+
+        $tipo = $this->tipo;
+
+        $editar = true;
+
+        $paises = Pais_origem::all();
+
+        $categorias = Categoria::all();
+
+        return view(
+            "site.adicionar",
+            compact(
+                'dados',
+                'tipo',
+                'editar',
+                'paises',
+                'categorias'
+            )
+        );
+    }
+>>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58
 }
