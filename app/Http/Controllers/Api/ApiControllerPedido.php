@@ -14,4 +14,23 @@ class ApiControllerPedido extends Controller
 
         return $dados::paginate($req->per_page);
     }
+    public function cancelarPedido($id)
+    {
+        $pedido = Pedido::find($id);
+
+        if(is_null($pedido))
+        {
+            return response()->json(['erro'=>'Pedido não encontrado',404]);
+        }
+
+        return response()->json('Pedido cancelado',200);
+    }
+    public function adicionarPedido(Request $req)
+    {
+        
+    }
+    public function atualizarPedido(Request $req)
+    {
+        
+    }
 }
