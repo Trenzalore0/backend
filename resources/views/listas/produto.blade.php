@@ -12,6 +12,7 @@
       <th scope="col">Pais Origem</th>
       <th scope="col">Categoria</th>
       <th scope="col">Imagem</th>
+      <th scope="col">ações</th>
     </tr>
   </thead>
   <tbody>
@@ -21,15 +22,15 @@
         <td>{{ $produto->ds_produto }}</td>
         <td>{{ $produto->nome_produto }}</td>
         <td>{{ $produto->ano_produto }}</td>
-        <td>{{ $produto->valor_produto }}</td>
+        <td>R$ {{ $produto->valor_produto }}</td>
         <td>{{ $produto->desconto_produto }}</td>
         <td>{{ $produto->cd_pais_origem }}</td>
         <td>{{ $produto->cd_categoria }}</td>
         <td>
-          <img width="70" src="{{ asset($produto->cd_imagem) }}">
+          <img width="70" height="60" class="w-100" src="{{ $produto->cd_imagem }}">
         </td>
         <td>
-          <div class="d-flex">
+          <div class="d-flex justify-content-between">
             <a class="btn btn-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
             <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
               @csrf

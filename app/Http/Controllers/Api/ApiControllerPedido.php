@@ -12,7 +12,8 @@ class ApiControllerPedido extends Controller
     {
         $dados = Pedido::all();
 
-        return $dados::paginate($req->per_page);
+        // return $dados::paginate($req->per_page);
+        return response()->json($dados , 200);
     }
     public function cancelarPedido($id)
     {

@@ -19,6 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-//rotas da api de pedido
+Route::get(
+    '/itemPedido/listar',
+    'Api\ItemPedidoController@listAll'
+);
 
-Route::get('/listarPedido','Api\ApiControllerPedido@listarPedido');
+Route::post(
+    '/itemPedido/pedido',
+    'Api\ItemPedidoController@selectProdutosPedido'
+);
+
+Route::post(
+    '/itemPedido/criarLista',
+    'Api\ItemPedidoController@createItem'
+);
+
+
+Route::get('/pedido/listarPedido','Api\ApiControllerPedido@listarPedido'
+);
