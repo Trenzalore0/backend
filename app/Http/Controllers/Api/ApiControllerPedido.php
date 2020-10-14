@@ -8,7 +8,7 @@ use App\Pedido;
 
 class ApiControllerPedido extends Controller
 {
-    public function listarPedido(Request $req)
+    public function listarPedidos(Request $req)
     {
         $dados = Pedido::all();
 
@@ -26,12 +26,26 @@ class ApiControllerPedido extends Controller
 
         return response()->json('Pedido cancelado',200);
     }
+
     public function adicionarPedido(Request $req)
     {
+        $dados = $req->all();
         
+        return response()->json(Pedido::create($dados), 201);
     }
-    public function atualizarPedido(Request $req)
-    {
-        
+
+    public function atualizarPedido(Request $req, $id)
+    {  
+        $dados = $req->all();
+
+        $pedido = $req::find($id);
+
+        if(is_null($pedido))
+        {
+            return response()->json(['erro','Pedido não encontrado'],404);
+        }
+
+        return response()->json($pedido->update($dados),200);
+
     }
 }

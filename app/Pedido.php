@@ -25,4 +25,8 @@ class Pedido extends Model
     {
         return $this->belongsTo(Item_pedido::class);
     }
+
+    protected $fillable = [
+        'id','cd_cliente','cd_tipo_pagamento','cd_status_pedido'
+    ];
 }
