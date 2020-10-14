@@ -11,50 +11,37 @@ class EnderecoController extends Controller
 {
     protected $endereco;
 
-    public function listar(Request $req){
-
-        return $this->endereco::paginate($req->per_page);
+    public function listar(){
+        
+        return response()->json(Endereco::all());
     }
 
     public function salvar(Request $req){
         $endereco = $req->all();
 
-        return response()->json($this->classe::create($endereco), 201);
+        return response()->json(Endereco::create($endereco), 201);
     }
 
     public function buscar($id){
-        $dados = $this->endereco::find($id);
-        if (is_null($dados)) {
-            return response()->json('Item não encontrado', 404);
+        $endereco = Endereco::find($id);
+
+        if (is_null($endereco)) {
+            return response()->json('Endereco não encontrado', 404);
         }
-        return response()->json($dados, 200);
+        return response()->json($endereco, 200);
     }
 
     public function atualizar(Request $req, $id)
     {
-        $dados = $req->all();
+        $endereco = $req->all();
 
-        $item = $this->endereco::find($id);
+        $idendereco = Endereco::find($id);
 
-        if(is_null($item)) {
-            return response()->json(['erro' => 'Recurso não encontrado'], 404);
+        if (is_null($idendereco)) {
+            return response()->json(['erro' => 'Cliente não encontrado'], 404);
         }
 
-        return response()->json($item->update($dados), 200);
+        return response()->json($idendereco->update($endereco), 200);
     }
-
-    public function deletar($id)
-    {
-        $item = $this->endereco::find($id);
-
-        if (is_null($item)) {
-            return response()->json(['erro' => 'Recurso não encontrado'], 404);
-        }
-
-        $item->delete();
-
-        return response()->json('Item Removido', 200);
-    }
-
 
 }

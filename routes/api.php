@@ -36,18 +36,24 @@ Route::post(
 
 Route::get(
     '/endereco/listar',
-    'Api\EnderecoController@listAll'
+    'Api\EnderecoController@listar'
 );
 
 Route::post(
-    '/endereco/pedido',
-    'Api\EnderecoController@selectProdutosPedido'
+    '/endereco/salvar',
+    'Api\EnderecoController@salvar'
 );
 
-Route::post(
-    '/endereco/criarLista',
-    'Api\EnderecoController@createItem'
+Route::get(
+    '/endereco/buscar/{id}',
+    'Api\EnderecoController@buscar'
 );
+
+Route::put(
+    '/endereco/atualizar/{id}',
+    'Api\EnderecoController@atualizar'
+);
+
 Route::get('/listar', 'API\ClienteController@listar');
 Route::post('/salvar', 'API\ClienteController@salvar');
 Route::get('/buscar/{id}', 'API\ClienteController@buscar');

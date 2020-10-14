@@ -29,7 +29,7 @@
         <td>
           <div class="d-flex">
             <a class="btn btn-primary" href="{{ route('endereco.edit', $endereco->id) }}">Editar</a>
-            <form action="{{ route('endereco.delete', $endereco->id) }}" method="POST">
+            <form action="{{ route('endereco.deletar', $endereco->id) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-secondary">Excluir</button>
