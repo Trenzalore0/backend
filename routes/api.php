@@ -43,5 +43,9 @@ Route::get('/pedido/listarPedidos','Api\ApiControllerPedido@listarPedidos'
 Route::post('/pedido/adicionarPedido','Api\ApiControllerPedido@adicionarPedido'
 );
 
-Route::put('/pedido/atualizarPedido','Api\ApiControllerPedido@atualizarPedido'
+Route::put('/pedido/atualizarPedido{id}','Api\ApiControllerPedido@atualizarPedido'
 );
+
+
+// /pedido/listarPedidos
+// /pedido/adicionarPedido
