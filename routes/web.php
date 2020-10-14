@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -115,37 +116,40 @@ Route::group(['middleware' => 'auth'], function () {
         '/pedido/deletarPedido',
         'Site\PedidoController@deletar'
     )->name('pedido.delete');
+    
+    //Rotas Endereço
+    Route::get(
+        '/endereco',
+        'Site\EnderecoController@index'
+    )->name('endereco.index');
+    
+    Route::get(
+        '/endereco/adicionar',
+        'Site\EnderecoController@adicionar'
+    )->name('endereco.create');
+    
+    Route::put(
+        '/endereco/salvar',
+        'Site\EnderecoController@salvar'
+    )->name('endereco.store');
+    
+    Route::get(
+        '/endereco/editar/{id}',
+        'Site\EnderecoController@editar'
+    )->name('endereco.edit');
+    
+    Route::put(
+        '/endereco/atualizar/{id}',
+        'Site\EnderecoController@atualizar'
+    )->name('endereco.update');
+    
+    Route::delete(
+        '/endereco/deletar/{id}',
+        'Site\EnderecoController@deletar'
+    )->name('endereco.deletar');
 });
 
-Route::get(
-    '/endereco',
-    'Site\EnderecoController@index'
-)->name('endereco.index');
 
-Route::get(
-    '/endereco/adicionar',
-    'Site\EnderecoController@adicionar'
-)->name('endereco.create');
-
-Route::put(
-    '/endereco/salvar',
-    'Site\EnderecoController@salvar'
-)->name('endereco.store');
-
-Route::get(
-    '/endereco/editar/{id}',
-    'Site\EnderecoController@editar'
-)->name('endereco.edit');
-
-Route::put(
-    '/endereco/atualizar/{id}',
-    'Site\EnderecoController@atualizar'
-)->name('endereco.update');
-
-Route::delete(
-    '/endereco/deletar/{id}',
-    'Site\EnderecoController@deletar'
-)->name('endereco.deletar');
 
 Auth::routes();
 
@@ -153,7 +157,5 @@ Auth::routes();
 //     '/home',
 //     'HomeController@index'
 // )->name('home');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
