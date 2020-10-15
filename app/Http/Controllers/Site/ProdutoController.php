@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Categoria;
-<<<<<<< HEAD
 use App\Imagem;
-=======
->>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58
 use App\Pais_origem;
 use App\Produto;
 use Illuminate\Http\Request;
@@ -71,103 +68,8 @@ class ProdutoController extends BaseController
 
       $data['cd_imagem'] = $image->id;
     }
-
-<<<<<<< HEAD
-    $this->classe::create($data);
-
-    $req->session()
-      ->flash(
-        'mensagem',
-        "$req->nome adicionado com sucesso"
-      );
-
-    return redirect()->route("$this->tipo.index");
   }
 
-  public function editar($id)
-  {
-    $dados = $this->classe::find($id);
-
-    $tipo = $this->tipo;
-
-    $editar = true;
-
-    $paises = Pais_origem::all();
-
-    $categorias = Categoria::all();
-
-    return view(
-      "site.adicionar",
-      compact(
-        'dados',
-        'tipo',
-        'editar',
-        'paises',
-        'categorias'
-      )
-    );
-  }
-
-  public function deletar(Request $req, $id)
-  {
-    $dado = $this->classe::find($id);
-
-    $img = Imagem::find($dado['cd_imagem']);
-
-    $this->deleteImage($img->ds_imagem);
-
-    $this->classe::destroy($id);
-
-    Imagem::destroy($img->id);
-
-    $req->session()
-      ->flash(
-        'mensagem',
-        "Dados de $dado->nome excluido com sucesso!"
-      );
-
-    return redirect()->route("$this->tipo.index");
-  }
-
-  public function transformImage(Request $req)
-  {
-    $image = $req->file('cd_imagem');
-
-    $extension = $image->guessClientExtension();
-
-    $directory = 'img/products/';
-
-    $hash = rand(1, 9999999);
-
-    $fileName = 'img_' . $hash . '.' . $extension;
-
-    $image->move($directory, $fileName);
-
-    return $directory . $fileName;
-  }
-
-  public function deleteImage($image)
-  {
-    unlink($image);
-  }
-=======
-    public function adicionar()
-    {
-        $tipo = $this->tipo;
-
-        $paises = Pais_origem::all();
-
-        $categorias = Categoria::all();
-
-        return view(
-            "site.adicionar",
-            compact(
-                'tipo',
-                'paises',
-                'categorias'
-            )
-        );
-    }
 
     public function editar($id)
     {
@@ -192,5 +94,4 @@ class ProdutoController extends BaseController
             )
         );
     }
->>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58
 }

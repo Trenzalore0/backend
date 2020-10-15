@@ -59,3 +59,13 @@ Route::post('/salvar', 'API\ClienteController@salvar');
 Route::get('/buscar/{id}', 'API\ClienteController@buscar');
 Route::put('/atualizar/{id}', 'Api\ClienteController@atualizar');
 
+Route::get(
+    '/produto/listar',
+    'Api\ProdutoController@listar'
+);
+
+Route::get(
+    '/produto/buscar/{id}',
+    'Api\ProdutoController@buscar'
+);
+
