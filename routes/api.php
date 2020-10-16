@@ -47,5 +47,12 @@ Route::put('/pedido/atualizarPedido{id}','Api\ApiControllerPedido@atualizarPedid
 );
 
 
-// /pedido/listarPedidos
-// /pedido/adicionarPedido
+//Api categoria
+Route::get('/categoria/listarCategorias','Api\ApiCategoriaController@listarCategoria');
+
+//Api Cartao Credito
+Route::get('/cartaoCredito/listarCartao/{id}','Api\ApiCartaoCredController@listarCartao');
+Route::post('/cartaoCredito/adicionarCartao','Api\ApiCartaoCredController@adicionarCartao');
+Route::get('/cartaoCredito/buscarCartao/{id}','Api\ApiCartaoCredController@buscarCartao');
+Route::put('/cartaoCredito/editarCartao/{id}','Api\ApiCartaoCredController@editarCartao');
+Route::delete('/cartaoCredito/removerCartao/{id}','Api\ApiCartaoCredController@removerCartao');

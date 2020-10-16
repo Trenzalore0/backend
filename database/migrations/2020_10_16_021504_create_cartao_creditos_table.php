@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartaoCretidosTable extends Migration
+class CreateCartaoCreditosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCartaoCretidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cartao_cretido', function (Blueprint $table) {
+        Schema::create('cartao_creditos', function (Blueprint $table) {
             $table->id();
             $table->string('nome_titular');
             $table->string('cpf_titular');
-            $table->string('data_vencimento');
-            $table->string('cvv_caartao');
+            $table->string('numero_cartao');
             $table->unsignedBigInteger('cd_cliente')->references('id')->on('clientes');
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ class CreateCartaoCretidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartao_cretido');
+        Schema::dropIfExists('cartao_creditos');
     }
 }
