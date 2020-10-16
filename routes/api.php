@@ -20,18 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get(
-    '/itemPedido/listar',
+    '/pedido/listar',
     'Api\ItemPedidoController@listAll'
 );
 
 Route::get(
-    '/itemPedido/pedido/{id}',
+    '/pedido/pedido/{id}',
     'Api\ItemPedidoController@selectProdutosPedido'
 );
 
 Route::post(
-    '/itemPedido/criarLista/',
-    'Api\ItemPedidoController@createItem'
+    '/pedido/criarLista/',
+    'Api\ItemPedidoController@create'
 );
 
 Route::get('/cliente/listar', 'API\ClienteController@listar');
