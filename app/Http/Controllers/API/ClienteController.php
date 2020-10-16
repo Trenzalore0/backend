@@ -17,7 +17,6 @@ class ClienteController extends Controller
 
 
     public function salvar(Request $req)
-    
     {
         $cliente = $req->all();
 
@@ -26,7 +25,6 @@ class ClienteController extends Controller
 
     
     public function buscar($id)
-
     {
         $cliente = Cliente::find($id);
         
@@ -41,7 +39,6 @@ class ClienteController extends Controller
 
 
     public function atualizar(Request $req, $id)
-    
     {
         $cliente = $req->all();
 

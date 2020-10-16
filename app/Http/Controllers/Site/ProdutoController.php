@@ -68,30 +68,82 @@ class ProdutoController extends BaseController
 
       $data['cd_imagem'] = $image->id;
     }
+
+    $this->classe::create($data);
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "$req->nome adicionado com sucesso"
+      );
+
+    return redirect()->route("$this->tipo.index");
   }
 
+  public function editar($id)
+  {
+    $dados = $this->classe::find($id);
 
-    public function editar($id)
-    {
-        $dados = $this->classe::find($id);
+    $tipo = $this->tipo;
 
-        $tipo = $this->tipo;
+    $editar = true;
 
-        $editar = true;
+    $paises = Pais_origem::all();
 
-        $paises = Pais_origem::all();
+    $categorias = Categoria::all();
 
-        $categorias = Categoria::all();
+    return view(
+      "site.adicionar",
+      compact(
+        'dados',
+        'tipo',
+        'editar',
+        'paises',
+        'categorias'
+      )
+    );
+  }
 
-        return view(
-            "site.adicionar",
-            compact(
-                'dados',
-                'tipo',
-                'editar',
-                'paises',
-                'categorias'
-            )
-        );
-    }
+  public function deletar(Request $req, $id)
+  {
+    $dado = $this->classe::find($id);
+
+    $img = Imagem::find($dado['cd_imagem']);
+
+    $this->deleteImage($img->ds_imagem);
+
+    $this->classe::destroy($id);
+
+    Imagem::destroy($img->id);
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "Dados de $dado->nome excluido com sucesso!"
+      );
+
+    return redirect()->route("$this->tipo.index");
+  }
+
+  public function transformImage(Request $req)
+  {
+    $image = $req->file('cd_imagem');
+
+    $extension = $image->guessClientExtension();
+
+    $directory = 'img/products/';
+
+    $hash = rand(1, 9999999);
+
+    $fileName = 'img_' . $hash . '.' . $extension;
+
+    $image->move($directory, $fileName);
+
+    return $directory . $fileName;
+  }
+
+  public function deleteImage($image)
+  {
+    unlink($image);
+  }
 }

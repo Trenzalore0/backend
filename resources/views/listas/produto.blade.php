@@ -30,11 +30,9 @@
           <img width="70" height="60" class="w-100" src="{{ $produto->cd_imagem }}">
         </td>
         <td>
-<<<<<<< HEAD
           <div class="d-flex justify-content-between">
-=======
           <div class="d-flex">
->>>>>>> 92446d4cd392f2ed3c5695880dfd6f34203c8e58
+          <div class="d-flex justify-content-between">
             <a class="btn btn-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
             <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
               @csrf

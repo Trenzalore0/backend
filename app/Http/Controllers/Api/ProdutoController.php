@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Produto;
 use App\Http\Controllers\Controller;
-use http\Env\Response;
 use Illuminate\Http\Request;
+use App\Imagem;
 
 class ProdutoController extends Controller
 {
@@ -15,14 +15,34 @@ class ProdutoController extends Controller
     }
 
 
-public function buscar($id){
+    public function buscar($id){
     $produto = Produto::find($id);
 
     if (is_null($produto)) {
-        return response()->json('Endereco não encontrado', 404);
+        return response()->json('Produto não encontrado', 404);
     }
     return response()->json($produto, 200);
 }
+
+public function index(Request $req)
+
+{
+
+  $dados = $this->classe::all();
+
+  $tipo = $this->tipo;
+
+  foreach ($dados as $dado) {
+
+    $img = Imagem::find($dado['cd_imagem']);
+
+    $dado['cd_imagem'] = url($img->ds_imagem);
+
+  }
+
+}
+
+
 
 }
 

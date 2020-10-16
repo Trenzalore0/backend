@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Endereco;
 use App\Http\Controllers\Controller;
-use http\Env\Response;
 use Illuminate\Http\Request;
 
 class EnderecoController extends Controller
 {
     protected $endereco;
+
+    public function adicionar(Request $req)
+    {
+        Endereco::create($req->all());
+    }
 
     public function listar(){
         
