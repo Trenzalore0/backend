@@ -26,9 +26,12 @@ class ProdutoController extends Controller
     return response()->json($produto, 200);
   }
 
-  public function FunctionName(Type $var = null)
+  public function buscarCategoria($id)
   {
-    # code...
+    // $categoria = Categoria::find($id);
+    $produto = Produto::find('cd_categoria');
+
+    return response()->json($produto->all($id), 200);
   }
 
   // public function index(Request $req)

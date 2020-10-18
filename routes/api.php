@@ -72,6 +72,11 @@ Route::get(
     'Api\ProdutoController@buscar'
 );
 
+Route::get(
+    '/produto/bucarCategoria/{id}',
+    'Api\ProdutoController@buscarCategoria'
+);
+
 Route::get('/cliente/listar', 'API\ClienteController@listar');
 Route::post('/cliente/salvar', 'API\ClienteController@salvar');
 Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
