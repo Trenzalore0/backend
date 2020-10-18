@@ -22,5 +22,5 @@ class perfilController extends BaseController
     {
         $item = Perfil::find($id);
         return response()->json($item, 200);
-    }    
+    }
 }

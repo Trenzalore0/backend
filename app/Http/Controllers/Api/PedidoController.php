@@ -25,7 +25,7 @@ class ItemPedidoController extends Controller
   {
     $products = $req->all();
     $id = $products[0]['cd_pedido'];
-    if(is_null(Pedido::find($id))) {
+    if (is_null(Pedido::find($id))) {
       return response()->json('Pedido não encontrado', 404);
     }
 

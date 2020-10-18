@@ -12,6 +12,4 @@ class loginController extends BaseController
     {
         $this->class = Login::class;
     }
-
-    
 }

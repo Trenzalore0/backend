@@ -13,6 +13,4 @@ class BaseController extends Controller
     {
         return response()->json($this->class::all(), 200);
     }
-
-    
 }

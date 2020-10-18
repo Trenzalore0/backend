@@ -15,18 +15,21 @@ class EnderecoController extends Controller
         Endereco::create($req->all());
     }
 
-    public function listar(){
-        
+    public function listar()
+    {
+
         return response()->json(Endereco::all());
     }
 
-    public function salvar(Request $req){
+    public function salvar(Request $req)
+    {
         $endereco = $req->all();
 
         return response()->json(Endereco::create($endereco), 201);
     }
 
-    public function buscar($id){
+    public function buscar($id)
+    {
         $endereco = Endereco::find($id);
 
         if (is_null($endereco)) {
@@ -47,5 +50,4 @@ class EnderecoController extends Controller
 
         return response()->json($idendereco->update($endereco), 200);
     }
-
 }
