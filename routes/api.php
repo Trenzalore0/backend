@@ -19,8 +19,40 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/listar', 'API\ClienteController@listar');
-Route::post('/salvar', 'API\ClienteController@salvar');
-Route::get('/buscar/{id}', 'API\ClienteController@buscar');
-Route::put('/atualizar/{id}', 'Api\ClienteController@atualizar');
+// ROTAS API - CLIENTE
 
+Route::get('/listar', 
+'API\ClienteController@listar');
+
+
+Route::post('/salvar', 
+'API\ClienteController@salvar');
+
+
+Route::get('/buscar/{id}', 
+'API\ClienteController@buscar');
+
+
+Route::put('/atualizar/{id}', 
+'Api\ClienteController@atualizar');
+
+// ROTAS API - ITEM PEDIDO
+
+Route::get(
+    '/itemPedido/listar',
+    'Api\ItemPedidoController@listAll'
+);
+
+Route::post(
+    '/itemPedido/pedido',
+    'Api\ItemPedidoController@selectProdutosPedido'
+);
+
+Route::post(
+    '/itemPedido/criarLista',
+    'Api\ItemPedidoController@createItem'
+);
+
+// Rotas Cadastro 
+
+Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
