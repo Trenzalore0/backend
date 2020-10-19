@@ -1,4 +1,7 @@
-<form action="{{ route($tipo.'.store') }}" method="post" class="form">
+<form action="{{ route($tipo.'.store') }}" method="post" class="form"
+  enctype="multipart/form-data">
+  @csrf
+  @method('PUT')
   @if ($tipo == 'cliente')
 
     @include('form.includes.cliente')
