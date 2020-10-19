@@ -10,6 +10,8 @@ class Cliente extends Model
         'nome', 'email', 'rg', 'cpf', 'data de nascimento', 'genero', 'login', 'senha'
         ];    
 
+    protected $table = 'clientes';
+
     public function login()
     {
         return $this->hasOne(Login::class);

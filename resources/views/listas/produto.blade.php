@@ -31,8 +31,11 @@
         </td>
         <td>
           <div class="d-flex justify-content-between">
+<<<<<<< HEAD
           <div class="d-flex">
           <div class="d-flex justify-content-between">
+=======
+>>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8
             <a class="btn btn-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
             <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
               @csrf

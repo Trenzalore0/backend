@@ -7,7 +7,7 @@ use App\Imagem;
 use App\Pais_origem;
 use App\Produto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
 
 class ProdutoController extends BaseController
 {

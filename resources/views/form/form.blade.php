@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8
 <form action="{{ route($tipo.'.store') }}" method="post" class="form"
   enctype="multipart/form-data">
   @csrf
   @method('PUT')
+<<<<<<< HEAD
 
 <form action="{{ route($tipo.'.store') }}" method="post" class="form">
   @csrf
   @method('put')
 
+=======
+>>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8
   @if ($tipo == 'cliente')
 
     @include('form.includes.cliente')
