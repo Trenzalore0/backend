@@ -31,6 +31,8 @@
         </td>
         <td>
           <div class="d-flex justify-content-between">
+          <div class="d-flex">
+          <div class="d-flex justify-content-between">
             <a class="btn btn-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
             <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
               @csrf
