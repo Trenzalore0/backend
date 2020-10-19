@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class CadastroController extends Controller
 {
+   
+    
+            // -------Cadastrar Clientes
+
     public function createCadastro (Request $req)
     
     {
@@ -40,12 +44,11 @@ class CadastroController extends Controller
         $contatoscliente = array(
             array('ds_contato' => $dadosrecebidos ['contato'] [0] ['ds_contato'], 
             "cd_cliente" => $clientecriado ['id'] 
-        ),
-    
-        array('ds_contato' => $dadosrecebidos ['contato'] [1] ['ds_contato'], 
-        "cd_cliente" => $clientecriado ['id']
+             ), 
+             array('ds_contato' => $dadosrecebidos ['contato'] [1] ['ds_contato'], 
+                "cd_cliente" => $clientecriado ['id']
 
-        ));
+            ));
 
 
         $contatoscriados = array();
@@ -74,4 +77,16 @@ class CadastroController extends Controller
     
 
     }
+
+            // -------Listando Clientes Cadastrados
+
+    public function listAll() 
+    
+    
+    {
+        return response()->json(Cliente::all(), 200);
+    }
+
+
+
 }
