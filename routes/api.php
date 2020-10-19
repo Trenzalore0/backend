@@ -56,3 +56,7 @@ Route::post('/cartaoCredito/adicionarCartao','Api\ApiCartaoCredController@adicio
 Route::get('/cartaoCredito/buscarCartao/{id}','Api\ApiCartaoCredController@buscarCartao');
 Route::put('/cartaoCredito/editarCartao/{id}','Api\ApiCartaoCredController@editarCartao');
 Route::delete('/cartaoCredito/removerCartao/{id}','Api\ApiCartaoCredController@removerCartao');
+
+
+//Api Perfil
+Route::get('/perfil/buscarTipoPerfil/{id}','Api\ApiPerfilController@buscarTipoPerfil');
