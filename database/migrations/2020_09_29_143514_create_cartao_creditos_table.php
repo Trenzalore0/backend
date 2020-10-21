@@ -18,7 +18,8 @@ class CreateCartaoCreditosTable extends Migration
             $table->string('nome_titular');
             $table->string('cpf_titular');
             $table->string('numero_cartao');
-            $table->unsignedBigInteger('cd_cliente')->references('id')->on('clientes');
+            $table->unsignedBigInteger('cd_cliente');
+            $table->foreign('cd_cliente')->references('id')->on('clientes');
             $table->timestamps();
         });
     }
