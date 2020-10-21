@@ -20,22 +20,37 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get(
-    '/pedido/listar',
-    'Api\ItemPedidoController@listAll'
+  '/pedido/listar',
+  'Api\ItemPedidoController@listAll'
 );
 
 Route::get(
-    '/pedido/pedido/{id}',
-    'Api\ItemPedidoController@selectProdutosPedido'
+  '/pedido/pedido/{id}',
+  'Api\ItemPedidoController@selectProdutosPedido'
 );
 
 Route::post(
-    '/pedido/criarLista/',
-    'Api\ItemPedidoController@create'
+  '/pedido/criarLista/',
+  'Api\ItemPedidoController@create'
 );
 
-Route::get('/cliente/listar', 'API\ClienteController@listar');
-Route::post('/cliente/salvar', 'API\ClienteController@salvar');
-Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
-Route::put('/cliente/atualizar/{id}', 'API\ClienteController@atualizar');
+Route::get(
+  '/cliente/listar',
+  'API\ClienteController@listar'
+);
 
+Route::post(
+  '/cliente/salvar',
+  'API\ClienteController@salvar'
+);
+
+Route::get(
+  '/cliente/buscar/{id}',
+  'API\ClienteController@buscar'
+);
+
+Route::put(
+  '/cliente/atualizar/{id}',
+  'API\ClienteController@atualizar'
+);
+  
