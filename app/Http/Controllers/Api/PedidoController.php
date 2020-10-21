@@ -35,12 +35,10 @@ class ItemPedidoController extends Controller
 
   public function create(Request $req)
   {
-<<<<<<< HEAD
     $products = $req->all();
     $id = $products[0]['cd_pedido'];
     if (is_null(Pedido::find($id))) {
       return response()->json('Pedido não encontrado', 404);
-=======
     $data = $req->all();
 
     $client = $data['cliente'];
@@ -70,7 +68,6 @@ class ItemPedidoController extends Controller
       $pay = Boleto::create([
         'dados_boleto' => $billet
       ]);
->>>>>>> 648c1c2c56f495b3ecb2c690e04282e0f191a764
     }
     
     $status = 1;

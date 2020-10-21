@@ -21,14 +21,11 @@
         <td>
           <div class="d-flex">
             <a class="btn btn-primary" href="{{ route('cliente.edit', $cliente->id) }}">Detalhes</a>
-<<<<<<< HEAD
-=======
             {{-- <form action="{{ route('cliente.delete', $cliente->id) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-secondary">Excluir</button>
             </form> --}}
->>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8
           </div>
         </td>
       </tr>

@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-<<<<<<< HEAD
-=======
 // ROTAS API - CLIENTE
 
 Route::get('/listar', 
@@ -41,7 +39,6 @@ Route::put('/atualizar/{id}',
 
 // ROTAS API - ITEM PEDIDO
 
->>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8
 Route::get(
     '/pedido/listar',
     'Api\ItemPedidoController@listAll'
@@ -94,10 +91,14 @@ Route::get(
     'Api\ProdutoController@buscar'
 );
 
-<<<<<<< HEAD
 Route::get(
     '/produto/bucarCategoria/{id}',
     'Api\ProdutoController@buscarCategoria'
+);
+
+Route::get(
+    'produto/index',
+    'Api\ProdutoController@index'
 );
 
 Route::get('/cliente/listar', 'API\ClienteController@listar');
@@ -106,8 +107,6 @@ Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
 Route::put('/cliente/atualizar/{id}', 'API\ClienteController@atualizar');
 
 
-=======
 // Rotas Cadastro 
 
 Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
->>>>>>> c123f1eda9df5149cacd92c105d6470890d9eab8

@@ -6,9 +6,16 @@ use App\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Categoria;
+use App\Pais_origem;
 
 class ProdutoController extends Controller
 {
+
+  public function listar()
+    {
+
+        return response()->json(Produto::all());
+    }
 
 
   public function buscar($id)
@@ -21,15 +28,31 @@ class ProdutoController extends Controller
     return response()->json($produto, 200);
   }
 
-  public function buscarCategoria($id)
+  // public function buscarCategoria($id)
+  // {
+  //   $categoria = Categoria::find($id);
+  //   $produto = Produto::find('cd_categoria');
+
+  //   return response()->json($categoria->all($produto), 200);
+  // }
+
+  public function index(Request $req)
   {
-    $categoria = Categoria::find($id);
-    $produto = Produto::find('cd_categoria');
+    $dados = Produto::all();
 
-    return response()->json($categoria->all($produto), 200);
+     $tipo = $this->tipo;
+  
+  foreach ($dados as $dado) {
+
+    
+    $cate = Categoria::find($dado['cd_categoria']);
+      $dado['cd_categoria'] = $cate->ds_categoria;
+    }
+
+    $mensagem = $req->session()->get('mensagem');
+
+    return view("site.index", compact('dados', 'tipo', 'mensagem'));
   }
-
-
 }
 
 
