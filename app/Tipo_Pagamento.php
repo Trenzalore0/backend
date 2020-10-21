@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tipo_Pagamento extends Model
 {
+    protected $table='tipo_pagamentos';
     public function boleto()
     {
         return $this->hasOne(Boleto::class);

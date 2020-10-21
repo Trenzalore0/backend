@@ -82,4 +82,17 @@ Route::post('/cliente/salvar', 'API\ClienteController@salvar');
 Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
 Route::put('/cliente/atualizar/{id}', 'API\ClienteController@atualizar');
 
+//Rota Tipo de Pagamento
 
+Route::get(
+    '/tipoPagamento/listar',
+    'Api\TipoPagamentoController@listar'
+);
+
+
+//Rota Status de Pedido
+
+Route::get(
+    '/statusPedido/listar',
+    'Api\StatusPedido@listar'
+);
