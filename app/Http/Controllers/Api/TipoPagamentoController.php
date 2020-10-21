@@ -12,7 +12,7 @@ class TipoPagamentoController extends Controller
     { 
         $receberDados=Tipo_Pagamento::all();
         if(is_null($receberDados)){
-            return response()->json('Não encontrou',404);
+            return response()->json('Tipo de Pagamento não localizado.',404);
         }    
 
        return response()->json(Tipo_Pagamento::all(),200);
