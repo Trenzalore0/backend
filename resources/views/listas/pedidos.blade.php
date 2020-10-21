@@ -25,7 +25,7 @@
         <td>
           <div><a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-primary">Ver Pedido</a></div>
           <form action="{{ route('pedido.update.cancel', $pedido->id) }}">
-            @csrf 
+            @csrf
             @method('put')
             <button class="btn btn-danger">Cancelar</button>
           </form>

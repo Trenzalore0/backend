@@ -53,6 +53,7 @@ Route::post(
   'Api\ItemPedidoController@create'
 );
 
+<<<<<<< HEAD
 // Rotas Cadastro 
 
 Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
@@ -60,3 +61,31 @@ Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
 Route::get('/cliente/listar', 'Api\CadastroController@listAll');
 
 Route::put('/cliente/atualizar/{id}', 'Api\CadastroController@atualizar');
+=======
+
+
+//Api route PEDIDO
+Route::get('/pedido/listarPedidos','Api\ApiControllerPedido@listarPedidos'
+);
+
+Route::post('/pedido/adicionarPedido','Api\ApiControllerPedido@adicionarPedido'
+);
+
+Route::put('/pedido/atualizarPedido{id}','Api\ApiControllerPedido@atualizarPedido'
+);
+
+
+//Api categoria
+Route::get('/categoria/listarCategorias','Api\ApiCategoriaController@listarCategoria');
+
+//Api Cartao Credito
+Route::get('/cartaoCredito/listarCartao/{id}','Api\ApiCartaoCredController@listarCartao');
+Route::post('/cartaoCredito/adicionarCartao','Api\ApiCartaoCredController@adicionarCartao');
+Route::get('/cartaoCredito/buscarCartao/{id}','Api\ApiCartaoCredController@buscarCartao');
+Route::put('/cartaoCredito/editarCartao/{id}','Api\ApiCartaoCredController@editarCartao');
+Route::delete('/cartaoCredito/removerCartao/{id}','Api\ApiCartaoCredController@removerCartao');
+
+
+//Api Perfil
+Route::get('/perfil/buscarTipoPerfil/{id}','Api\ApiPerfilController@buscarTipoPerfil');
+>>>>>>> 7494b9f18de1d93f323cb05cc20e0b9b5aea63d7

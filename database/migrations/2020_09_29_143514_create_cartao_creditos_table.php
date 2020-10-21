@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartaoCretidosTable extends Migration
+class CreateCartaoCreditosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCartaoCretidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cartao_credito', function (Blueprint $table) {
+        Schema::create('cartao_creditos', function (Blueprint $table) {
             $table->id();
             $table->string('nome_titular');
             $table->string('cpf_titular');
@@ -30,6 +30,6 @@ class CreateCartaoCretidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartao_credito');
+        Schema::dropIfExists('cartao_creditos');
     }
 }
