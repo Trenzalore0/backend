@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Login extends Model
 {
+    protected $fillable = [
+        'login', 'senha', 'cd_perfil'
+    ]; 
+    
     
     public function cliente()
     {
@@ -23,3 +27,4 @@ class Login extends Model
     }
     
 }
+

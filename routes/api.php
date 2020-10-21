@@ -19,6 +19,25 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+// ROTAS API - CLIENTE
+
+Route::get('/listar', 
+'API\ClienteController@listar');
+
+
+Route::post('/salvar', 
+'API\ClienteController@salvar');
+
+
+Route::get('/buscar/{id}', 
+'API\ClienteController@buscar');
+
+
+Route::put('/atualizar/{id}', 
+'Api\ClienteController@atualizar');
+
+// ROTAS API - ITEM PEDIDO
+
 Route::get(
   '/pedido/listar',
   'Api\ItemPedidoController@listAll'
@@ -34,23 +53,10 @@ Route::post(
   'Api\ItemPedidoController@create'
 );
 
-Route::get(
-  '/cliente/listar',
-  'API\ClienteController@listar'
-);
+// Rotas Cadastro 
 
-Route::post(
-  '/cliente/salvar',
-  'API\ClienteController@salvar'
-);
+Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
 
-Route::get(
-  '/cliente/buscar/{id}',
-  'API\ClienteController@buscar'
-);
+Route::get('/cliente/listar', 'Api\CadastroController@listAll');
 
-Route::put(
-  '/cliente/atualizar/{id}',
-  'API\ClienteController@atualizar'
-);
-  
+Route::put('/cliente/atualizar/{id}', 'Api\CadastroController@atualizar');
