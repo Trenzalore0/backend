@@ -13,6 +13,10 @@
   @elseif($tipo == 'produto')
     @include('listas.produto')
 
+  @elseif($tipo == 'endereco')
+
+    @include('listas.enderecos')  
+
   @else
   
     @include('listas.pedidos')

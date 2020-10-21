@@ -35,6 +35,10 @@ class ItemPedidoController extends Controller
 
   public function create(Request $req)
   {
+    $products = $req->all();
+    $id = $products[0]['cd_pedido'];
+    if (is_null(Pedido::find($id))) {
+      return response()->json('Pedido não encontrado', 404);
     $data = $req->all();
 
     $client = $data['cliente'];
@@ -51,17 +55,10 @@ class ItemPedidoController extends Controller
 
     $pay = $data['tipo_pagamento'];
 
-<<<<<<< HEAD
     if ($pay == 1) {
       $pay['id'] = $data['dados_pagamento']['id_cartao'];
 
       $card = CartaoCretido::find($pay['id']);
-=======
-    if ($pay == 'cartão de credito') {
-      $pay['id'] = $data['dados_pagamento']['id_cartao'];
-
-      $card = CartaoCretido::find($pay);
->>>>>>> cb0e26c5984552911a28c2057434fd60e87e3ae1
       if (is_null($card)) {
         return response()->json('cartão não encontrado', 400);
       }
@@ -74,7 +71,6 @@ class ItemPedidoController extends Controller
     }
     
     $status = 1;
-<<<<<<< HEAD
 
     $type_payment = $data['tipo_pagamento'];
     
@@ -82,12 +78,6 @@ class ItemPedidoController extends Controller
       'cd_cliente' => $client['id'],
       'cd_tipo_pagamento' => $type_payment,
       'cd_pagamento' => $pay['id'],
-=======
-    
-    $newOrder = [
-      'cd_cliente' => $client['id'],
-      'cd_tipo_pagamento' => $pay['id'],
->>>>>>> cb0e26c5984552911a28c2057434fd60e87e3ae1
       'cd_endereco_entrega' => $address,
       'cd_status_pedido' => $status
     ];
