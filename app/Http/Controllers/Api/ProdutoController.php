@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Produto;
+use App\Models\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Categoria;
-use App\Pais_origem;
+use App\Models\Categoria;
+use App\Models\Pais_origem;
 
 class ProdutoController extends Controller
 {
 
   public function listar()
-    {
-
-        return response()->json(Produto::all());
-    }
-
+  {
+    return response()->json(Produto::all());
+  }
 
   public function buscar($id)
   {
@@ -32,7 +30,6 @@ class ProdutoController extends Controller
   // {
   //   $categoria = Categoria::find($id);
   //   $produto = Produto::find('cd_categoria');
-
   //   return response()->json($categoria->all($produto), 200);
   // }
 
@@ -40,12 +37,10 @@ class ProdutoController extends Controller
   {
     $dados = Produto::all();
 
-     $tipo = $this->tipo;
-  
-  foreach ($dados as $dado) {
+    $tipo = $this->tipo;
 
-    
-    $cate = Categoria::find($dado['cd_categoria']);
+    foreach ($dados as $dado) {
+      $cate = Categoria::find($dado['cd_categoria']);
       $dado['cd_categoria'] = $cate->ds_categoria;
     }
 
@@ -54,17 +49,3 @@ class ProdutoController extends Controller
     return view("site.index", compact('dados', 'tipo', 'mensagem'));
   }
 }
-
-
-
-
-
-
-// buscaCategoria()
-
-
-// buscarPreco()
-
-// listarPreco()
-
-// listarCategoria()

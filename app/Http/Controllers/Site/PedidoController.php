@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Pedido;
-use App\Produto;
+use App\Models\Pedido;
+use App\Models\Produto;
 
 class PedidoController extends BaseController
 {

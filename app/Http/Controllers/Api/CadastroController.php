@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Cliente;
-use App\Contato;
-use App\Endereco;
+use App\Models\Cliente;
+use App\Models\Contato;
+use App\Models\Endereco;
 use App\Http\Controllers\Controller;
-use App\Login;
+use App\Models\Login;
 use Illuminate\Http\Request;
 
 class CadastroController extends Controller
@@ -52,13 +52,11 @@ class CadastroController extends Controller
       )
     );
 
-
     $contatoscriados = array();
 
     foreach ($contatoscliente as $contato) {
       $contatoscriados[] = Contato::create($contato);
     }
-
 
     $clienteend = array(
       'rua' => $dadosrecebidos['endereco']['rua'],
@@ -73,15 +71,6 @@ class CadastroController extends Controller
 
     $endereco = Endereco::create($clienteend);
 
-
-
     return response()->json('Cliente criado com sucesso!', 201);
-  }
-
-  // -------Listando Clientes Cadastrados
-
-  public function listAll()
-  {
-    return response()->json(Cliente::all(), 200);
   }
 }

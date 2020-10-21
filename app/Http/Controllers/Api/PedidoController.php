@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Boleto;
-use App\CartaoCretido;
-use App\Cliente;
-use App\Endereco;
+use App\Models\Boleto;
+use App\Models\CartaoCretido;
+use App\Models\Cliente;
+use App\Models\Endereco;
 use App\Http\Controllers\Controller;
-use App\Item_pedido;
-use App\Pedido;
+use App\Models\Item_pedido;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class ItemPedidoController extends Controller
