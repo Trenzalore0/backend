@@ -13,11 +13,4 @@ class ApiCategoriaController extends Controller
         $categorias = Categoria::all();
         return response()->json($categorias, 200);
     }
-
-    // public function gerarCategoria(Request $req)
-    // {
-    //     $categorias = $req->all();
-
-    //     return response()->json(Categoria::create($categorias),201);
-    // }
 }
