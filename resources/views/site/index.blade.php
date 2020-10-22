@@ -11,8 +11,11 @@
     @include('listas.clientes')
 
   @elseif($tipo == 'produto')
-
     @include('listas.produto')
+
+  @elseif($tipo == 'endereco')
+
+    @include('listas.enderecos')  
 
   @else
   

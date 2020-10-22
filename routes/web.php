@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -11,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', 'Site\HomeController@index')
     ->name('home.index');
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
     //Rotas de cliente
     Route::get(
         '/cliente',
@@ -49,7 +50,6 @@ Route::group(['middleware' => 'auth'], function () {
         'Site\ClienteController@deletar'
     )->name('cliente.delete');
 
-
     //Rotas de produto
     Route::get(
         '/produto',
@@ -80,7 +80,6 @@ Route::group(['middleware' => 'auth'], function () {
         '/produto/deletar/{id}',
         'Site\ProdutoController@deletar'
     )->name('produto.deletar');
-
 
     // Rotas de pedido
     Route::get(
@@ -117,7 +116,37 @@ Route::group(['middleware' => 'auth'], function () {
         '/pedido/deletarPedido',
         'Site\PedidoController@deletar'
     )->name('pedido.delete');
+    
+    //Rotas Endereço
+    Route::get(
+        '/endereco',
+        'Site\EnderecoController@index'
+    )->name('endereco.index');
+    
+    Route::get(
+        '/endereco/adicionar',
+        'Site\EnderecoController@adicionar'
+    )->name('endereco.create');
+    
+    Route::put(
+        '/endereco/salvar',
+        'Site\EnderecoController@salvar'
+    )->name('endereco.store');
+    
+    Route::get(
+        '/endereco/editar/{id}',
+        'Site\EnderecoController@editar'
+    )->name('endereco.edit');
+    
+    Route::put(
+        '/endereco/atualizar/{id}',
+        'Site\EnderecoController@atualizar'
+    )->name('endereco.update');
+    
+    Route::delete(
+        '/endereco/deletar/{id}',
+        'Site\EnderecoController@deletar'
+    )->name('endereco.deletar');
 });
-
 
 Auth::routes();

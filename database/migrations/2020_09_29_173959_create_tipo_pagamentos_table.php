@@ -15,9 +15,12 @@ class CreateTipoPagamentosTable extends Migration
     {
         Schema::create('tipo_pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('ds_tipo_pagamento');
-            $table->unsignedBigInteger('cd_boleto');
-            $table->foreign('cd_boleto')->references('id')->on('boletos');
+            $table->unsignedBigInteger('cd_cartao_credito')->nullable();
+            $table->unsignedBigInteger('cd_boleto')->nullable();
+            $table->foreign('cd_cartao_credito')
+                ->references('id')->on('cartao_creditos');
+            $table->foreign('cd_boleto')
+                ->references('id')->on('boletos');
             $table->timestamps();
         });
     }

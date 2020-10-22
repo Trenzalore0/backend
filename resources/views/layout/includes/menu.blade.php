@@ -1,4 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<style>
+  .navbar-brand, nav {
+    background-color: #660033;
+  }
+</style> 
+<nav class="navbar navbar-expand-md navbar-dark">
   <a class="navbar-brand" href="#">Desvinho Manager</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -27,14 +32,17 @@
           <a class="nav-link" href="{{ route('produto.index') }}">Produtos</a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
           <form action="{{ route('logout') }}" method="post">
             @csrf
             <input class="nav-link text-secondary" type="submit" value="Logout"/>
           </form>
           
+=======
+          <a class="nav-link" href="{{ route('endereco.index') }}">Endereco</a>
+>>>>>>> c9a04a6eb33516ee8f2bc396f485c8cc0ccdcba9
         </li>
       @endguest
     </ul>
   </div>
-
 </nav>
