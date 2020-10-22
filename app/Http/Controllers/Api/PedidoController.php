@@ -14,29 +14,29 @@ class ItemPedidoController extends Controller
     return response()->json(Item_pedido::all(), 200);
   }
 
-  public function selectProdutosPedido(Request $req)
+  public function selectProdutosPedido($id)
   {
-    $pedido = $req->all();
-
-    $products = Item_pedido::where('cd_pedido', $pedido['id']);
+    $products = Item_pedido::where('cd_pedido', $id);
 
     return response()->json($products, 200);
   }
 
-  public function createItem(Request $req, $id)
+  public function createItem(Request $req)
   {
-    if(!is_null(Pedido::find($id))) {
-      return response()->json('Pedido não encontrado', 404);
-    }
+    $data = $req->all();
 
-    $products = $req->all();
+    $client = $data['cliente'];
+
+    $address =  $data['endereco_entrega'];
+
+    $products = $data['produtos'];
 
     foreach ($products as $product) {
       $newProduct = [
-        'cd_pedido' => $id,
-        'cd_produto' => $product->id,
-        'quantidade_produto' => $product->quantidade_produto,
-        'valor_produto' => $product->valor
+        'cd_pedido' => $product['cd_pedido'],
+        'cd_produto' => $product['cd_produto'],
+        'quantidade_produto' => $product['quantidade_produto'],
+        'valor_produto' => $product['valor_produto']
       ];
       Item_pedido::create($newProduct);
     }

@@ -14,22 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::get(
     '/itemPedido/listar',
-    'Api\ItemPedidoController@listAll'
+    'Api\PedidoController@listAll'
+);
+
+Route::get(
+    '/itemPedido/pedido/{id}',
+    'Api\PedidoController@selectProdutosPedido'
 );
 
 Route::post(
-    '/itemPedido/pedido',
-    'Api\ItemPedidoController@selectProdutosPedido'
+    '/itemPedido/criarLista/',
+    'Api\PedidoController@createItem'
 );
 
-Route::post(
-    '/itemPedido/criarLista',
-    'Api\ItemPedidoController@createItem'
-);
+Route::get('/cliente/listar', 'API\ClienteController@listar');
+Route::post('/cliente/salvar', 'API\ClienteController@salvar');
+Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
+Route::put('/cliente/atualizar/{id}', 'API\ClienteController@atualizar');
+
