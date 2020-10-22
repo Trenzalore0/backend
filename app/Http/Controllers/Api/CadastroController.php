@@ -55,7 +55,7 @@ class CadastroController extends Controller
             ));
 
 
-       $contactcreate = array();
+        $contactcreate = array();
 
         foreach($contact as $contact){
            $contactcreate[] = Contato::create($contact);
