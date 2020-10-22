@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,49 +15,90 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
-// ROTAS API - CLIENTE
-
-Route::get('/listar', 
-'API\ClienteController@listar');
-
-
-Route::post('/salvar', 
-'API\ClienteController@salvar');
-
-
-Route::get('/buscar/{id}', 
-'API\ClienteController@buscar');
-
-
-Route::put('/atualizar/{id}', 
-'Api\ClienteController@atualizar');
-
-// ROTAS API - ITEM PEDIDO
-
-Route::get(
-    '/itemPedido/listar',
-    'Api\ItemPedidoController@listAll'
-);
-
-Route::post(
-    '/itemPedido/pedido',
-    'Api\ItemPedidoController@selectProdutosPedido'
-);
-
-Route::post(
-    '/itemPedido/criarLista',
-    'Api\ItemPedidoController@createItem'
-);
 
 // Rotas Cadastro 
+Route::post(
+  '/cliente/cadastro',
+  'Api\CadastroController@createCadastro'
+);
 
-Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
+//Api categoria
+Route::get(
+  '/categoria/listarCategorias',
+  'Api\ApiCategoriaController@listarCategoria'
+);
 
-Route::get('/cliente/listar', 'Api\CadastroController@listAll');
+//Api Cartao Credito
+Route::get(
+  '/cartaoCredito/listarCartao/{id}',
+  'Api\ApiCartaoCredController@listarCartao'
+);
+Route::post(
+  '/cartaoCredito/adicionarCartao',
+  'Api\ApiCartaoCredController@adicionarCartao'
+);
+Route::get(
+  '/cartaoCredito/buscarCartao/{id}',
+  'Api\ApiCartaoCredController@buscarCartao'
+);
+Route::put(
+  '/cartaoCredito/editarCartao/{id}',
+  'Api\ApiCartaoCredController@editarCartao'
+);
+Route::delete(
+  '/cartaoCredito/removerCartao/{id}',
+  'Api\ApiCartaoCredController@removerCartao'
+);
 
-Route::put('/cliente/atualizar/{id}', 'Api\CadastroController@edit');
+//Api Perfil
+Route::get(
+  '/perfil/buscarTipoPerfil/{id}',
+  'Api\ApiPerfilController@buscarTipoPerfil'
+);
+
+//Rotas Endereços
+Route::get(
+  '/endereco/listar',
+  'Api\EnderecoController@listar'
+);
+
+Route::post(
+  '/endereco/salvar',
+  'Api\EnderecoController@salvar'
+);
+
+Route::get(
+  '/endereco/buscar/{id}',
+  'Api\EnderecoController@buscar'
+);
+
+Route::put(
+  '/endereco/atualizar/{id}',
+  'Api\EnderecoController@atualizar'
+);
+
+//Rotas Produtos
+Route::get(
+  '/produto/listar',
+  'Api\ProdutoController@listar'
+);
+
+Route::get(
+  '/produto/buscar/{id}',
+  'Api\ProdutoController@buscar'
+);
+
+Route::get(
+  '/produto/bucarCategoria/{id}',
+  'Api\ProdutoController@buscarCategoria'
+);
+
+Route::get(
+  'produto/index',
+  'Api\ProdutoController@index'
+);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Perfil;
+use App\Models\Perfil;
 use Illuminate\Http\Request;
 
 class perfilController extends BaseController
@@ -22,5 +22,5 @@ class perfilController extends BaseController
     {
         $item = Perfil::find($id);
         return response()->json($item, 200);
-    }    
+    }
 }

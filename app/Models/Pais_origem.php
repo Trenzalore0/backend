@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +10,4 @@ class Pais_origem extends Model
     {
         return $this->belongsTo(Produto::class);
     }
-
-    protected $table = 'pais_origem';
-
-    protected $fillable = [
-        'ds_pais_origem'
-    ];
 }

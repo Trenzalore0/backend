@@ -1,14 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
     protected $fillable = [
-        'nome', 'email', 'rg', 'cpf', 'data_de_nascimento', 'genero', 'login', 'senha', 'cd_login'
-    ]; 
+        'nome', 'email', 'rg', 'cpf', 'data de nascimento', 'genero', 'login', 'senha'
+        ];    
 
     protected $table = 'clientes';
 

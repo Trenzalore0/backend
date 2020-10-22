@@ -5,6 +5,8 @@
 
 @section('conteudo')
 
-  <h1>teste</h1>
+  <div>
+    <label class='display-4'>Escolher para onde ir</label>
+  </div>
 
 @endsection

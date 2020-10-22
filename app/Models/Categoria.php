@@ -1,19 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Imagem extends Model
+class Categoria extends Model
 {
-    protected $table = 'imagens';
 
     protected $fillable = [
-        'ds_imagem',
+        'id','ds_categoria'
     ];
-
     public function produto()
     {
         return $this->belongsTo(Produto::class);
     }
+
 }

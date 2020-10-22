@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Categoria;
-use App\Imagem;
-use App\Pais_origem;
-use App\Produto;
+use App\Models\Categoria;
+use App\Models\Imagem;
+use App\Models\Pais_origem;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 

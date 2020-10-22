@@ -18,7 +18,7 @@ class CreateTipoPagamentosTable extends Migration
             $table->unsignedBigInteger('cd_cartao_credito')->nullable();
             $table->unsignedBigInteger('cd_boleto')->nullable();
             $table->foreign('cd_cartao_credito')
-                ->references('id')->on('cartao_credito');
+                ->references('id')->on('cartao_creditos');
             $table->foreign('cd_boleto')
                 ->references('id')->on('boletos');
             $table->timestamps();

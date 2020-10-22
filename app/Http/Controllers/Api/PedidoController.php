@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Boleto;
-use App\CartaoCretido;
-use App\Cliente;
-use App\Endereco;
+use App\Models\Boleto;
+use App\Models\CartaoCretido;
+use App\Models\Cliente;
+use App\Models\Endereco;
 use App\Http\Controllers\Controller;
-use App\Item_pedido;
-use App\Pedido;
+use App\Models\Item_pedido;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class ItemPedidoController extends Controller
@@ -35,60 +35,68 @@ class ItemPedidoController extends Controller
 
   public function create(Request $req)
   {
-    $data = $req->all();
+    $products = $req->all();
+    $id = $products[0]['cd_pedido'];
+    if (is_null(Pedido::find($id))) {
+      return response()->json('Pedido não encontrado', 404);
+      $data = $req->all();
 
-    $client = $data['cliente'];
+      $client = $data['cliente'];
 
-    if (is_null(Cliente::find($client))) {
-      return response()->json('cliente não encontrado', 400);
-    }
-
-    $address = $data['endereco_entrega'];
-
-    if (is_null(Endereco::find($address))) {
-      return response()->json('endereço não encontrado', 400);
-    }
-
-    $pay = $data['tipo_pagamento'];
-
-    if ($pay == 'cartão de credito') {
-      $pay['id'] = $data['dados_pagamento']['id_cartao'];
-
-      $card = CartaoCretido::find($pay);
-      if (is_null($card)) {
-        return response()->json('cartão não encontrado', 400);
+      if (is_null(Cliente::find($client))) {
+        return response()->json('cliente não encontrado', 400);
       }
-    } else {
-      $billet = $data['dados_pagamento']['ds_boleto'];
 
-      $pay = Boleto::create([
-        'dados_boleto' => $billet
-      ]);
-    }
-    
-    $status = 1;
-    
-    $newOrder = [
-      'cd_cliente' => $client['id'],
-      'cd_tipo_pagamento' => $pay['id'],
-      'cd_endereco_entrega' => $address,
-      'cd_status_pedido' => $status
-    ];
+      $address = $data['endereco_entrega'];
 
-    $order = Pedido::create($newOrder);
+      if (is_null(Endereco::find($address))) {
+        return response()->json('endereço não encontrado', 400);
+      }
 
-    $products = $data['produtos'];
+      $pay = $data['tipo_pagamento'];
 
-    foreach ($products as $product) {
-      $newProduct = [
-        'cd_pedido' => $order['id'],
-        'cd_produto' => $product['id_produto'],
-        'quantidade_produto' => $product['quantidade_produto'],
-        'valor_produto' => $product['valor_produto']
+      if ($pay == 1) {
+        $pay['id'] = $data['dados_pagamento']['id_cartao'];
+
+        $card = CartaoCretido::find($pay['id']);
+        if (is_null($card)) {
+          return response()->json('cartão não encontrado', 400);
+        }
+      } else {
+        $billet = $data['dados_pagamento']['ds_boleto'];
+
+        $pay = Boleto::create([
+          'dados_boleto' => $billet
+        ]);
+      }
+
+      $status = 1;
+
+      $type_payment = $data['tipo_pagamento'];
+
+      $newOrder = [
+        'cd_cliente' => $client['id'],
+        'cd_tipo_pagamento' => $type_payment,
+        'cd_pagamento' => $pay['id'],
+        'cd_endereco_entrega' => $address,
+        'cd_status_pedido' => $status
       ];
-      Item_pedido::create($newProduct);
-    }
 
-    return response()->json('Items criados com sucesso', 201);
+      $order = Pedido::create($newOrder);
+
+      $products = $data['produtos'];
+
+      foreach ($products as $product) {
+        $newProduct = [
+          'cd_pedido' => $order['id'],
+          'cd_produto' => $product['id_produto'],
+          'quantidade_produto' => $product['quantidade_produto'],
+          'valor_produto' => $product['valor_produto']
+        ];
+        Item_pedido::create($newProduct);
+      }
+
+      return response()->json('Items criados com sucesso', 201);
+    }
   }
 }
