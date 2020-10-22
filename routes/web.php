@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Site\HomeController@index')
     ->name('home.index');
 
-// Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
     //Rotas de cliente
     Route::get(
@@ -147,6 +147,6 @@ Route::get('/', 'Site\HomeController@index')
         '/endereco/deletar/{id}',
         'Site\EnderecoController@deletar'
     )->name('endereco.deletar');
-// });
+});
 
 Auth::routes();

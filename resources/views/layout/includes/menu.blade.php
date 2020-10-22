@@ -1,4 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<style>
+  .navbar-brand, nav {
+    background-color: #660033;
+  }
+</style> 
+<nav class="navbar navbar-expand-md navbar-dark">
   <a class="navbar-brand" href="#">Desvinho Manager</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -32,5 +37,4 @@
       @endguest
     </ul>
   </div>
-
 </nav>
