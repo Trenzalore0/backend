@@ -59,4 +59,4 @@ Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
 
 Route::get('/cliente/listar', 'Api\CadastroController@listAll');
 
-Route::put('/cliente/atualizar/{id}', 'Api\CadastroController@atualizar');
+Route::put('/cliente/atualizar/{id}', 'Api\CadastroController@edit');

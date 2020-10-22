@@ -14,62 +14,66 @@ class CadastroController extends Controller
     
             // -------Cadastrar Clientes
 
-    public function createCadastro (Request $req)
+    public function createRegister (Request $req)
     
     {
-        $dadosrecebidos = $req->all();
+        $datareceived = $req->all();
 
-        $clientelogin = array(
-            'login' => $dadosrecebidos ['email'],
-            'senha' => $dadosrecebidos ['senha'],
+        if(is_null($datareceived)) {            
+            return response()->json('Dados incompletos', 404);
+        }
+
+        $clientslogin = array(
+            'login' => $datareceived ['email'],
+            'senha' => $datareceived ['senha'],
             'cd_perfil' => 1
         );
 
-        $logincriado = Login::create($clientelogin);
+        $loginclient = Login::create($clientslogin);
 
-        $cliente = array(
-            'nome' => $dadosrecebidos ['nome'],
-            'cpf' => $dadosrecebidos ['cpf'],
-            'rg' => $dadosrecebidos ['rg'],
-            'email' => $dadosrecebidos ['email'],
-            'data_de_nascimento' => $dadosrecebidos ['data_nascimento'],
-            'genero' => $dadosrecebidos ['genero'],
-            'login' => $dadosrecebidos ['email'],
-            'senha' => $dadosrecebidos ['senha'],
-            'cd_login' => $logincriado['id']
+        $clients = array(
+            'nome' => $datareceived ['nome'],
+            'cpf' => $datareceived ['cpf'],
+            'rg' => $datareceived ['rg'],
+            'email' => $datareceived ['email'],
+            'data_de_nascimento' => $datareceived ['data_nascimento'],
+            'genero' => $datareceived ['genero'],
+            'login' => $datareceived ['email'],
+            'senha' => $datareceived ['senha'],
+            'cd_login' => $loginclient['id']
             );
 
-        $clientecriado = Cliente::create($cliente);
+        $clientscreate = Cliente::create($clients);
         
-        $contatoscliente = array(
-            array('ds_contato' => $dadosrecebidos ['contato'] [0] ['ds_contato'], 
-            "cd_cliente" => $clientecriado ['id'] 
+        $contact = array(
+            array('ds_contato' => $datareceived ['contato'] [0] ['ds_contato'], 
+            "cd_cliente" => $clientscreate ['id'] 
              ), 
-             array('ds_contato' => $dadosrecebidos ['contato'] [1] ['ds_contato'], 
-                "cd_cliente" => $clientecriado ['id']
+             array('ds_contato' => $datareceived ['contato'] [1] ['ds_contato'], 
+                "cd_cliente" => $clientscreate ['id']
 
             ));
 
 
-        $contatoscriados = array();
+       $contactcreate = array();
 
-        foreach($contatoscliente as $contato){
-            $contatoscriados[] = Contato::create($contato);
+        foreach($contact as $contact){
+           $contactcreate[] = Contato::create($contact);
         }
 
 
-        $clienteend = array(
-            'rua' => $dadosrecebidos['endereco']['rua'],
-            'cep' => $dadosrecebidos ['endereco']['cep'],
-            'cd_uf' => $dadosrecebidos['endereco']['cd_uf'],
-            'numero' => $dadosrecebidos['endereco']['numero'],
-            'complemento' => $dadosrecebidos ['endereco']['complemento'],
-            'referencia' => $dadosrecebidos ['endereco']['referencia'],
-            'bairro' => $dadosrecebidos ['endereco']['bairro'],
-            'cd_cliente' => $clientecriado ['id']
+        $clientsadress = array(
+            'rua' => $datareceived['endereco']['rua'],
+            'cep' => $datareceived ['endereco']['cep'],
+            'cd_uf' => $datareceived['endereco']['cd_uf'],
+            'numero' => $datareceived['endereco']['numero'],
+            'complemento' => $datareceived ['endereco']['complemento'],
+            'referencia' => $datareceived ['endereco']['referencia'],
+            'bairro' => $datareceived ['endereco']['bairro'],
+            'cd_cliente' => $clientscreate ['id']
         );
 
-        $endereco = Endereco::create($clienteend);
+        $endereco = Endereco::create($clientsadress);
 
 
 
@@ -78,15 +82,49 @@ class CadastroController extends Controller
 
     }
 
-            // -------Listando Clientes Cadastrados
+                // -------Editando Clientes Cadastrados
 
-    public function listAll() 
+
+        public function edit (Request $req, $id)
     
+         {
+              $clients = $req->all();
+            
+               $itemclient = Cliente::find($id);
+            
+                if (is_null($itemclient)) {
+                      return response()->json(['erro' => 'Cliente não encontrado'], 404);
+                }
+            
+                    return response()->json($itemclient->update($clients), 200);
+            
+                }
+
+
+                // -------Validando Login
+
+
+        public function validateLogin (Request $req)
     
-    {
-        return response()->json(Cliente::all(), 200);
-    }
+        {
+            $login = $req->all();
+                
+            $clients = Cliente::where('email', '=', $login['email'])->get();
+
+            if(is_null($clients)){
+                return response()->json('Email não Cadastrado', 400);
+            } 
+
+            if($login['senha'] == $clients['senha'] ){
+                return response()->json('Bem vindo!!', 200);
+            } else {
+                return response()->json('Senha Incorreta', 400);
+            }
 
 
+
+            
+        }               
+                         
 
 }

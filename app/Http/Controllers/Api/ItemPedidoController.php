@@ -19,7 +19,7 @@ class ItemPedidoController extends Controller
     $pedido = $req->all();
 
     $products = Item_pedido::where('cd_pedido', $pedido['id']);
-
+ 
     return response()->json($products, 200);
   }
 
