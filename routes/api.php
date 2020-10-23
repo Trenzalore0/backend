@@ -57,26 +57,12 @@ Route::delete(
 
 //Api Perfil
 Route::get(
-<<<<<<< HEAD
-    '/itemPedido/listar',
-    'Api\PedidoController@listAll'
-=======
   '/perfil/buscarTipoPerfil/{id}',
   'Api\ApiPerfilController@buscarTipoPerfil'
->>>>>>> c9a04a6eb33516ee8f2bc396f485c8cc0ccdcba9
 );
 
 //Rotas Endereços
 Route::get(
-<<<<<<< HEAD
-    '/itemPedido/pedido/{id}',
-    'Api\PedidoController@selectProdutosPedido'
-);
-
-Route::post(
-    '/itemPedido/criarLista/',
-    'Api\PedidoController@createItem'
-=======
   '/endereco/listar',
   'Api\EnderecoController@listar'
 );
@@ -105,7 +91,6 @@ Route::get(
 Route::get(
   '/produto/buscar/{id}',
   'Api\ProdutoController@buscar'
->>>>>>> c9a04a6eb33516ee8f2bc396f485c8cc0ccdcba9
 );
 
 Route::get(

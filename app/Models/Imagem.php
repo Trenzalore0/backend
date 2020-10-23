@@ -12,8 +12,4 @@ class Imagem extends Model
         'ds_imagem',
     ];
 
-    public function produto()
-    {
-        return $this->belongsTo(Produto::class);
-    }
 }

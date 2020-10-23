@@ -1,4 +1,7 @@
-<label class="display-4">Listagem</label>
+<label class="display-4">Listagem <small>Pedidos</small></label>
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Voltar</a>
+</div>
 {{-- <a href="{{ route('pedido.create') }}" class="btn btn-success float-right mt-3">Criar</a> --}}
 <table class="table">
   <thead>

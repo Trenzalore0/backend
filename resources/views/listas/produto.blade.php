@@ -1,5 +1,9 @@
-<label class="display-4">Listagem</label>
-<a href="{{ route('produto.create') }}" class="btn btn-success float-right mt-3">Criar</a>
+<label class="display-4">Listagem <small>Produtos </small></label>
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Voltar</a>
+  <a href="{{ route('produto.create') }}" class="btn btn-success ">Criar</a>
+</div>
+
 <table class="table">
   <thead>
     <tr>

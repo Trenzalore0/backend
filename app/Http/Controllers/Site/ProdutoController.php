@@ -62,11 +62,9 @@ class ProdutoController extends BaseController
     $data = $req->all();
 
     if ($req->hasFile('cd_imagem')) {
-      $image = Imagem::create([
-        'ds_imagem' => $this->transformImage($req)
-      ]);
+      $image = $this->transformImage($req);
 
-      $data['cd_imagem'] = $image->id;
+      $data['ds_imagem'] = $image;
     }
 
     $this->classe::create($data);
@@ -108,13 +106,9 @@ class ProdutoController extends BaseController
   {
     $dado = $this->classe::find($id);
 
-    $img = Imagem::find($dado['cd_imagem']);
-
-    $this->deleteImage($img->ds_imagem);
+    $this->deleteImage($dado['ds_imagem']);
 
     $this->classe::destroy($id);
-
-    Imagem::destroy($img->id);
 
     $req->session()
       ->flash(
