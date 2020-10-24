@@ -30,23 +30,30 @@
 
 <div class="form-group">
   <label for="sel1">Pais origem do Produto:</label>
-  <select class="form-control" id="sel1" name="cd_pais_origem">
-    @foreach ($paises as $pais)
-      <option value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
-    @endforeach
-  </select>
+  @if ($paises == 'not found')
+    <input type="text" class='form-control' name='cd_pais_origem' />
+
+  @else
+
+    <select class="form-control" id="sel1" name="cd_pais_origem">
+      @foreach ($paises as $pais)
+        <option value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
+      @endforeach
+    </select>
+
+  @endif
 </div>
 
 <div class="form-group">
   <label for="">Categoria: </label>
   <select class="form-control" name="cd_categoria" id="">
     @foreach ($categorias as $categoria)
-        <option value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>
+      <option value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>
     @endforeach
   </select>
 </div>
 
 <div class="form-group">
-  <label for="cd_imagem">Imagem: </label>
-  <input type="file" name="cd_imagem" id="cd_imagem">
+  <label for="ds_imagem">Imagem: </label>
+  <input type="file" name="ds_imagem" id="ds_imagem">
 </div>
