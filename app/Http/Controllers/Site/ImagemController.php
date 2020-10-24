@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Models\Imagem;
 use Illuminate\Http\Request;
 
-class ImagemController extends BaseController
+class ImagemController extends BaseArquivoController
 {
   public function __construct()
   {
@@ -18,7 +18,7 @@ class ImagemController extends BaseController
     $data = $req->all();
 
     if ($req->hasFile('ds_imagem')) {
-      $image = $this->transformImage($req);
+      $image = $this->transformImage($req, $this->guardar);
 
       $data['ds_imagem'] = $image;
     }
@@ -36,67 +36,4 @@ class ImagemController extends BaseController
     return redirect()->route("$this->tipo.index");
   }
 
-  public function atualizar(Request $req, $id)
-  {
-    $data = $req->all();
-
-    $img = $this->classe::find($id);
-
-    if ($req->hasFile('ds_imagem')) {
-      $this->deleteImage($img['ds_imagem']);
-
-      $image = $this->transformImage($req);
-
-      $data['ds_imagem'] = $image;
-    }
-
-    $img->update($data);
-
-    $req->session()
-      ->flash(
-        'mensagem',
-        "O produto $req->nome foi atualizado com sucesso"
-      );
-
-    return redirect()->route("$this->tipo.index");
-  }
-
-  public function deletar(Request $req, $id)
-  {
-    $dado = $this->classe::find($id);
-
-    $this->deleteImage($dado['ds_imagem']);
-
-    $this->classe::destroy($id);
-
-    $req->session()
-      ->flash(
-        'mensagem',
-        "Dados de $dado->nome excluido com sucesso!"
-      );
-
-    return redirect()->route("$this->tipo.index");
-  }
-
-  public function transformImage(Request $req)
-  {
-    $image = $req->file('ds_imagem');
-
-    $extension = $image->guessClientExtension();
-
-    $directory = 'img/banners/';
-
-    $hash = rand(1, 9999999);
-
-    $fileName = 'img_' . $hash . '.' . $extension;
-
-    $image->move($directory, $fileName);
-
-    return $directory . $fileName;
-  }
-
-  public function deleteImage($image)
-  {
-    unlink($image);
-  }
 }

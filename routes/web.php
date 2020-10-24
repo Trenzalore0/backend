@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\ClienteController@adicionar'
   )->name('cliente.create');
 
-  Route::put(
+  Route::post(
     '/cliente/salvar',
     'Site\ClienteController@salvar'
   )->name('cliente.store');
@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\ProdutoController@adicionar'
   )->name('produto.create');
 
-  Route::put(
+  Route::post(
     '/produto/salvar',
     'Site\ProdutoController@salvar'
   )->name('produto.store');
@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\PedidoController@adicionar'
   )->name('pedido.create');
 
-  Route::put(
+  Route::post(
     '/pedido/salvar',
     'Site\PedidoController@salvar'
   )->name('pedido.store');
@@ -128,7 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\EnderecoController@adicionar'
   )->name('endereco.create');
 
-  Route::put(
+  Route::post(
     '/endereco/salvar',
     'Site\EnderecoController@salvar'
   )->name('endereco.store');
@@ -159,7 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\UfController@adicionar'
   )->name('uf.create');
 
-  Route::put(
+  Route::post(
     '/uf/salvar',
     'Site\UfController@salvar'
   )->name('uf.store');
@@ -190,7 +190,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\ImagemController@adicionar'
   )->name('imagem.create');
 
-  Route::put(
+  Route::post(
     '/imagem/salvar',
     'Site\ImagemController@salvar'
   )->name('imagem.store');

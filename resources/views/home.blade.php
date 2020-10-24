@@ -10,7 +10,6 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 mt-4">
-        <label class='display-4'>o Costa que fala faz falta no presencial</label>
         @guest
           <div class="card-title mb-4">
             <h4>Realize o login ou cadastre-se</h4>

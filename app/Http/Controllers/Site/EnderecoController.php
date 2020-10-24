@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Models\Endereco;
 
 class EnderecoController extends BaseController

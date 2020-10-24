@@ -1,7 +1,10 @@
 <label class='display-4'>Criar <small>{{ $tipo }}</small></label>
-<form action="{{ route($tipo.$rota, $dados->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route($tipo.'.index') }}">Listagem</a>
+</div>
+<form action="{{ route($tipo.$rota, $dados ?? ''->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
   @csrf
-  @method('put')
+  {{ isset($dados->id) ? method_field('put') : method_field('post') }}
 
   @if ($tipo == 'cliente')
 
