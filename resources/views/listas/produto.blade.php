@@ -27,7 +27,7 @@
         <td class='text-center'>{{ $produto->nome_produto }}</td>
         <td class='text-center'>{{ $produto->ano_produto }}</td>
         <td class='text-center'>R$ {{ $produto->valor_produto }}</td>
-        <td class='text-center'>% {{ $produto->desconto_produto }}</td>
+        <td class='text-center'>R$ {{ $produto->desconto_produto }}</td>
         <td class='text-center'>{{ $produto->cd_pais_origem }}</td>
         <td class='text-center'>{{ $produto->cd_categoria }}</td>
         <td class='text-center'>

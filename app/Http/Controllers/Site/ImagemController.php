@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Imagem;
+use Exception;
 use Illuminate\Http\Request;
 
 class ImagemController extends BaseArquivoController
@@ -21,7 +22,7 @@ class ImagemController extends BaseArquivoController
       $this->guardar = $data['tipo_imagem'];
 
       $image = $this->transformImage($req, $this->guardar);
-      
+
       $data['ds_imagem'] = $image;
     }
 
@@ -44,8 +45,11 @@ class ImagemController extends BaseArquivoController
 
     if ($req->hasFile('ds_imagem')) {
       $this->guardar = $data['tipo_imagem'];
-
-      $this->deleteImage($img['ds_imagem']);
+      
+      try {
+        $this->deleteImage($img['ds_imagem']);
+      } catch (Exception $e) {
+      }
 
       $image = $this->transformImage($req, $this->guardar);
 
@@ -62,5 +66,4 @@ class ImagemController extends BaseArquivoController
 
     return redirect()->route("$this->tipo.index");
   }
-
 }

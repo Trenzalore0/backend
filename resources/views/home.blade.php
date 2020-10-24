@@ -22,7 +22,7 @@
           </div>
         @else
           <div class="card-title mb-4">
-            <h4>Escolha á operação:</h4>
+            <h4>Escolha a operação:</h4>
           </div>
 
           <div class="d-flex justify-content-around">
