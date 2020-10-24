@@ -13,7 +13,13 @@ class ProdutoController extends Controller
 
   public function listar()
   {
-    return response()->json(Produto::all());
+    $products = Produto::all();
+
+    foreach($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products, 200);
   }
 
   public function buscar($id)
