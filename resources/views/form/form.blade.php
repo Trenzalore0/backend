@@ -1,4 +1,4 @@
-<label class='display-4'>Criar <small>{{ $tipo }}</small></label>
+<label class='display-4'>{{ $rota == '.store' ? 'Criar' : 'Alterar' }} <small>{{ $tipo }}</small></label>
 <div class='float-right mt-3'>
   <a class='btn btn-outline-secondary' href="{{ route($tipo.'.index') }}">Listagem</a>
 </div>
@@ -32,6 +32,6 @@
 
   @endif
 
-  <button type="submit" class="btn btn-success">Salvar</button>
+  <button type="submit" class="btn btn-success mb-5">Salvar</button>
 
 </form>

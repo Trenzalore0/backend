@@ -27,11 +27,6 @@
         <td>
           <div class='d-flex justify-content-around'>
             <a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-outline-primary">Ver Pedido</a>
-            <form action="{{ route('pedido.update.cancel', $pedido->id) }}">
-              @csrf
-              @method('put')
-              <button class="btn btn-outline-danger">Cancelar</button>
-            </form>
           </div>
 
         </td>

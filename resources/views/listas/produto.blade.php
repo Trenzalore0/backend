@@ -22,16 +22,16 @@
   <tbody>
     @foreach ($dados as $produto)
       <tr>
-        <td>{{ $produto->id }}</td>
-        <td>{{ $produto->ds_produto }}</td>
-        <td>{{ $produto->nome_produto }}</td>
-        <td>{{ $produto->ano_produto }}</td>
-        <td>R$ {{ $produto->valor_produto }}</td>
-        <td>{{ $produto->desconto_produto }}</td>
-        <td>{{ $produto->cd_pais_origem }}</td>
-        <td>{{ $produto->cd_categoria }}</td>
-        <td>
-          <img width="70" height="60" class="w-100" src="{{ $produto->cd_imagem }}">
+        <td class='text-center'>{{ $produto->id }}</td>
+        <td class='text-center'>{{ $produto->ds_produto }}</td>
+        <td class='text-center'>{{ $produto->nome_produto }}</td>
+        <td class='text-center'>{{ $produto->ano_produto }}</td>
+        <td class='text-center'>R$ {{ $produto->valor_produto }}</td>
+        <td class='text-center'>% {{ $produto->desconto_produto }}</td>
+        <td class='text-center'>{{ $produto->cd_pais_origem }}</td>
+        <td class='text-center'>{{ $produto->cd_categoria }}</td>
+        <td class='text-center'>
+          <img width="70" height="60" class="w-100" src="{{ url($produto->ds_imagem) }}">
         </td>
         <td>
           <div class="d-flex justify-content-around">

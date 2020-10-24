@@ -26,16 +26,6 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('cliente.index');
 
   Route::get(
-    '/cliente/adicionar',
-    'Site\ClienteController@adicionar'
-  )->name('cliente.create');
-
-  Route::post(
-    '/cliente/salvar',
-    'Site\ClienteController@salvar'
-  )->name('cliente.store');
-
-  Route::get(
     '/cliente/editar',
     'Site\ClienteController@editar'
   )->name('cliente.edit');
@@ -88,16 +78,6 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('pedido.index');
 
   Route::get(
-    '/pedido/adicionar',
-    'Site\PedidoController@adicionar'
-  )->name('pedido.create');
-
-  Route::post(
-    '/pedido/salvar',
-    'Site\PedidoController@salvar'
-  )->name('pedido.store');
-
-  Route::get(
     '/pedido/detalharPedido',
     'Site\PedidoController@detalhar'
   )->name('pedido.edit');
@@ -106,11 +86,6 @@ Route::group(['middleware' => 'auth'], function () {
     '/pedido/atualizarPedido',
     'Site\PedidoController@atualizar'
   )->name('pedido.update');
-
-  Route::put(
-    '/pedido/cancelarPedido',
-    'Site\PedidoController@cancelar'
-  )->name('pedido.update.cancel');
 
   Route::delete(
     '/pedido/deletarPedido',

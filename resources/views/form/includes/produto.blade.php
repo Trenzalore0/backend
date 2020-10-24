@@ -30,30 +30,51 @@
 
 <div class="form-group">
   <label for="sel1">Pais origem do Produto:</label>
-  @if ($paises == 'not found')
-    <input type="text" class='form-control' name='cd_pais_origem' />
 
-  @else
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <select class="form-control" id="sel1" name="cd_pais_origem">
+          <option value="">selecione</option>
+          @foreach ($paises as $pais)
+            <option value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="col-6">
+        <input type="text" name='ds_pais_origem' class='form-control' placeholder='configure um novo Pais'>
+      </div>
+    </div>
+  </div>
 
-    <select class="form-control" id="sel1" name="cd_pais_origem">
-      @foreach ($paises as $pais)
-        <option value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
-      @endforeach
-    </select>
 
-  @endif
 </div>
 
 <div class="form-group">
   <label for="">Categoria: </label>
-  <select class="form-control" name="cd_categoria" id="">
-    @foreach ($categorias as $categoria)
-      <option value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>
-    @endforeach
-  </select>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <select class="form-control" name="cd_categoria" id="">
+          <option value="">selecione</option>
+          @foreach ($categorias as $categoria)
+            <option value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="col-6">
+        <input type="text" name='ds_categoria' placeholder='crie uma nova categoria' class='form-control'>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="form-group">
   <label for="ds_imagem">Imagem: </label>
   <input type="file" name="ds_imagem" id="ds_imagem">
+</div>
+
+<div>
+  <img class='w-50 mb-2' src="{{ url($dados->ds_imagem ?? '') }}" alt="">
 </div>

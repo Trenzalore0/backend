@@ -14,9 +14,9 @@
   <tbody>
     @foreach ($dados as $uf)
       <tr>
-        <td>{{ $uf->id }}</td>
-        <td>{{ $uf->ds_uf }}</td>
-        <td>
+        <td class='text-center'>{{ $uf->id }}</td>
+        <td class='text-center'>{{ $uf->ds_uf }}</td>
+        <td class='text-center'>
           <div class="d-flex justify-content-around">
             <a class="btn btn-outline-primary" href="{{ route('uf.edit', $uf->id) }}">Editar</a>
             <form action="{{ route('uf.delete', $uf->id) }}" method="POST">

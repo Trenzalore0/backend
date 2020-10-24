@@ -25,8 +25,8 @@ class CadastroController extends Controller
     );
 
     $logincriado = Login::create($clientelogin);
-
-    $cliente = array(
+ddddddddddddddddddddddddddddddddddddddddd
+    $cliente = array(ddddddddddddddddddddddddddddddddddddddddd
       'nome' => $dadosrecebidos['nome'],
       'cpf' => $dadosrecebidos['cpf'],
       'rg' => $dadosrecebidos['rg'],

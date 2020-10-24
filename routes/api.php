@@ -110,4 +110,7 @@ Route::get(
   'Api\ConsumoController@listUF'
 );
 
-
+Route::get(
+  '/imagens/{tipo}',
+  'Api\ConsumoController@GetImages'
+);

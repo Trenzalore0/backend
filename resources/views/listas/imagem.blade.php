@@ -14,9 +14,9 @@
   <tbody>
     @foreach ($dados as $imagem)
       <tr>
-        <td>{{ $imagem->id }}</td>
-        <td><img width='100' src="{{ url($imagem->ds_imagem) }}"></td>
-        <td>
+        <td class='text-center'>{{ $imagem->id }}</td>
+        <td class='text-center'><img width='100' src="{{ url($imagem->ds_imagem) }}"></td>
+        <td class='text-center'>
           <div class="d-flex justify-content-around">
             <a class="btn btn-outline-primary" href="{{ route('imagem.edit', $imagem->id) }}">Editar</a>
             <form action="{{ route('imagem.delete', $imagem->id) }}" method="POST">

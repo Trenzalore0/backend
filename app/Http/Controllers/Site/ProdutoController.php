@@ -44,10 +44,6 @@ class ProdutoController extends BaseArquivoController
 
     $paises = Pais_origem::all();
 
-    if(count($paises) == 0) {
-      $paises = 'not found';
-    }
-
     $categorias = Categoria::all();
 
     $rota = '.store';
@@ -61,6 +57,55 @@ class ProdutoController extends BaseArquivoController
         'categorias'
       )
     );
+  }
+
+  public function salvar(Request $req)
+  {
+    $data = $req->all();
+
+    $product = [];
+
+    if ($req->hasFile('ds_imagem')) {
+      $image = $this->transformImage($req, $this->guardar);
+
+      $product['ds_imagem'] = $image;
+    }
+
+    if ($data['ds_categoria'] !== null) {
+      $categoria = Categoria::create([
+        'ds_categoria' => $data['ds_categoria']
+      ]);
+
+      $product['cd_categoria'] = $categoria->id;
+    } else {
+      $product['cd_categoria'] = $data['cd_categoria'];
+    }
+
+    if ($data['ds_pais_origem'] !== null) {
+      $pais = Pais_origem::create([
+        'ds_pais_origem' => $data['ds_pais_origem']
+      ]);
+
+      $product['cd_pais_origem'] = $pais->id;
+    } else {
+      $product['cd_pais_origem'] = $data['cd_pais_origem'];
+    }
+
+    $product['ds_produto'] = $data['ds_produto'];
+    $product['nome_produto'] = $data['nome_produto'];
+    $product['valor_produto'] = $data['valor_produto'];
+    $product['ano_produto'] = $data['ano_produto'];
+    $product['desconto_produto'] = $data['desconto_produto'];
+
+    $this->classe::create($product);
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "$req->nome adicionado com sucesso"
+      );
+
+    return redirect()->route("$this->tipo.index");
   }
 
   public function editar($id)
@@ -86,6 +131,4 @@ class ProdutoController extends BaseArquivoController
       )
     );
   }
-
-  
 }
