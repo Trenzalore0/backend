@@ -25,7 +25,7 @@
 <div class="form-group">
   <label for="desconto_produto"><b>Desconto do Produto: </b></label>
   <input style="border-radius: 10px;" type="text" class="form-control" id="desconto_produto" name="desconto_produto"
-    value="{{ $dados->valor_produto ?? '' }}">
+    value="{{ $dados->desconto_produto ?? '' }}">
 </div>
 
 <div class="form-group">
