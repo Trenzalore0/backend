@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use Exception;
 use Illuminate\Http\Request;
 
 class BaseArquivoController extends BaseController
@@ -69,7 +70,12 @@ class BaseArquivoController extends BaseController
     $img = $this->classe::find($id);
 
     if ($req->hasFile('ds_imagem')) {
-      $this->deleteImage($img['ds_imagem']);
+      try {
+        $this->deleteImage($img['ds_imagem']);
+      } catch (Exception $e) {
+        
+      }
+      
 
       $image = $this->transformImage($req, $this->guardar);
 
