@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Categoria;
-use App\Imagem;
-use App\Pais_origem;
-use App\Produto;
+use App\Models\Categoria;
+use App\Models\Imagem;
+use App\Models\Pais_origem;
+use App\Models\Produto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
 
 class ProdutoController extends BaseController
 {
@@ -24,8 +24,7 @@ class ProdutoController extends BaseController
     $tipo = $this->tipo;
 
     foreach ($dados as $dado) {
-      $img = Imagem::find($dado['cd_imagem']);
-      $dado['cd_imagem'] = url($img->ds_imagem);
+      $dado['ds_imagem'] = url($dado['ds_imagem']);
 
       $cate = Categoria::find($dado['cd_categoria']);
       $dado['cd_categoria'] = $cate->ds_categoria;
@@ -45,13 +44,20 @@ class ProdutoController extends BaseController
 
     $paises = Pais_origem::all();
 
+    if(count($paises) == 0) {
+      $paises = 'not found';
+    }
+
     $categorias = Categoria::all();
+
+    $rota = '.store';
 
     return view(
       "site.adicionar",
       compact(
         'tipo',
         'paises',
+        'rota',
         'categorias'
       )
     );
@@ -62,11 +68,9 @@ class ProdutoController extends BaseController
     $data = $req->all();
 
     if ($req->hasFile('cd_imagem')) {
-      $image = Imagem::create([
-        'ds_imagem' => $this->transformImage($req)
-      ]);
+      $image = $this->transformImage($req);
 
-      $data['cd_imagem'] = $image->id;
+      $data['ds_imagem'] = $image;
     }
 
     $this->classe::create($data);
@@ -86,7 +90,7 @@ class ProdutoController extends BaseController
 
     $tipo = $this->tipo;
 
-    $editar = true;
+    $rota = '.update';
 
     $paises = Pais_origem::all();
 
@@ -97,7 +101,7 @@ class ProdutoController extends BaseController
       compact(
         'dados',
         'tipo',
-        'editar',
+        'rota',
         'paises',
         'categorias'
       )
@@ -108,13 +112,9 @@ class ProdutoController extends BaseController
   {
     $dado = $this->classe::find($id);
 
-    $img = Imagem::find($dado['cd_imagem']);
-
-    $this->deleteImage($img->ds_imagem);
+    $this->deleteImage($dado['ds_imagem']);
 
     $this->classe::destroy($id);
-
-    Imagem::destroy($img->id);
 
     $req->session()
       ->flash(
@@ -127,7 +127,7 @@ class ProdutoController extends BaseController
 
   public function transformImage(Request $req)
   {
-    $image = $req->file('cd_imagem');
+    $image = $req->file('ds_imagem');
 
     $extension = $image->guessClientExtension();
 

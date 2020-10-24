@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
     protected $classe;
 
@@ -26,7 +26,9 @@ class BaseController extends Controller
     {
         $tipo = $this->tipo;
 
-        return view("site.adicionar", compact('tipo'));
+        $rota = '.store';
+
+        return view("site.adicionar", compact('tipo', 'rota'));
     }
 
     public function salvar(Request $req)
@@ -47,9 +49,9 @@ class BaseController extends Controller
 
         $tipo = $this->tipo;
 
-        $editar = true;
+        $rota = '.update';
 
-        return view("site.adicionar", compact('dados', 'tipo', 'editar'));
+        return view("site.adicionar", compact('dados', 'tipo', 'rota'));
     }
 
     public function atualizar(Request $req, $id)

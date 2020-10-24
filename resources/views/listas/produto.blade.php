@@ -1,5 +1,9 @@
-<label class="display-4">Listagem</label>
-<a href="{{ route('produto.create') }}" class="btn btn-success float-right mt-3">Criar</a>
+<label class="display-4">Listagem <small>Produtos </small></label>
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Voltar</a>
+  <a href="{{ route('produto.create') }}" class="btn btn-success ">Criar</a>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -30,6 +34,8 @@
           <img width="70" height="60" class="w-100" src="{{ $produto->cd_imagem }}">
         </td>
         <td>
+          <div class="d-flex justify-content-between">
+          <div class="d-flex">
           <div class="d-flex justify-content-between">
             <a class="btn btn-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
             <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
