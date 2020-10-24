@@ -19,7 +19,7 @@ class ProdutoController extends Controller
       $product['ds_imagem'] = url($product['ds_imagem']);
     }
 
-    return response()->json($products, 200);
+    return response()->js on($products, 200);
   }
 
   public function buscar($id)
