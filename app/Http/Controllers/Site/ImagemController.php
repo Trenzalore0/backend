@@ -55,6 +55,8 @@ class ImagemController extends BaseArquivoController
 
       $image = $this->transformImage($req, $this->guardar);
 
+      $this->PushOrigin();
+      
       $data['ds_imagem'] = $image;
     }
 
