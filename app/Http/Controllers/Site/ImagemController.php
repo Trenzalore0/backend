@@ -34,6 +34,8 @@ class ImagemController extends BaseArquivoController
         "$req->nome adicionado com sucesso"
       );
 
+    $this->PushOrigin();
+    
     return redirect()->route("$this->tipo.index");
   }
 
@@ -63,6 +65,8 @@ class ImagemController extends BaseArquivoController
         'mensagem',
         "O produto $req->nome foi atualizado com sucesso"
       );
+
+    $this->PushOrigin();
 
     return redirect()->route("$this->tipo.index");
   }
