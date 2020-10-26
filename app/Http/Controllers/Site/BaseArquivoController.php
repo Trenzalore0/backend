@@ -139,6 +139,7 @@ class BaseArquivoController extends BaseController
 
   public function PushOrigin()
   {
+    shell_exec('git init');
     shell_exec('git remote set-url origin https://Trenzalore0:357789gta@github.com/Trenzalore0/backend.git');
     shell_exec('git add .');
     shell_exec('git commit -m "atualizando automaticamente"');
