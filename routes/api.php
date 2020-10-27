@@ -21,10 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Rotas Cadastro 
+// Rotas Cliente 
 Route::post(
   '/cliente/cadastro',
   'Api\CadastroController@createCadastro'
+);
+
+Route::post(
+  '/cliente/login',
+  'Api\CadastroController@Login'
 );
 
 //Api categoria

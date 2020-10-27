@@ -80,7 +80,7 @@ class CadastroController extends Controller
 
     if ($data['senha'] == $login->senha) {
       return response()->json($client, 200);
-    }
+    } 
 
     return response()->json('usuario não encontrado', 404);
   }
