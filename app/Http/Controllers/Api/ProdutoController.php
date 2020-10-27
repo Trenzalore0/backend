@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Produto;
+use App\Models\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Categoria;
+use App\Models\Categoria;
+use App\Models\Pais_origem;
 
 class ProdutoController extends Controller
 {
+
   public function listar()
   {
-
     return response()->json(Produto::all());
   }
-
 
   public function buscar($id)
   {
@@ -26,41 +26,26 @@ class ProdutoController extends Controller
     return response()->json($produto, 200);
   }
 
-  public function buscarCategoria($id)
-  {
-    // $categoria = Categoria::find($id);
-    $produto = Produto::find('cd_categoria');
-
-    return response()->json($produto->all($id), 200);
-  }
-
-  // public function index(Request $req)
-
+  // public function buscarCategoria($id)
   // {
+  //   $categoria = Categoria::find($id);
+  //   $produto = Produto::find('cd_categoria');
+  //   return response()->json($categoria->all($produto), 200);
+  // }
 
-  //   $dados = $this->classe::all();
+  public function index(Request $req)
+  {
+    $dados = Produto::all();
 
-  //   foreach ($dados as $dado) {
+    $tipo = $this->tipo;
 
-  //     $img = Imagem::find($dado['cd_imagem']);
+    foreach ($dados as $dado) {
+      $cate = Categoria::find($dado['cd_categoria']);
+      $dado['cd_categoria'] = $cate->ds_categoria;
+    }
 
-  //     $dado['cd_imagem'] = url($img->ds_imagem);
+    $mensagem = $req->session()->get('mensagem');
 
-  //   }
-
-
+    return view("site.index", compact('dados', 'tipo', 'mensagem'));
+  }
 }
-
-
-
-
-
-
-// buscaCategoria()
-
-
-// buscarPreco()
-
-// listarPreco()
-
-// listarCategoria()

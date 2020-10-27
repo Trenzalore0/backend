@@ -21,6 +21,11 @@
         <td>
           <div class="d-flex">
             <a class="btn btn-primary" href="{{ route('cliente.edit', $cliente->id) }}">Detalhes</a>
+            {{-- <form action="{{ route('cliente.delete', $cliente->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-secondary">Excluir</button>
+            </form> --}}
           </div>
         </td>
       </tr>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Endereco;
+use App\Models\Endereco;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -10,15 +10,9 @@ class EnderecoController extends Controller
 {
     protected $endereco;
 
-    public function adicionar(Request $req)
-    {
-        Endereco::create($req->all());
-    }
-
     public function listar()
     {
-
-        return response()->json(Endereco::all());
+        return response()->json(Endereco::all(), 200);
     }
 
     public function salvar(Request $req)

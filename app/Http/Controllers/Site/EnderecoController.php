@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Uf;
-use App\Endereco;
+use App\Models\Uf;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
