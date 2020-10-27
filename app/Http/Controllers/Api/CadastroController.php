@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 class CadastroController extends Controller
 {
 
+  
+
+
   // -------Cadastrar Clientes
 
   public function createCadastro(Request $req)
