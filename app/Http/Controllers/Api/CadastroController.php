@@ -69,4 +69,19 @@ class CadastroController extends Controller
 
     return response()->json('Cliente criado com sucesso!', 201);
   }
+
+  public function Login(Request $req)
+  {
+    $data = $req->all();
+
+    $client = Cliente::where('email', '=', $data['email'])->get();
+
+    $login = Login::find($client->cd_login);
+
+    if ($data['senha'] == $login->senha) {
+      return response()->json($client, 200);
+    }
+
+    return response()->json('usuario não encontrado', 404);
+  }
 }
