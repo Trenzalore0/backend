@@ -43,10 +43,12 @@ Route::get(
   '/cartaoCredito/listarCartao/{id}',
   'Api\ApiCartaoCredController@listarCartao'
 );
+
 Route::post(
   '/cartaoCredito/adicionarCartao',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
+
 Route::get(
   '/cartaoCredito/buscarCartao/{id}',
   'Api\ApiCartaoCredController@buscarCartao'

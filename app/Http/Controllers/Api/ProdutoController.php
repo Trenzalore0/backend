@@ -39,7 +39,11 @@ class ProdutoController extends Controller
       return response()->json('categoria não encontrada', 404);
     }
 
-    $produtos = Produto::where('cd_categoria', '=', $id)->get(    );
+    $produtos = Produto::where('cd_categoria', '=', $id)->get();
+
+    foreach($produtos as $produto) {
+      $produto->ds_imagem = url($produto->ds_imagem);
+    }
   
     return response()->json($produtos, 200);
   }
