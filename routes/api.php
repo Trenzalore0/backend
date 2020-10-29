@@ -41,7 +41,7 @@ Route::get(
 //Api Cartao Credito
 Route::get(
   '/cartaoCredito/listarCartao/{id}',
-  'Api\ApiCartaoCredController@listarCartao'
+  'Api\ApiCartaoCredControllerx@listarCartao'
 );
 
 Route::post(
@@ -53,6 +53,7 @@ Route::get(
   '/cartaoCredito/buscarCartao/{id}',
   'Api\ApiCartaoCredController@buscarCartao'
 );
+
 Route::put(
   '/cartaoCredito/editarCartao/{id}',
   'Api\ApiCartaoCredController@editarCartao'
