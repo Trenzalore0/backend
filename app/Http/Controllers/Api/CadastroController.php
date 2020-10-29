@@ -16,6 +16,12 @@ class CadastroController extends Controller
   {
     $dadosrecebidos = $req->all();
 
+    $hasEmail = Cliente::where('email', '=', $dadosrecebidos['email'])->get();
+
+    if (count($hasEmail) != 0) {
+      return response()->json('email já cadatrado', 300);
+    }
+
     $clientelogin = array(
       'login' => $dadosrecebidos['email'],
       'senha' => $dadosrecebidos['senha'],
