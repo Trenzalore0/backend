@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class CadastroController extends Controller
 {
-
   public function createCadastro(Request $req)
   {
     $dadosrecebidos = $req->all();
