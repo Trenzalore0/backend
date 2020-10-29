@@ -11,7 +11,7 @@ use App\Models\Item_pedido;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
-class ItemPedidoController extends Controller
+class PedidoController extends Controller
 {
   public function listAll($id)
   {

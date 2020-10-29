@@ -111,6 +111,14 @@ Route::get(
   'Api\ProdutoController@index'
 );
 
+// Routas de Pedido
+Route::get(
+  '/pedido/listar/{id}',
+  'Api\PedidoController@listAll'
+);
+
+
+
 // Rotas de consumo na page
 
 Route::get(
