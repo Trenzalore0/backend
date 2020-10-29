@@ -24,9 +24,9 @@ class EnderecoController extends Controller
 
     public function buscar($id)
     {
-        $endereco = Endereco::find($id);
+        $endereco = Endereco::where('cd_cliente', '=', $id)->get();
 
-        if (is_null($endereco)) {
+        if (count($endereco) == 0) {
             return response()->json('Endereco não encontrado', 404);
         }
         return response()->json($endereco, 200);
