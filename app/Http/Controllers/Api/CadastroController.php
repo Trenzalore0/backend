@@ -85,7 +85,7 @@ class CadastroController extends Controller
       return response()->json('usuario não cadastrado', 404);
     }
 
-    $login = Login::find($client->cd_login);
+    $login = Login::find($client[0]->cd_login);
 
     if ($data['senha'] == $login->senha) {
       return response()->json($client, 200);
