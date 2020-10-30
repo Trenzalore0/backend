@@ -8,8 +8,6 @@
       <th class="scope" class='text-center'>Numero Pedido</th>
       <th class="scope" class='text-center'>Cd. Pagamento</th>
       <th class="scope" class='text-center'>Nome Cliente</th>
-      <th class="scope" class='text-center'>Quantidade de itens</th>
-      <th class="scope" class='text-center'>Total da compra</th>
       <th class="scope" class='text-center'>Status</th>
       <th class="scope" class='text-center'>Ação</th>
     </tr>
@@ -18,12 +16,10 @@
     {{-- colocar for each aqui --}}
     @foreach ($dados as $pedido)
       <tr>
-        <td>000001</td>
-        <td>01</td>
-        <td>Fulano</td>
-        <td>qtd</td>
-        <td></td>
-        <td>Aberto</td>
+        <td>{{ $pedido->id }}</td>
+        <td>{{ $pedido->cd_pagamento }}</td>
+        <td>{{ $pedido->cd_cliente }}</td>
+        <td>{{ $pedido->cd_status_pedido }}</td>
         <td>
           <div class='d-flex justify-content-around'>
             <a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-outline-primary">Ver Pedido</a>

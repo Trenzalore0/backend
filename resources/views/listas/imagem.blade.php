@@ -7,6 +7,7 @@
   <thead> 
     <tr>
       <th scope="col" class='text-center'>Id</th>
+      <th scope="col" class='text-center'>Tipo Imagem</th>
       <th scope="col" class='text-center'>Imagem</th>
       <th scope="col" class='text-center'>Ações</th>
     </tr>
@@ -15,6 +16,7 @@
     @foreach ($dados as $imagem)
       <tr>
         <td class='text-center'>{{ $imagem->id }}</td>
+        <td class='text-center'>{{ $imagem->tipo_imagem }}</td>
         <td class='text-center'><img width='100' src="{{ url($imagem->ds_imagem) }}"></td>
         <td class='text-center'>
           <div class="d-flex justify-content-around">

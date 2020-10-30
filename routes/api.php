@@ -117,7 +117,10 @@ Route::get(
   'Api\PedidoController@listAll'
 );
 
-
+Route::post(
+  '/pedido/criar',
+  'Api\PedidoController@create'
+);
 
 // Rotas de consumo na page
 
