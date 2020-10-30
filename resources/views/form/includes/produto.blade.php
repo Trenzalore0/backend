@@ -85,5 +85,5 @@
 </div>
 
 <div>
-  <img class='w-50 mb-2' src="{{ url($dados ?? ''->ds_imagem ?? '') }}" alt="">
+  <img class='w-50 mb-2' src="{{ url($dados->ds_imagem ?? '') }}" alt="">
 </div>
