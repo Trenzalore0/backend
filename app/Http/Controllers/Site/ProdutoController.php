@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Categoria;
-use App\Models\Imagem;
 use App\Models\Pais_origem;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
 
-class ProdutoController extends BaseController
+class ProdutoController extends BaseArquivoController
 {
   public function __construct()
   {
     $this->classe = Produto::class;
     $this->tipo = 'produto';
+    $this->guardar = '/products';
   }
 
   public function index(Request $req)
@@ -24,8 +24,7 @@ class ProdutoController extends BaseController
     $tipo = $this->tipo;
 
     foreach ($dados as $dado) {
-      $img = Imagem::find($dado['cd_imagem']);
-      $dado['cd_imagem'] = url($img->ds_imagem);
+      $dado['ds_imagem'] = url($dado['ds_imagem']);
 
       $cate = Categoria::find($dado['cd_categoria']);
       $dado['cd_categoria'] = $cate->ds_categoria;
@@ -47,11 +46,14 @@ class ProdutoController extends BaseController
 
     $categorias = Categoria::all();
 
+    $rota = '.store';
+
     return view(
       "site.adicionar",
       compact(
         'tipo',
         'paises',
+        'rota',
         'categorias'
       )
     );
@@ -61,15 +63,41 @@ class ProdutoController extends BaseController
   {
     $data = $req->all();
 
-    if ($req->hasFile('cd_imagem')) {
-      $image = Imagem::create([
-        'ds_imagem' => $this->transformImage($req)
-      ]);
+    $product = [];
 
-      $data['cd_imagem'] = $image->id;
+    if ($req->hasFile('ds_imagem')) {
+      $image = $this->transformImage($req, $this->guardar);
+
+      $product['ds_imagem'] = $image;
     }
 
-    $this->classe::create($data);
+    if ($data['ds_categoria'] !== null) {
+      $categoria = Categoria::create([
+        'ds_categoria' => $data['ds_categoria']
+      ]);
+
+      $product['cd_categoria'] = $categoria->id;
+    } else {
+      $product['cd_categoria'] = $data['cd_categoria'];
+    }
+
+    if ($data['ds_pais_origem'] !== null) {
+      $pais = Pais_origem::create([
+        'ds_pais_origem' => $data['ds_pais_origem']
+      ]);
+
+      $product['cd_pais_origem'] = $pais->id;
+    } else {
+      $product['cd_pais_origem'] = $data['cd_pais_origem'];
+    }
+
+    $product['ds_produto'] = $data['ds_produto'];
+    $product['nome_produto'] = $data['nome_produto'];
+    $product['valor_produto'] = $data['valor_produto'];
+    $product['ano_produto'] = $data['ano_produto'];
+    $product['desconto_produto'] = $data['desconto_produto'];
+
+    $this->classe::create($product);
 
     $req->session()
       ->flash(
@@ -86,7 +114,7 @@ class ProdutoController extends BaseController
 
     $tipo = $this->tipo;
 
-    $editar = true;
+    $rota = '.update';
 
     $paises = Pais_origem::all();
 
@@ -97,53 +125,10 @@ class ProdutoController extends BaseController
       compact(
         'dados',
         'tipo',
-        'editar',
+        'rota',
         'paises',
         'categorias'
       )
     );
-  }
-
-  public function deletar(Request $req, $id)
-  {
-    $dado = $this->classe::find($id);
-
-    $img = Imagem::find($dado['cd_imagem']);
-
-    $this->deleteImage($img->ds_imagem);
-
-    $this->classe::destroy($id);
-
-    Imagem::destroy($img->id);
-
-    $req->session()
-      ->flash(
-        'mensagem',
-        "Dados de $dado->nome excluido com sucesso!"
-      );
-
-    return redirect()->route("$this->tipo.index");
-  }
-
-  public function transformImage(Request $req)
-  {
-    $image = $req->file('cd_imagem');
-
-    $extension = $image->guessClientExtension();
-
-    $directory = 'img/products/';
-
-    $hash = rand(1, 9999999);
-
-    $fileName = 'img_' . $hash . '.' . $extension;
-
-    $image->move($directory, $fileName);
-
-    return $directory . $fileName;
-  }
-
-  public function deleteImage($image)
-  {
-    unlink($image);
   }
 }

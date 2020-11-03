@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Boleto;
-use App\Models\CartaoCretido;
+use App\Models\CartaoCredito;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
@@ -58,7 +58,7 @@ class ItemPedidoController extends Controller
       if ($pay == 1) {
         $pay['id'] = $data['dados_pagamento']['id_cartao'];
 
-        $card = CartaoCretido::find($pay['id']);
+        $card = CartaoCredito::find($pay['id']);
         if (is_null($card)) {
           return response()->json('cartão não encontrado', 400);
         }

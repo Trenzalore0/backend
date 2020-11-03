@@ -9,11 +9,7 @@ class Imagem extends Model
     protected $table = 'imagens';
 
     protected $fillable = [
-        'ds_imagem',
+        'ds_imagem', 'tipo_imagem'
     ];
 
-    public function produto()
-    {
-        return $this->belongsTo(Produto::class);
-    }
 }

@@ -6,27 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateImagemsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('imagens', function (Blueprint $table) {
-            $table->id();
-            $table->string('ds_imagem');
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('imagens', function (Blueprint $table) {
+      $table->id();
+      $table->string('ds_imagem');
+      $table->string('tipo_imagem');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('imagens');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('imagens');
+  }
 }

@@ -21,10 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Rotas Cadastro 
+// Rotas Cliente 
 Route::post(
   '/cliente/cadastro',
   'Api\CadastroController@createCadastro'
+);
+
+Route::post(
+  '/cliente/login',
+  'Api\CadastroController@Login'
 );
 
 //Api categoria
@@ -99,6 +104,18 @@ Route::get(
 );
 
 Route::get(
-  'produto/index',
+  '/produto/index',
   'Api\ProdutoController@index'
+);
+
+// Rotas de consumo na page
+
+Route::get(
+  '/uf',
+  'Api\ConsumoController@listUF'
+);
+
+Route::get(
+  '/imagens/{tipo}',
+  'Api\ConsumoController@GetImages'
 );

@@ -19,7 +19,9 @@ class PedidoController extends BaseController
 
         $produtos = Produto::all();
 
-        return view("site.adicionar", compact('tipo', 'produtos'));
+        $rota = '.store';
+
+        return view("site.adicionar", compact('tipo', 'produtos', 'rota'));
     }
 
     public function editar($id)

@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 class CadastroController extends Controller
 {
 
-  // -------Cadastrar Clientes
-
   public function createCadastro(Request $req)
   {
     $dadosrecebidos = $req->all();
@@ -25,7 +23,6 @@ class CadastroController extends Controller
     );
 
     $logincriado = Login::create($clientelogin);
-
     $cliente = array(
       'nome' => $dadosrecebidos['nome'],
       'cpf' => $dadosrecebidos['cpf'],
@@ -35,7 +32,7 @@ class CadastroController extends Controller
       'genero' => $dadosrecebidos['genero'],
       'login' => $dadosrecebidos['email'],
       'senha' => $dadosrecebidos['senha'],
-      'cd_login' => $logincriado['id']
+      'cd_login' => $logincriado->id
     );
 
     $clientecriado = Cliente::create($cliente);
@@ -43,12 +40,11 @@ class CadastroController extends Controller
     $contatoscliente = array(
       array(
         'ds_contato' => $dadosrecebidos['contato'][0]['ds_contato'],
-        "cd_cliente" => $clientecriado['id']
+        "cd_cliente" => $clientecriado->id
       ),
       array(
         'ds_contato' => $dadosrecebidos['contato'][1]['ds_contato'],
-        "cd_cliente" => $clientecriado['id']
-
+        "cd_cliente" => $clientecriado->id
       )
     );
 
@@ -66,11 +62,26 @@ class CadastroController extends Controller
       'complemento' => $dadosrecebidos['endereco']['complemento'],
       'referencia' => $dadosrecebidos['endereco']['referencia'],
       'bairro' => $dadosrecebidos['endereco']['bairro'],
-      'cd_cliente' => $clientecriado['id']
+      'cd_cliente' => $clientecriado->id
     );
 
-    $endereco = Endereco::create($clienteend);
+    Endereco::create($clienteend);
 
     return response()->json('Cliente criado com sucesso!', 201);
+  }
+
+  public function Login(Request $req)
+  {
+    $data = $req->all();
+
+    $client = Cliente::where('email', '=', $data['email'])->get();
+
+    $login = Login::find($client->cd_login);
+
+    if ($data['senha'] == $login->senha) {
+      return response()->json($client, 200);
+    } 
+
+    return response()->json('usuario não encontrado', 404);
   }
 }
