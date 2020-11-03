@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('cliente.index');
 
   Route::get(
-    '/cliente/editar',
+    '/cliente/editar/{id}',
     'Site\ClienteController@editar'
   )->name('cliente.edit');
 
@@ -78,8 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('pedido.index');
 
   Route::get(
-    '/pedido/detalharPedido',
-    'Site\PedidoController@detalhar'
+    '/pedido/editar/{id}',
+    'Site\PedidoController@editar'
   )->name('pedido.edit');
 
   Route::put(

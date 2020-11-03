@@ -41,16 +41,19 @@ Route::get(
 //Api Cartao Credito
 Route::get(
   '/cartaoCredito/listarCartao/{id}',
-  'Api\ApiCartaoCredController@listarCartao'
+  'Api\ApiCartaoCredControllerx@listarCartao'
 );
+
 Route::post(
   '/cartaoCredito/adicionarCartao',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
+
 Route::get(
   '/cartaoCredito/buscarCartao/{id}',
   'Api\ApiCartaoCredController@buscarCartao'
 );
+
 Route::put(
   '/cartaoCredito/editarCartao/{id}',
   'Api\ApiCartaoCredController@editarCartao'
@@ -106,6 +109,17 @@ Route::get(
 Route::get(
   '/produto/index',
   'Api\ProdutoController@index'
+);
+
+// Routas de Pedido
+Route::get(
+  '/pedido/listar/{id}',
+  'Api\PedidoController@listAll'
+);
+
+Route::post(
+  '/pedido/criar',
+  'Api\PedidoController@create'
 );
 
 // Rotas de consumo na page

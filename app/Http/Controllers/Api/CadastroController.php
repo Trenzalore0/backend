@@ -11,10 +11,15 @@ use Illuminate\Http\Request;
 
 class CadastroController extends Controller
 {
-
   public function createCadastro(Request $req)
   {
     $dadosrecebidos = $req->all();
+
+    $hasEmail = Cliente::where('email', '=', $dadosrecebidos['email'])->get();
+
+    if (count($hasEmail) != 0) {
+      return response()->json('email já cadatrado', 300);
+    }
 
     $clientelogin = array(
       'login' => $dadosrecebidos['email'],
@@ -76,12 +81,16 @@ class CadastroController extends Controller
 
     $client = Cliente::where('email', '=', $data['email'])->get();
 
-    $login = Login::find($client->cd_login);
+    if (count($client) == 0) {
+      return response()->json('usuario não cadastrado', 404);
+    }
+
+    $login = Login::find($client[0]->cd_login);
 
     if ($data['senha'] == $login->senha) {
       return response()->json($client, 200);
-    } 
+    }
 
-    return response()->json('usuario não encontrado', 404);
+    return response()->json('senha incorreta', 300);
   }
 }

@@ -19,7 +19,7 @@
 <div class="form-group">
   <label for="valor_produto"><b>Valor do produto: </b></label>
   <input style="border-radius: 10px;" type="text" class="form-control" id="valor_produto" name="valor_produto"
-    value="{{ $dados->valor_produto ?? '' }}">
+    value="{{$dados->valor_produto ?? '' }}">
 </div>
 
 <div class="form-group">
@@ -34,13 +34,14 @@
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <select class="form-control" id="sel1" name="cd_pais_origem" value="{{ $dados->cd_pais_origem }}">
+        <select class="form-control" id="sel1" name="cd_pais_origem" value="{{ $dados->cd_pais_origem ?? '' }}">
           <option value="">selecione</option>
           @foreach ($paises as $pais)
             <option
-            @if($dados->cd_pais_origem == $pais->id)
+            {{ $dados ?? '' != '' ? $dados->cd_pais_origem == $pais->id ? 'selected' : '' : '' }}
+            {{-- @if($dados ?? ''->cd_pais_origem == $pais->id)
               selected
-            @endif
+            @endif --}}
             value="{{ $pais->id }}">{{ $pais->ds_pais_origem }}</option>
           @endforeach
         </select>
@@ -63,7 +64,7 @@
           <option value="">selecione</option>
           @foreach ($categorias as $categoria)
             <option 
-              @if($categoria->id == $dados->cd_categoria)
+              @if($dados ?? '' != '' ? $categoria->id == $dados->cd_categoria : '')
                 selected
               @endif
               value="{{ $categoria->id }}">{{ $categoria->ds_categoria }}</option>

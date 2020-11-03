@@ -34,8 +34,8 @@
                   <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary"
                     href="{{ route('cliente.index') }}">Clientes</a>
                   <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary" href="{{ route('pedido.index') }}">Pedidos</a>
-                  <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary" href="{{ route('uf.index') }}">Uf</a>
-                  <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary" href="{{ route('imagem.index') }}">Imagem</a>
+                  {{-- <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary" href="{{ route('uf.index') }}">Uf</a> --}}
+                  <a class="col-12 col-sm-4 col-md-2 btn btn-outline-primary" href="{{ route('imagem.index') }}">Imagens</a>
                 </div>
               </div>
 
