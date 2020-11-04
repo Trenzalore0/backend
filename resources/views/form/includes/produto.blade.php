@@ -34,7 +34,7 @@
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <select class="form-control" id="sel1" name="cd_pais_origem" value="{{ $dados->cd_pais_origem ?? '' }}">
+        <select style="border-radius: 10px;" class="form-control" id="sel1" name="cd_pais_origem" value="{{ $dados->cd_pais_origem ?? '' }}">
           <option value="">selecione</option>
           @foreach ($paises as $pais)
             <option
@@ -47,7 +47,7 @@
         </select>
       </div>
       <div class="col-6">
-        <input type="text" name='ds_pais_origem' class='form-control' placeholder='configure um novo Pais'>
+        <input style="border-radius: 10px;" type="text" name='ds_pais_origem' class='form-control' placeholder='configure um novo Pais'>
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <select class="form-control" name="cd_categoria">
+        <select style="border-radius: 10px;" class="form-control" name="cd_categoria">
           <option value="">selecione</option>
           @foreach ($categorias as $categoria)
             <option 
@@ -72,7 +72,7 @@
         </select>
       </div>
       <div class="col-6">
-        <input type="text" name='ds_categoria' placeholder='crie uma nova categoria' class='form-control'>
+        <input style="border-radius: 10px;" type="text" name='ds_categoria' placeholder='crie uma nova categoria' class='form-control'>
       </div>
     </div>
   </div>

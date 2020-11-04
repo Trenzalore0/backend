@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       @guest
-      @else
+      @else 
         <li class="nav-item">
           <form action="{{ route('logout') }}" method="post">
             @csrf

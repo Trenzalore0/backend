@@ -51,3 +51,5 @@
 
 
 @endsection
+
+@section('titulo', 'Home')
