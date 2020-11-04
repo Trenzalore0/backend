@@ -2,7 +2,7 @@
 <div class='float-right mt-3'>
   <a class='btn btn-outline-secondary' href="{{ route($tipo.'.index') }}">Listagem</a>
 </div>
-<form action="{{ route($tipo.$rota, $dados ?? ''->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
+<form action="{{ route($tipo.$rota, $dados->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
   @csrf
   {{ isset($dados->id) ? method_field('put') : method_field('post') }}
 

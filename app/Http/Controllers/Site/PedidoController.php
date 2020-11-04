@@ -36,11 +36,11 @@ class PedidoController extends BaseController
     {
         $tipo = $this->tipo;
 
-        $produtos = Produto::all();
+        // $produtos = Produto::all();
 
         $rota = '.store';
 
-        return view("site.adicionar", compact('tipo', 'produtos', 'rota'));
+        return view("site.adicionar", compact('tipo', 'rota'));
     }
 
     public function editar($id)
@@ -49,17 +49,16 @@ class PedidoController extends BaseController
 
         $tipo = $this->tipo;
 
-        $editar = true;
+        $rota = '.edit';
 
-        $produtos = Produto::all();
+        // $produtos = Produto::all();
 
         return view(
             "site.adicionar",
             compact(
                 'dados',
                 'tipo',
-                'editar',
-                'produtos'
+               'rota'
             )
         );
     }
