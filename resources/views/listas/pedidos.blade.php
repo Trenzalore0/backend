@@ -17,7 +17,9 @@
     @foreach ($dados as $pedido)
       <tr>
         <td>000001</td>
-        <td>01</td>
+        <td><tr> <select> 
+        <option>1</option>  
+        </select> </tr></td>
         <td>Fulano</td>
         <td>qtd</td>
         <td></td>
