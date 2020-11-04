@@ -19,7 +19,7 @@ class ProdutoController extends BaseArquivoController
 
   public function index(Request $req)
   {
-    $dados = $this->classe::all();
+    $dados = Produto::paginate(10);
 
     $tipo = $this->tipo;
 

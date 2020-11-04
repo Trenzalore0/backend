@@ -4,19 +4,29 @@
 </div>
 <div class="form-group">
   <label for="sel1">Produtos</label>
-  <select class="form-control" id="sel1" readonly>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Produto</td>
+        <td>Preço</td>
+        <td>quantidade</td>
+      </tr>
+    </thead>
+    <tbody>
 
-    @foreach ($produtos as $produto)
-      <option>{{ $produto->nome_produto ?? ''}}</option>
-    @endforeach
-  </select>
+    </tbody>
+  </table>
+  <div >
+
+  </div>
+  {{-- aqui fazer lista dos produtos no pedido --}}
 </div>
-<div class="form-group">
+{{-- <div class="form-group">
   <label for="quantidade">Quantidade</label>
   <input type="text" class="form-control" id="quantidade" name="quantidade" readonly>
-</div>
+</div> --}} 
 <div class="form-group">
-  <label for="valor">Valor</label>
+  <label for="valor">Valor Total</label>
   <input type="text" class="form-control" id="valor" name="valor" readonly>
 </div>
 <div class="form-group">

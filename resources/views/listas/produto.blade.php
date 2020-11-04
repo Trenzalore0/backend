@@ -48,3 +48,6 @@
     @endforeach
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+{{ $dados->links() }}
+</div>

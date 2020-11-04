@@ -15,7 +15,7 @@ class CreateProdutosTable extends Migration
   {
     Schema::create('produtos', function (Blueprint $table) {
       $table->id();
-      $table->string('ds_produto');
+      $table->string('ds_produto', 1000);
       $table->string('nome_produto');
       $table->string('ano_produto');
       $table->float('valor_produto');
@@ -28,6 +28,7 @@ class CreateProdutosTable extends Migration
       $table->foreign('cd_categoria')
         ->references('id')->on('categorias');
       $table->timestamps();
+      $table->delete();
     });
   }
 
