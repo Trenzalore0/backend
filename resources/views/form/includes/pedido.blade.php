@@ -36,3 +36,13 @@
     <option>Boleto</option>
   </select>
 </div>
+<div class="from-group">
+  <label for="sel1">Status do pedido:</label>
+     <select class="form-control" id="sel1"> 
+       @foreach ($status as $statu)        
+        <option>{{$statu->ds_status}}</option>
+       @endforeach
+     </select>    
+</div>
+<br>
+

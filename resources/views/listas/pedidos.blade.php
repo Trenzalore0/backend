@@ -18,18 +18,9 @@
       <tr>
         <td>{{ $pedido->id }}</td>
         <td>{{ $pedido->cd_pagamento }}</td>
-        <td>{{ $pedido->cd_cliente }}</td>
-        
-        <td>
-         ' <select> 
-            @foreach ($status as $statu)         
-          <option>{{ $statu->ds_status }}<option>
-            @endforeach
-            </select>'
-          </td>
-            
-        <td>
-          
+        <td>{{ $pedido->cd_cliente }}</td>       
+        <td>{{ $pedido->cd_status_pedido }}</td>          
+        <td>          
           <div class='d-flex justify-content-around'>
             <a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-outline-primary">Ver Pedido</a>
           </div>
@@ -37,6 +28,7 @@
         </td>
       </tr>
     @endforeach
+    
     {{-- fechar o each --}}
   </tbody>
 </table>

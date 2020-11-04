@@ -20,14 +20,11 @@ class PedidoController extends BaseController
     {
         $dados = $this->classe::all();
 
-        $status = Status_pedido::all();
-
-
-
-
         foreach ($dados as $dado) {
             $cliente = Cliente::find($dado['cd_cliente']);
             $dado->cd_cliente = $cliente->nome;
+            $status = Status_pedido::find($dado['cd_status_pedido']);
+            $dado->cd_status_pedido = $status->ds_status;
         }
 
 
@@ -35,7 +32,7 @@ class PedidoController extends BaseController
 
         $mensagem = $req->session()->get('mensagem');
 
-        return view("site.index", compact('status','dados', 'tipo', 'mensagem'));
+        return view("site.index", compact('dados', 'tipo', 'mensagem'));
     }
 
     public function adicionar()
@@ -58,6 +55,10 @@ class PedidoController extends BaseController
 
         $rota = '.edit';
 
+        $status = Status_pedido::all();
+
+
+
         // $produtos = Produto::all();
 
         return view(
@@ -65,7 +66,8 @@ class PedidoController extends BaseController
             compact(
                 'dados',
                 'tipo',
-               'rota'
+               'rota',
+               'status'
             )
         );
     }
