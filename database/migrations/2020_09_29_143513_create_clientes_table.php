@@ -16,10 +16,10 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('email');
-            $table->string('rg');
-            $table->string('cpf');
-            $table->date('data de nascimento');
+            $table->string('email')->unique();
+            $table->string('rg')->unique();
+            $table->string('cpf')->unique();
+            $table->date('data_de_nascimento');
             $table->enum('genero', ['Masculino', 'Feminino', 'Prefiro não informar']);
             $table->string('login');
             $table->string('senha');

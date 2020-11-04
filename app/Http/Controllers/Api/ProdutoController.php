@@ -13,7 +13,13 @@ class ProdutoController extends Controller
 
   public function listar()
   {
-    return response()->json(Produto::all());
+    $products = Produto::all();
+
+    foreach($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products, 200);
   }
 
   public function buscar($id)
@@ -23,15 +29,35 @@ class ProdutoController extends Controller
     if (is_null($produto)) {
       return response()->json('Produto não encontrado', 404);
     }
+
     return response()->json($produto, 200);
   }
 
-  // public function buscarCategoria($id)
-  // {
-  //   $categoria = Categoria::find($id);
-  //   $produto = Produto::find('cd_categoria');
-  //   return response()->json($categoria->all($produto), 200);
-  // }
+  public function buscarCategoria($id)
+  {
+    if (is_null(Categoria::find($id))) {
+      return response()->json('categoria não encontrada', 404);
+    }
+
+    $produtos = Produto::where('cd_categoria', '=', $id)->get();
+
+    foreach($produtos as $produto) {
+      $produto->ds_imagem = url($produto->ds_imagem);
+    }
+  
+    return response()->json($produtos, 200);
+  }
+
+  public function buscarPais($id)
+  {
+    if (is_null(Pais_origem::find($id))) {
+      return response()->json('pais não encontrado', 404);
+    }
+
+    $produtos = Produto::where('cd_pais_origem', '=', $id)->get();
+
+    return response()->json($produtos, 200);
+  }
 
   public function index(Request $req)
   {
