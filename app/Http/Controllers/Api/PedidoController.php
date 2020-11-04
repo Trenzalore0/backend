@@ -9,6 +9,7 @@ use App\Models\Endereco;
 use App\Http\Controllers\Controller;
 use App\Models\Item_pedido;
 use App\Models\Pedido;
+use App\Models\Status_pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -22,6 +23,23 @@ class PedidoController extends Controller
     }
 
     $orders = Pedido::where('cd_cliente', '=', $id)->get();
+
+    foreach ($orders as $order) {
+      $products = Item_pedido::where('cd_pedido', '=', $order->id)->get();
+
+      $valor_total = 0;
+      $quantidade = 0;
+      foreach ($products as $product) {
+        $valor_total += $product->valor_produto;
+        $quantidade += $product->quantidade_produto;
+      }
+
+      $order->valor_total = $valor_total;
+      $order->quantidade_produto = $quantidade;
+
+      $status = Status_pedido::find($order->cd_status_pedido);
+      $order->cd_status_pedido = $status->ds_status;
+    }
 
     return response()->json($orders, 200);
   }
