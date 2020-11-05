@@ -13,7 +13,7 @@ class ProdutoController extends Controller
 
   public function listar()
   {
-    $products = Produto::all();
+    $products = Produto::where('status_produto', '=', 'ativado');
 
     foreach($products as $product) {
       $product['ds_imagem'] = url($product['ds_imagem']);

@@ -52,7 +52,14 @@
     </div>
   </div>
 
+</div>
 
+<div class="form-group">
+  <label for="">Status do produto:</label>
+  <select name="status_produto" class='form-control col-2'>
+    <option value="ativado">ativar</option>
+    <option value="desativado">desativar</option>
+  </select>
 </div>
 
 <div class="form-group">

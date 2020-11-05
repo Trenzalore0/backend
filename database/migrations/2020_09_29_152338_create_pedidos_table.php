@@ -21,7 +21,7 @@ class CreatePedidosTable extends Migration
       $table->unsignedBigInteger('cd_tipo_pagamento');
       $table->unsignedBigInteger('cd_status_pedido');
       $table->unsignedBigInteger('cd_endereco_entrega');
-      
+      $table->string('valor_total');
       $table->foreign('cd_tipo_pagamento')
         ->references('id')->on('pagamentos');
 

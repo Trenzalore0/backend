@@ -25,18 +25,6 @@ class PedidoController extends Controller
     $orders = Pedido::where('cd_cliente', '=', $id)->get();
 
     foreach ($orders as $order) {
-      $products = Item_pedido::where('cd_pedido', '=', $order->id)->get();
-
-      $valor_total = 0;
-      $quantidade = 0;
-      foreach ($products as $product) {
-        $valor_total += $product->valor_produto;
-        $quantidade += $product->quantidade_produto;
-      }
-
-      $order->valor_total = $valor_total;
-      $order->quantidade_produto = $quantidade;
-
       $status = Status_pedido::find($order->cd_status_pedido);
       $order->cd_status_pedido = $status->ds_status;
     }
@@ -93,7 +81,8 @@ class PedidoController extends Controller
       'cd_tipo_pagamento' => $type_payment,
       'cd_pagamento' => $pay->id,
       'cd_endereco_entrega' => $address,
-      'cd_status_pedido' => $status
+      'cd_status_pedido' => $status,
+      'valor_total' => $data['valor_total']
     ];
 
     $order = Pedido::create($newOrder);
@@ -103,7 +92,7 @@ class PedidoController extends Controller
     foreach ($products as $product) {
       $newProduct = [
         'cd_pedido' => $order->id,
-        'cd_produto' => $product['id_produto'],
+        'cd_produto' => $product['id'],
         'quantidade_produto' => $product['quantidade'],
         'valor_produto' => $product['valor_produto']
       ];
