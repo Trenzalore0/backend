@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\newLaravelTips;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -147,6 +149,14 @@ Route::group(['middleware' => 'auth'], function () {
         '/endereco/deletar/{id}',
         'Site\EnderecoController@deletar'
     )->name('endereco.deletar');
+});
+
+Route::get('email-cadastro', function(){
+    $usuario = new stdClass();
+    $usuario->nome = 'Costa';
+    $usuario->email = 'matheus.costa.ol97@gmail.com';
+    return new newLaravelTips($usuario);
+    // Mail::send(new newLaravelTips($usuario));
 });
 
 Auth::routes();

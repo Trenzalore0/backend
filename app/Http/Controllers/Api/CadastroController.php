@@ -6,12 +6,19 @@ use App\Models\Cliente;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
+use App\Mail\newLaravelTips;
 use App\Models\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use stdClass;
+
+
+
 
 class CadastroController extends Controller
 {
 
+  
   // -------Cadastrar Clientes
 
   public function createCadastro(Request $req)
@@ -39,6 +46,13 @@ class CadastroController extends Controller
     );
 
     $clientecriado = Cliente::create($cliente);
+
+    // $usuario = new stdClass();
+    // $usuario->nome = $clientecriado['nome'];
+    // $usuario->email = $clientecriado['email'];
+    // return new newLaravelTips($usuario);
+    // Mail::send(new newLaravelTips($usuario));
+
 
     $contatoscliente = array(
       array(
@@ -70,6 +84,8 @@ class CadastroController extends Controller
     );
 
     $endereco = Endereco::create($clienteend);
+
+    
 
     return response()->json('Cliente criado com sucesso!', 201);
   }
