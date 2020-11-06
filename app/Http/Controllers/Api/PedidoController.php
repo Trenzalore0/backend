@@ -101,4 +101,6 @@ class PedidoController extends Controller
 
     return response()->json('Items criados com sucesso', 201);
   }
+
+  
 }

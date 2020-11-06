@@ -20,7 +20,7 @@
         <td>{{ $cliente->nome }}</td>
         <td>{{ $cliente->email }}</td>
         <td>{{ $cliente->cpf }}</td>
-        <td>{{ $cliente->dataDeNascimento }}</td>
+        <td>{{ $cliente->data_de_nascimento }}</td>
         <td>
           <div class="d-flex justify-content-around">
             <a class="btn btn-outline-primary" href="{{ route('cliente.edit', $cliente->id) }}">Detalhes</a>
@@ -30,3 +30,4 @@
     @endforeach
   </tbody>
 </table>
+{{ $dados->links() }}

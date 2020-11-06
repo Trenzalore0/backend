@@ -6,6 +6,7 @@ use App\Models\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Item_pedido;
 use App\Models\Pais_origem;
 
 class ProdutoController extends Controller
@@ -13,7 +14,7 @@ class ProdutoController extends Controller
 
   public function listar()
   {
-    $products = Produto::where('status_produto', '=', 'ativado');
+    $products = Produto::where('status_produto', '=', 'ativado')->get();
 
     foreach($products as $product) {
       $product['ds_imagem'] = url($product['ds_imagem']);
