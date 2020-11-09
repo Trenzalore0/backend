@@ -3,8 +3,14 @@
   <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
   <a href="{{ route('imagem.create') }}" class="btn btn-outline-success">Criar</a>
 </div>
+@if (!empty($mensagem))
+  <div class="alert {{ $classe }} ">
+    {{ $mensagem }}
+  </div>
+@endif
+
 <table class="table">
-  <thead> 
+  <thead>
     <tr>
       <th scope="col" class='text-center'>Id</th>
       <th scope="col" class='text-center'>Tipo Imagem</th>
@@ -32,3 +38,6 @@
     @endforeach
   </tbody>
 </table>
+<div class="d-flex justify-content-center align-items-center">
+  {{ $dados->links() }}
+</div>

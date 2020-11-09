@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends BaseController
 {
-    public function __construct()
-    {
-        $this->classe = Categoria::class;
-        $this->tipo = 'categoria';
-    }
+  public function __construct()
+  {
+    $this->classe = Categoria::class;
+    $this->tipo = 'categoria';
+  }
 }

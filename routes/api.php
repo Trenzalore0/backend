@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Rotas Cliente 
+//Api Cadastro 
 Route::post(
   '/cliente/cadastro',
   'Api\CadastroController@createCadastro'

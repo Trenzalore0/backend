@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Site;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Models\Produto;
+use App\Models\Status_pedido;
 use Illuminate\Http\Request;
 use App\Models\Item_pedido;
-use App\Models\Status_pedido;
 
 class PedidoController extends BaseController
 {
@@ -19,41 +19,33 @@ class PedidoController extends BaseController
 
   public function index(Request $req)
   {
-    $dados = $this->classe::all();
+    $dados = $this->classe::paginate(5);
 
     foreach ($dados as $dado) {
-      $cliente = Cliente::find($dado['cd_cliente']);
+      $cliente = Cliente::find($dado->cd_cliente);
       $dado->cd_cliente = $cliente->nome;
-    }
 
+      $status = Status_pedido::find($dado['cd_status_pedido']);
+      $dado->cd_status_pedido = $status->ds_status;
+    }
 
     $tipo = $this->tipo;
 
     $mensagem = $req->session()->get('mensagem');
+    $classe = $req->session()->get('classe');
 
-    return view("site.index", compact('dados', 'tipo', 'mensagem'));
-  }
-
-  public function adicionar()
-  {
-    $tipo = $this->tipo;
-
-    // $produtos = Produto::all();
-
-    $rota = '.store';
-
-    return view("site.adicionar", compact('tipo', 'rota'));
+    return view("site.index", compact('dados', 'tipo', 'mensagem', 'classe'));
   }
 
   public function editar($id)
   {
     $dados = $this->classe::find($id);
 
-    $dados->cd_cliente = Cliente::find($dados->cd_cliente)->nome; 
+    $dados->cd_cliente = Cliente::find($dados->cd_cliente)->nome;
 
     $dados->valor_total = \number_format($dados->valor_total, 2, ',', '');
 
-    $produtos = Item_pedido::where('cd_pedido', '=', $id)->paginate(5); 
+    $produtos = Item_pedido::where('cd_pedido', '=', $id)->paginate(5);
 
     foreach ($produtos as $produto) {
       $produto->cd_produto = Produto::find($produto->cd_produto)->nome_produto;
@@ -62,19 +54,39 @@ class PedidoController extends BaseController
 
     $tipo = $this->tipo;
 
-    $rota = '.edit';
+    $rota = '.update';
 
     $status = Status_pedido::all();
 
     return view(
       "site.adicionar",
       compact(
-        'dados',  
+        'dados',
         'tipo',
         'produtos',
         'status',
         'rota'
       )
     );
+  }
+
+  public function atualizar(Request $req, $id)
+  {
+    $dados = $req->all();
+    $this->classe::find($id)->update($dados);
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "O pedido $id foi atualizado com sucesso"
+      );
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
+
+    return redirect()->route("$this->tipo.index");
   }
 }

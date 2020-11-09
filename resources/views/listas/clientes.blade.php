@@ -2,8 +2,14 @@
 <div class='float-right mt-3'>
   <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
 </div>
+@if (!empty($mensagem))
+  <div class="alert {{ $classe }} ">
+    {{ $mensagem }}
+  </div>
+@endif
+
 <table class="table">
-  <thead> 
+  <thead>
     <tr>
       <th scope="col" class='text-center'>Id</th>
       <th scope="col" class='text-center'>Nome</th>
@@ -30,4 +36,6 @@
     @endforeach
   </tbody>
 </table>
-{{ $dados->links() }}
+<div class="d-flex justify-content-center align-items-center">
+  {{ $dados->links() }}
+</div>

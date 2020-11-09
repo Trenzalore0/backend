@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('pedido.edit');
 
   Route::put(
-    '/pedido/atualizarPedido',
+    '/pedido/atualizarPedido/{id}',
     'Site\PedidoController@atualizar'
   )->name('pedido.update');
 
@@ -184,13 +184,10 @@ Route::group(['middleware' => 'auth'], function () {
     '/imagem/deletar/{id}',
     'Site\ImagemController@deletar'
   )->name('imagem.delete');
-
-    
 });
 
 Auth::routes();
 
 
-Route::get('/enviar/email', function() {
-  
+Route::get('/enviar/email', function () {
 });

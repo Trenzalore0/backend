@@ -18,7 +18,13 @@ class CadastroController extends Controller
     $hasEmail = Cliente::where('email', '=', $dadosrecebidos['email'])->get();
 
     if (count($hasEmail) != 0) {
-      return response()->json('email já cadatrado', 300);
+      return response()->json('email já cadastrado', 200);
+    }
+
+    $hasEmail = Login::where('login', '=', $dadosrecebidos['email'])->get();
+
+    if (count($hasEmail) != 0) {
+      return response()->json('email já cadastrado', 200);
     }
 
     $clientelogin = array(
@@ -28,6 +34,7 @@ class CadastroController extends Controller
     );
 
     $logincriado = Login::create($clientelogin);
+
     $cliente = array(
       'nome' => $dadosrecebidos['nome'],
       'cpf' => $dadosrecebidos['cpf'],
@@ -35,8 +42,6 @@ class CadastroController extends Controller
       'email' => $dadosrecebidos['email'],
       'data_de_nascimento' => $dadosrecebidos['data_nascimento'],
       'genero' => $dadosrecebidos['genero'],
-      'login' => $dadosrecebidos['email'],
-      'senha' => $dadosrecebidos['senha'],
       'cd_login' => $logincriado->id
     );
 

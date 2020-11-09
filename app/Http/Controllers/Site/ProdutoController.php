@@ -38,6 +38,8 @@ class ProdutoController extends BaseArquivoController
 
     $mensagem = $req->session()->get('mensagem');
 
+
+
     return view("site.index", compact('dados', 'tipo', 'mensagem'));
   }
 
@@ -106,6 +108,12 @@ class ProdutoController extends BaseArquivoController
       ->flash(
         'mensagem',
         "$req->nome adicionado com sucesso"
+      );
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
       );
 
     return redirect()->route("$this->tipo.index");

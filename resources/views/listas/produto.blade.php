@@ -3,6 +3,11 @@
   <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
   <a href="{{ route('produto.create') }}" class="btn btn-outline-success ">Criar</a>
 </div>
+@if (!empty($mensagem))
+  <div class="alert {{ $classe }} ">
+    {{ $mensagem }}
+  </div>
+@endif
 
 <table class="table">
   <thead>
@@ -40,11 +45,6 @@
       <td>
         <div class="d-flex justify-content-around">
           <a class="btn btn-outline-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
-          {{-- <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-outline-danger">Deletar</button>
-          </form> --}}
         </div>
       </td>
 
