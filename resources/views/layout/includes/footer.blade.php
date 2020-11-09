@@ -20,7 +20,7 @@
 
   .list_footer{
     display:inline;
-    justify-content: space-around;
+    /* justify-content: space-around; */
   }
 
 }
