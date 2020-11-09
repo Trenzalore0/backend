@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Login;
+use App\Models\Login;
 use Illuminate\Http\Request;
 
 class loginController extends BaseController

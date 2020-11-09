@@ -32,15 +32,30 @@ class ProdutoController extends BaseArquivoController
       $pais = Pais_origem::find($dado['cd_pais_origem']);
       $dado['cd_pais_origem'] = $pais->ds_pais_origem;
 
-      $dado->valor_produto = \number_format($dado->valor_produto, 2, ',', '');
-      $dado->desconto_produto = \number_format($dado->desconto_produto, 2, ',', '');
+      $dado->valor_produto = \number_format(
+        $dado->valor_produto,
+        2,
+        ',',
+        ''
+      );
+      $dado->desconto_produto = \number_format(
+        $dado->desconto_produto,
+        2,
+        ',',
+        ''
+      );
     }
 
     $mensagem = $req->session()->get('mensagem');
+    
+    $classe = $req->session()->get('classe');
 
-
-
-    return view("site.index", compact('dados', 'tipo', 'mensagem'));
+    return view("site.index", compact(
+      'dados',
+      'tipo',
+      'mensagem',
+      'classe'
+    ));
   }
 
   public function adicionar()

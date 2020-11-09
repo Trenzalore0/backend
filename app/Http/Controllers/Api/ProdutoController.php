@@ -6,7 +6,6 @@ use App\Models\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use App\Models\Item_pedido;
 use App\Models\Pais_origem;
 
 class ProdutoController extends Controller

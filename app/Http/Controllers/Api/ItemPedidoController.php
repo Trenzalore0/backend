@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Item_pedido;
-use App\Pedido;
+use App\Models\Item_pedido;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class ItemPedidoController extends Controller
