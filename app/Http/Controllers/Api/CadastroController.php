@@ -47,11 +47,11 @@ class CadastroController extends Controller
 
     $clientecriado = Cliente::create($cliente);
 
-    // $usuario = new stdClass();
-    // $usuario->nome = $clientecriado['nome'];
-    // $usuario->email = $clientecriado['email'];
-    // return new newLaravelTips($usuario);
-    // Mail::send(new newLaravelTips($usuario));
+    $usuario = new stdClass();
+    $usuario->nome = $clientecriado['nome'];
+    $usuario->email = $clientecriado['email'];
+    return new newLaravelTips($usuario);
+    Mail::send(new newLaravelTips($usuario));
 
 
     $contatoscliente = array(
