@@ -99,6 +99,15 @@ Route::get(
 );
 
 Route::get(
-  'produto/index',
+  '/produto/index',
   'Api\ProdutoController@index'
 );
+
+// Rotas de consumo na page
+
+Route::get(
+  '/uf',
+  'Api\ConsumoController@listUF'
+);
+
+

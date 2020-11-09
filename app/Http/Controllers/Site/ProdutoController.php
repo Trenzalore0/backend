@@ -24,8 +24,7 @@ class ProdutoController extends BaseController
     $tipo = $this->tipo;
 
     foreach ($dados as $dado) {
-      $img = Imagem::find($dado['cd_imagem']);
-      $dado['cd_imagem'] = url($img->ds_imagem);
+      $dado['ds_imagem'] = url($dado['ds_imagem']);
 
       $cate = Categoria::find($dado['cd_categoria']);
       $dado['cd_categoria'] = $cate->ds_categoria;
@@ -45,13 +44,20 @@ class ProdutoController extends BaseController
 
     $paises = Pais_origem::all();
 
+    if(count($paises) == 0) {
+      $paises = 'not found';
+    }
+
     $categorias = Categoria::all();
+
+    $rota = '.store';
 
     return view(
       "site.adicionar",
       compact(
         'tipo',
         'paises',
+        'rota',
         'categorias'
       )
     );
@@ -84,7 +90,7 @@ class ProdutoController extends BaseController
 
     $tipo = $this->tipo;
 
-    $editar = true;
+    $rota = '.update';
 
     $paises = Pais_origem::all();
 
@@ -95,7 +101,7 @@ class ProdutoController extends BaseController
       compact(
         'dados',
         'tipo',
-        'editar',
+        'rota',
         'paises',
         'categorias'
       )
@@ -121,7 +127,7 @@ class ProdutoController extends BaseController
 
   public function transformImage(Request $req)
   {
-    $image = $req->file('cd_imagem');
+    $image = $req->file('ds_imagem');
 
     $extension = $image->guessClientExtension();
 
