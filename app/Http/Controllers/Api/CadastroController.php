@@ -10,6 +10,7 @@ use App\Mail\newLaravelTips;
 use App\Models\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SebastianBergmann\Environment\Console;
 use stdClass;
 
 
@@ -17,12 +18,6 @@ use stdClass;
 
 class CadastroController extends Controller
 {
-
-  public function emailCadastro($cliente){
-    // $usuario = new stdClass();
-    // // return new newLaravelTips($usuario);
-    Mail::send(new newLaravelTips($cliente));
-  }
 
   
   // -------Cadastrar Clientes
@@ -53,9 +48,8 @@ class CadastroController extends Controller
 
     $clientecriado = Cliente::create($cliente);
 
-    // $this->emailCadastro($clientecriado);
-
-
+    $novoMailCadastro = new newLaravelTips($this->clientecriado);
+    Mail::send($novoMailCadastro);    
 
     $contatoscliente = array(
       array(
@@ -88,8 +82,7 @@ class CadastroController extends Controller
 
     $endereco = Endereco::create($clienteend);
 
-    
-
-    return response()->json('Cliente criado com sucesso!', 201)&&redirect('email-cadastro');
+    return response()->json('Cliente criado com sucesso! ', 201);
   }
+
 }

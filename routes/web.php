@@ -216,13 +216,13 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 
-Route::get('email-cadastro', function(){
-    $usuario = new stdClass();
-    $usuario->nome = 'Admin';
-    $usuario->email = 'desvinho@gmail.com';
-    // return new newLaravelTips($usuario);
-    // return new mailSac($usuario);
-    Mail::send(new newLaravelTips($usuario));
-});
+// Route::get('email-cadastro', function(){
+//     $usuario = new stdClass();
+//     $usuario->nome = 'Admin';
+//     $usuario->email = 'desvinho@gmail.com';
+//     // return new newLaravelTips($usuario);
+//     // return new mailSac($usuario);
+//     Mail::send(new newLaravelTips($usuario));
+// });
 
 Auth::routes();
