@@ -11,33 +11,36 @@ use App\Models\Pedido;
 
 class mailPedido extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
-    private $usuario, $pedido;
+  private $usuario, $pedido;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(Cliente $usuario, Pedido $pedido)
-    {
-        //
-        $this->usuario = $usuario;
-        $this->pedido = $pedido;
-    }
+  /**
+   * Create a new message instance.
+   *
+   * @return void
+   */
+  public function __construct(Cliente $usuario, Pedido $pedido)
+  {
+    $this->usuario = $usuario;
+    $this->pedido = $pedido;
+  }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        $this->subject('Cadastro');
-        $this->to($this->usuario->email, $this->usuario->nome);
-        return $this->markdown('mail.mailPedido', [
-            'usuario' => $this->usuario
-        ]);
-    }
+  /**
+   * Build the message.
+   *
+   * @return $this
+   */
+  public function build()
+  {
+    $this->subject('Pedido realizado com sucesso! :)');
+    $this->to($this->usuario->email, $this->usuario->nome);
+    $usuario = $this->usuario;
+    $pedido = $this->pedido;
+    $pedido->valor_total = number_format($pedido->valor_total, 2, ',', '');    
+    return $this->markdown('mail.mailPedido', compact(
+      'usuario',
+      'pedido'
+    ));
+  }
 }
