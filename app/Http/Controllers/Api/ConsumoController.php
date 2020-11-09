@@ -19,7 +19,7 @@ class ConsumoController extends Controller
     $response = Imagem::where('tipo_imagem', '=', $tipo)->get();
 
     if (\count($response) == 0) {
-      return response()->json(['error' => 'tipo de imagem não encontrado'], 404);
+      return response()->json('tipo de imagem não encontrado', 404);
     }
 
     foreach ($response as $image) {
@@ -28,4 +28,20 @@ class ConsumoController extends Controller
 
     return response()->json($response, 200);
   }
+
+  public function Buscar ($pesquisa)
+  {
+    $products = Produto::where('nome_produto', 'like', "%{$pesquisa}%")->get();
+
+    if (count($pesquisa) == 0) {
+      return response()->json('produto não localizado', 404);
+    }
+
+    foreach($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products, 200);
+  }
+
 }

@@ -133,3 +133,8 @@ Route::get(
   '/imagens/{tipo}',
   'Api\ConsumoController@GetImages'
 );
+
+Route::get(
+  '/buscar/{pesquisa}',
+  'Api\ConsumoController@Buscar'
+);
