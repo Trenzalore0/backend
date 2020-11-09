@@ -1,6 +1,9 @@
 <?php
 
+use App\Mail\mailSac;
+use App\Mail\newLaravelTips;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -184,6 +187,15 @@ Route::group(['middleware' => 'auth'], function () {
     '/imagem/deletar/{id}',
     'Site\ImagemController@deletar'
   )->name('imagem.delete');
+});
+
+Route::get('email-cadastro', function(){
+    $usuario = new stdClass();
+    $usuario->nome = 'Admin';
+    $usuario->email = 'desvinho@gmail.com';
+    // return new newLaravelTips($usuario);
+    // return new mailSac($usuario);
+    // Mail::send(new newLaravelTips($usuario));
 });
 
 Auth::routes();
