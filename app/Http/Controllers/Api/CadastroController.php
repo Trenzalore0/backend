@@ -8,6 +8,7 @@ use App\Models\Endereco;
 use App\Http\Controllers\Controller;
 use App\Mail\newLaravelTips;
 use App\Models\Login;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Mockery\Expectation;
@@ -39,7 +40,7 @@ class CadastroController extends Controller
 
     try {
       $logincriado = Login::create($clientelogin);
-    } catch (Expectation $e) {
+    } catch (Exception $e) {
       return response()->json($e, 200);
     }
 
@@ -55,7 +56,7 @@ class CadastroController extends Controller
 
     try {
       $clientecriado = Cliente::create($cliente);
-    } catch (Expectation $e) {
+    } catch (Exception $e) {
       return response()->json($e, 200);
     }
 
@@ -64,7 +65,6 @@ class CadastroController extends Controller
     $usuario->email = $cliente['email'];
     $laravelTips = new newLaravelTips($usuario);
     Mail::send($laravelTips);
-
 
     $contatoscliente = array(
       array(
@@ -96,12 +96,12 @@ class CadastroController extends Controller
 
     try {
       Endereco::create($clienteend);
-    } catch (Expectation $e) {
+    } catch (Exception $e) {
       return response()->josn($e, 200);
     }
 
     return response()->json('Cliente criado com sucesso!', 201);
-  }
+  } 
 
   public function Login(Request $req)
   {

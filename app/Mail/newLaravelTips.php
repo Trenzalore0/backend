@@ -34,8 +34,7 @@ class newLaravelTips extends Mailable
     {
         $this->subject('Cadastro');
         $this->to($this->usuario->email,$this->usuario->nome);
-        return $this->markdown('mail.newLaravelTips', [
-            'usuario' => $this->usuario
-        ]);
+        $usuario = $this->usuario;
+        return $this->markdown('mail.newLaravelTips', compact('usuario'));
     }
 }

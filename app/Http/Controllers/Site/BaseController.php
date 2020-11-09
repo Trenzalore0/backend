@@ -21,7 +21,12 @@ abstract class BaseController extends Controller
 
     $classe = $req->session()->get('classe');
 
-    return view("site.index", compact('dados', 'tipo', 'mensagem', 'classe'));
+    return view("site.index", compact(
+      'dados',
+      'tipo',
+      'mensagem',
+      'classe'
+    ));
   }
 
   public function adicionar()
@@ -36,10 +41,17 @@ abstract class BaseController extends Controller
   public function salvar(Request $req)
   {
     $this->classe::create($req->all());
+
     $req->session()
       ->flash(
         'mensagem',
         "$req->nome adicionado com sucesso"
+      );
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
       );
 
     return redirect()->route("$this->tipo.index");

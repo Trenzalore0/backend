@@ -33,7 +33,13 @@ class ImagemController extends BaseArquivoController
         'mensagem',
         "$req->nome adicionado com sucesso"
       );
-    
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
+
     return redirect()->route("$this->tipo.index");
   }
 
@@ -45,14 +51,14 @@ class ImagemController extends BaseArquivoController
 
     if ($req->hasFile('ds_imagem')) {
       $this->guardar = $data['tipo_imagem'];
-      
+
       try {
         $this->deleteImage($img['ds_imagem']);
       } catch (Exception $e) {
       }
 
       $image = $this->transformImage($req, $this->guardar);
-      
+
       $data['ds_imagem'] = $image;
     }
 
@@ -62,6 +68,12 @@ class ImagemController extends BaseArquivoController
       ->flash(
         'mensagem',
         "A imagem de $img->tipo_imagem foi atualizada com sucesso"
+      );
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
       );
 
     return redirect()->route("$this->tipo.index");

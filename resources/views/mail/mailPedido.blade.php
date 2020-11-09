@@ -1,6 +1,6 @@
 @component('mail::message')
     
-<h1>Olá NOME</h1>
+<h1>Olá {{ $usuario->nome }}</h1>
 <p>Seu pedido foi efetuado com sucesso</p>
 <p>NUMEROPEDIDO</p>
 <p>VALORPEDIDO</p>

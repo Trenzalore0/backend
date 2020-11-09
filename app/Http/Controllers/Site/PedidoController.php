@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Mail\mailPedido;
+use App\Mail\mailStatusPedido;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Status_pedido;
 use Illuminate\Http\Request;
 use App\Models\Item_pedido;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends BaseController
 {
@@ -34,7 +38,12 @@ class PedidoController extends BaseController
     $mensagem = $req->session()->get('mensagem');
     $classe = $req->session()->get('classe');
 
-    return view("site.index", compact('dados', 'tipo', 'mensagem', 'classe'));
+    return view("site.index", compact(
+      'dados',
+      'tipo',
+      'mensagem',
+      'classe'
+    ));
   }
 
   public function editar($id)
@@ -43,13 +52,23 @@ class PedidoController extends BaseController
 
     $dados->cd_cliente = Cliente::find($dados->cd_cliente)->nome;
 
-    $dados->valor_total = \number_format($dados->valor_total, 2, ',', '');
+    $dados->valor_total = \number_format(
+      $dados->valor_total,
+      2,
+      ',',
+      ''
+    );
 
     $produtos = Item_pedido::where('cd_pedido', '=', $id)->paginate(5);
 
     foreach ($produtos as $produto) {
       $produto->cd_produto = Produto::find($produto->cd_produto)->nome_produto;
-      $produto->valor_produto = \number_format($produto->valor_produto, 2, ',', '');
+      $produto->valor_produto = \number_format(
+        $produto->valor_produto,
+        2,
+        ',',
+        ''
+      );
     }
 
     $tipo = $this->tipo;
@@ -73,19 +92,48 @@ class PedidoController extends BaseController
   public function atualizar(Request $req, $id)
   {
     $dados = $req->all();
-    $this->classe::find($id)->update($dados);
 
-    $req->session()
-      ->flash(
-        'mensagem',
-        "O pedido $id foi atualizado com sucesso"
-      );
+    try {
+      $pedido = $this->classe::find($id);
 
-    $req->session()
-      ->flash(
-        'classe',
-        "alert-success"
+      $pedido->update($dados);
+
+      $req->session()
+        ->flash(
+          'mensagem',
+          "O pedido $id foi atualizado com sucesso"
+        );
+
+      $req->session()
+        ->flash(
+          'classe',
+          "alert-success"
+        );
+
+      $usuario = Cliente::find($pedido->cd_cliente);
+
+      $status = Status_pedido::find($dados['cd_status_pedido']);
+
+      $emaiSend = new mailStatusPedido(
+        $usuario,
+        $pedido,
+        $status
       );
+      
+      // return $emaiSend;
+
+      Mail::send($emaiSend);
+    } catch (Exception $e) {
+
+      $req->session()
+        ->flash('mensagem', $e);
+
+      $req->session()
+        ->flash(
+          'classe',
+          "alert-danger"
+        );
+    }
 
     return redirect()->route("$this->tipo.index");
   }
