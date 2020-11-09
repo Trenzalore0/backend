@@ -15,7 +15,7 @@ class CreatePaisOrigemsTable extends Migration
     {
         Schema::create('pais_origem', function (Blueprint $table) {
             $table->id();
-            $table->string('ds_pais_origem');
+            $table->string('ds_pais_origem')->unique();
             $table->timestamps();
         });
     }

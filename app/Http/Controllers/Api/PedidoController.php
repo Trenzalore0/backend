@@ -9,9 +9,10 @@ use App\Models\Endereco;
 use App\Http\Controllers\Controller;
 use App\Models\Item_pedido;
 use App\Models\Pedido;
+use App\Models\Status_pedido;
 use Illuminate\Http\Request;
 
-class ItemPedidoController extends Controller
+class PedidoController extends Controller
 {
   public function listAll($id)
   {
@@ -22,6 +23,11 @@ class ItemPedidoController extends Controller
     }
 
     $orders = Pedido::where('cd_cliente', '=', $id)->get();
+
+    foreach ($orders as $order) {
+      $status = Status_pedido::find($order->cd_status_pedido);
+      $order->cd_status_pedido = $status->ds_status;
+    }
 
     return response()->json($orders, 200);
   }
@@ -35,68 +41,66 @@ class ItemPedidoController extends Controller
 
   public function create(Request $req)
   {
-    $products = $req->all();
-    $id = $products[0]['cd_pedido'];
-    if (is_null(Pedido::find($id))) {
-      return response()->json('Pedido não encontrado', 404);
-      $data = $req->all();
+    $data = $req->all();
 
-      $client = $data['cliente'];
+    $client = $data['cliente'];
 
-      if (is_null(Cliente::find($client))) {
-        return response()->json('cliente não encontrado', 400);
-      }
-
-      $address = $data['endereco_entrega'];
-
-      if (is_null(Endereco::find($address))) {
-        return response()->json('endereço não encontrado', 400);
-      }
-
-      $pay = $data['tipo_pagamento'];
-
-      if ($pay == 1) {
-        $pay['id'] = $data['dados_pagamento']['id_cartao'];
-
-        $card = CartaoCredito::find($pay['id']);
-        if (is_null($card)) {
-          return response()->json('cartão não encontrado', 400);
-        }
-      } else {
-        $billet = $data['dados_pagamento']['ds_boleto'];
-
-        $pay = Boleto::create([
-          'dados_boleto' => $billet
-        ]);
-      }
-
-      $status = 1;
-
-      $type_payment = $data['tipo_pagamento'];
-
-      $newOrder = [
-        'cd_cliente' => $client['id'],
-        'cd_tipo_pagamento' => $type_payment,
-        'cd_pagamento' => $pay['id'],
-        'cd_endereco_entrega' => $address,
-        'cd_status_pedido' => $status
-      ];
-
-      $order = Pedido::create($newOrder);
-
-      $products = $data['produtos'];
-
-      foreach ($products as $product) {
-        $newProduct = [
-          'cd_pedido' => $order['id'],
-          'cd_produto' => $product['id_produto'],
-          'quantidade_produto' => $product['quantidade_produto'],
-          'valor_produto' => $product['valor_produto']
-        ];
-        Item_pedido::create($newProduct);
-      }
-
-      return response()->json('Items criados com sucesso', 201);
+    if (is_null(Cliente::find($client))) {
+      return response()->json('cliente não encontrado', 400);
     }
+
+    $address = $data['endereco_entrega'];
+
+    if (is_null(Endereco::find($address))) {
+      return response()->json('endereço não encontrado', 400);
+    }
+
+    $pay = $data['tipo_pagamento'];
+
+    if ($pay == 2) {
+      $pay->id = $data['dados_pagamento']['id_cartao'];
+
+      $card = CartaoCredito::find($pay['id']);
+      if (is_null($card)) {
+        return response()->json('cartão não encontrado', 400);
+      }
+    } else {
+      $billet = $data['dados_pagamento']['ds_boleto'];
+
+      $pay = Boleto::create([
+        'dados_boleto' => $billet
+      ]);
+    }
+
+    $status = 1;
+
+    $type_payment = $data['tipo_pagamento'];
+
+    $newOrder = [
+      'cd_cliente' => $client,
+      'cd_tipo_pagamento' => $type_payment,
+      'cd_pagamento' => $pay->id,
+      'cd_endereco_entrega' => $address,
+      'cd_status_pedido' => $status,
+      'valor_total' => $data['valor_total']
+    ];
+
+    $order = Pedido::create($newOrder);
+
+    $products = $data['produtos'];
+
+    foreach ($products as $product) {
+      $newProduct = [
+        'cd_pedido' => $order->id,
+        'cd_produto' => $product['id'],
+        'quantidade_produto' => $product['quantidade'],
+        'valor_produto' => $product['valor_produto']
+      ];
+      Item_pedido::create($newProduct);
+    }
+
+    return response()->json('Items criados com sucesso', 201);
   }
+
+  
 }

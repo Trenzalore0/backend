@@ -13,7 +13,13 @@ class ProdutoController extends Controller
 
   public function listar()
   {
-    return response()->json(Produto::all());
+    $products = Produto::where('status_produto', '=', 'ativado')->get();
+
+    foreach($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products, 200);
   }
 
   public function buscar($id)
@@ -33,7 +39,11 @@ class ProdutoController extends Controller
       return response()->json('categoria não encontrada', 404);
     }
 
-    $produtos = Produto::where('cd_categoria', '=', $id)->get(    );
+    $produtos = Produto::where('cd_categoria', '=', $id)->get();
+
+    foreach($produtos as $produto) {
+      $produto->ds_imagem = url($produto->ds_imagem);
+    }
   
     return response()->json($produtos, 200);
   }

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Imagem;
+use Exception;
 use Illuminate\Http\Request;
 
-class ImagemController extends BaseController
+class ImagemController extends BaseArquivoController
 {
   public function __construct()
   {
@@ -15,15 +16,15 @@ class ImagemController extends BaseController
 
   public function salvar(Request $req)
   {
-    $data = $req->all();
+    $data = $req->paginate(5);
 
     if ($req->hasFile('ds_imagem')) {
-      $image = $this->transformImage($req);
+      $this->guardar = $data['tipo_imagem'];
+
+      $image = $this->transformImage($req, $this->guardar);
 
       $data['ds_imagem'] = $image;
     }
-
-    $data['tipo_imagem'] = 'Banner';
 
     $this->classe::create($data);
 
@@ -31,6 +32,12 @@ class ImagemController extends BaseController
       ->flash(
         'mensagem',
         "$req->nome adicionado com sucesso"
+      );
+
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
       );
 
     return redirect()->route("$this->tipo.index");
@@ -43,9 +50,14 @@ class ImagemController extends BaseController
     $img = $this->classe::find($id);
 
     if ($req->hasFile('ds_imagem')) {
-      $this->deleteImage($img['ds_imagem']);
+      $this->guardar = $data['tipo_imagem'];
 
-      $image = $this->transformImage($req);
+      try {
+        $this->deleteImage($img['ds_imagem']);
+      } catch (Exception $e) {
+      }
+
+      $image = $this->transformImage($req, $this->guardar);
 
       $data['ds_imagem'] = $image;
     }
@@ -55,48 +67,15 @@ class ImagemController extends BaseController
     $req->session()
       ->flash(
         'mensagem',
-        "O produto $req->nome foi atualizado com sucesso"
+        "A imagem de $img->tipo_imagem foi atualizada com sucesso"
       );
-
-    return redirect()->route("$this->tipo.index");
-  }
-
-  public function deletar(Request $req, $id)
-  {
-    $dado = $this->classe::find($id);
-
-    $this->deleteImage($dado['ds_imagem']);
-
-    $this->classe::destroy($id);
 
     $req->session()
       ->flash(
-        'mensagem',
-        "Dados de $dado->nome excluido com sucesso!"
+        'classe',
+        "alert-success"
       );
 
     return redirect()->route("$this->tipo.index");
-  }
-
-  public function transformImage(Request $req)
-  {
-    $image = $req->file('ds_imagem');
-
-    $extension = $image->guessClientExtension();
-
-    $directory = 'img/banners/';
-
-    $hash = rand(1, 9999999);
-
-    $fileName = 'img_' . $hash . '.' . $extension;
-
-    $image->move($directory, $fileName);
-
-    return $directory . $fileName;
-  }
-
-  public function deleteImage($image)
-  {
-    unlink($image);
   }
 }
