@@ -18,6 +18,12 @@ use stdClass;
 class CadastroController extends Controller
 {
 
+  public function emailCadastro($cliente){
+    // $usuario = new stdClass();
+    // // return new newLaravelTips($usuario);
+    Mail::send(new newLaravelTips($cliente));
+  }
+
   
   // -------Cadastrar Clientes
 
@@ -47,11 +53,8 @@ class CadastroController extends Controller
 
     $clientecriado = Cliente::create($cliente);
 
-    $usuario = new stdClass();
-    $usuario->nome = $clientecriado['nome'];
-    $usuario->email = $clientecriado['email'];
-    // return new newLaravelTips($usuario);
-    Mail::send(new newLaravelTips($usuario));
+    // $this->emailCadastro($clientecriado);
+
 
 
     $contatoscliente = array(
@@ -87,6 +90,6 @@ class CadastroController extends Controller
 
     
 
-    return response()->json('Cliente criado com sucesso!', 201);
+    return response()->json('Cliente criado com sucesso!', 201)&&redirect('email-cadastro');
   }
 }
