@@ -1,40 +1,44 @@
 <label class="display-4">Listagem <small>Pedidos</small></label>
 <div class='float-right mt-3'>
-  <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Voltar</a>
+  <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
 </div>
-{{-- <a href="{{ route('pedido.create') }}" class="btn btn-success float-right mt-3">Criar</a> --}}
+  @if(!empty($mensagem))
+    <div class="alert {{ $classe }} ">
+      {{ $mensagem }}
+    </div>
+  @endif
+
 <table class="table">
   <thead>
     <tr>
-      <th class="scope">Numero Pedido</th>
-      <th class="scope">Cd. Pagamento</th>
-      <th class="scope">Nome Cliente</th>
-      <th class="scope">Quantidade de itens</th>
-      <th class="scope">Total da compra</th>
-      <th class="scope">Status</th>
-      <th class="scope">Ação</th>
+      <th class="scope" class='text-center'>Numero Pedido</th>
+      <th class="scope" class='text-center'>Cd. Pagamento</th>
+      <th class="scope" class='text-center'>Nome Cliente</th>
+      <th class="scope" class='text-center'>Status</th>
+      <th class="scope" class='text-center'>Ação</th>
     </tr>
   </thead>
   <tbody>
     {{-- colocar for each aqui --}}
     @foreach ($dados as $pedido)
       <tr>
-        <td>000001</td>
-        <td>01</td>
-        <td>Fulano</td>
-        <td>qtd</td>
-        <td></td>
-        <td>Aberto</td>
-        <td>
-          <div><a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-primary">Ver Pedido</a></div>
-          <form action="{{ route('pedido.update.cancel', $pedido->id) }}">
-            @csrf
-            @method('put')
-            <button class="btn btn-danger">Cancelar</button>
-          </form>
+        <td>{{ $pedido->id }}</td>
+        <td>{{ $pedido->cd_pagamento }}</td>
+        <td>{{ $pedido->cd_cliente }}</td>       
+        <td>{{ $pedido->cd_status_pedido }}</td>          
+        <td>          
+          <div class='d-flex justify-content-around'>
+            <a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-outline-primary">Ver Pedido</a>
+          </div>
+
         </td>
       </tr>
     @endforeach
-    {{-- fechar o each --}}
+    
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center align-items-center">
+  {{ $dados->links() }}
+</div>
+

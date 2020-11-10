@@ -119,8 +119,6 @@ class PedidoController extends BaseController
         $pedido,
         $status
       );
-      
-      // return $emaiSend;
 
       Mail::send($emaiSend);
       

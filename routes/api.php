@@ -21,10 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Rotas Cadastro 
+//Api Cadastro 
 Route::post(
   '/cliente/cadastro',
   'Api\CadastroController@createCadastro'
+);
+
+Route::post(
+  '/cliente/login',
+  'Api\CadastroController@Login'
 );
 
 //Api categoria
@@ -36,16 +41,19 @@ Route::get(
 //Api Cartao Credito
 Route::get(
   '/cartaoCredito/listarCartao/{id}',
-  'Api\ApiCartaoCredController@listarCartao'
+  'Api\ApiCartaoCredControllerx@listarCartao'
 );
+
 Route::post(
   '/cartaoCredito/adicionarCartao',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
+
 Route::get(
   '/cartaoCredito/buscarCartao/{id}',
   'Api\ApiCartaoCredController@buscarCartao'
 );
+
 Route::put(
   '/cartaoCredito/editarCartao/{id}',
   'Api\ApiCartaoCredController@editarCartao'
@@ -103,6 +111,17 @@ Route::get(
   'Api\ProdutoController@index'
 );
 
+// Routas de Pedido
+Route::get(
+  '/pedido/listar/{id}',
+  'Api\PedidoController@listAll'
+);
+
+Route::post(
+  '/pedido/criar',
+  'Api\PedidoController@create'
+);
+
 // Rotas de consumo na page
 
 Route::get(
@@ -110,4 +129,7 @@ Route::get(
   'Api\ConsumoController@listUF'
 );
 
-
+Route::get(
+  '/imagens/{tipo}',
+  'Api\ConsumoController@GetImages'
+);

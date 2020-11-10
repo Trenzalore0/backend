@@ -7,10 +7,13 @@ use App\Models\CartaoCredito;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
+use App\Mail\mailPedido;
 use App\Models\Item_pedido;
 use App\Models\Pedido;
 use App\Models\Status_pedido;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
@@ -43,15 +46,15 @@ class PedidoController extends Controller
   {
     $data = $req->all();
 
-    $client = $data['cliente'];
+    $client = Cliente::find($data['cliente']);
 
-    if (is_null(Cliente::find($client))) {
+    if (empty($client)) {
       return response()->json('cliente não encontrado', 400);
     }
 
     $address = $data['endereco_entrega'];
 
-    if (is_null(Endereco::find($address))) {
+    if (empty(Endereco::find($address))) {
       return response()->json('endereço não encontrado', 400);
     }
 
@@ -77,7 +80,7 @@ class PedidoController extends Controller
     $type_payment = $data['tipo_pagamento'];
 
     $newOrder = [
-      'cd_cliente' => $client,
+      'cd_cliente' => $client->id,
       'cd_tipo_pagamento' => $type_payment,
       'cd_pagamento' => $pay->id,
       'cd_endereco_entrega' => $address,
@@ -85,8 +88,12 @@ class PedidoController extends Controller
       'valor_total' => $data['valor_total']
     ];
 
-    $order = Pedido::create($newOrder);
-
+    try {
+      $order = Pedido::create($newOrder);
+    } catch (Exception $e) {
+      return response()->json($e, 200);
+    }
+    
     $products = $data['produtos'];
 
     foreach ($products as $product) {
@@ -99,8 +106,14 @@ class PedidoController extends Controller
       Item_pedido::create($newProduct);
     }
 
-    return response()->json('Items criados com sucesso', 201);
-  }
+    $sendEmail = new mailPedido($client, $order);
 
-  
+    try {
+      Mail::send($sendEmail);
+    } catch (Exception $e) {
+      return response()->json($e, 200);
+    }
+    
+    return response()->json('Pedido criado com sucesso!', 201);
+  }  
 }

@@ -29,17 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('cliente.index');
 
   Route::get(
-    '/cliente/adicionar',
-    'Site\ClienteController@adicionar'
-  )->name('cliente.create');
-
-  Route::put(
-    '/cliente/salvar',
-    'Site\ClienteController@salvar'
-  )->name('cliente.store');
-
-  Route::get(
-    '/cliente/editar',
+    '/cliente/editar/{id}',
     'Site\ClienteController@editar'
   )->name('cliente.edit');
 
@@ -64,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\ProdutoController@adicionar'
   )->name('produto.create');
 
-  Route::put(
+  Route::post(
     '/produto/salvar',
     'Site\ProdutoController@salvar'
   )->name('produto.store');
@@ -91,29 +81,14 @@ Route::group(['middleware' => 'auth'], function () {
   )->name('pedido.index');
 
   Route::get(
-    '/pedido/adicionar',
-    'Site\PedidoController@adicionar'
-  )->name('pedido.create');
-
-  Route::put(
-    '/pedido/salvar',
-    'Site\PedidoController@salvar'
-  )->name('pedido.store');
-
-  Route::get(
-    '/pedido/detalharPedido',
-    'Site\PedidoController@detalhar'
+    '/pedido/editar/{id}',
+    'Site\PedidoController@editar'
   )->name('pedido.edit');
 
   Route::put(
-    '/pedido/atualizarPedido',
+    '/pedido/atualizarPedido/{id}',
     'Site\PedidoController@atualizar'
   )->name('pedido.update');
-
-  Route::put(
-    '/pedido/cancelarPedido',
-    'Site\PedidoController@cancelar'
-  )->name('pedido.update.cancel');
 
   Route::delete(
     '/pedido/deletarPedido',
@@ -131,7 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\EnderecoController@adicionar'
   )->name('endereco.create');
 
-  Route::put(
+  Route::post(
     '/endereco/salvar',
     'Site\EnderecoController@salvar'
   )->name('endereco.store');
@@ -162,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\UfController@adicionar'
   )->name('uf.create');
 
-  Route::put(
+  Route::post(
     '/uf/salvar',
     'Site\UfController@salvar'
   )->name('uf.store');
@@ -193,7 +168,7 @@ Route::group(['middleware' => 'auth'], function () {
     'Site\ImagemController@adicionar'
   )->name('imagem.create');
 
-  Route::put(
+  Route::post(
     '/imagem/salvar',
     'Site\ImagemController@salvar'
   )->name('imagem.store');
@@ -212,8 +187,6 @@ Route::group(['middleware' => 'auth'], function () {
     '/imagem/deletar/{id}',
     'Site\ImagemController@deletar'
   )->name('imagem.delete');
-
-    
 });
 
 // Route::get('email-cadastro', function(){
@@ -226,3 +199,7 @@ Route::group(['middleware' => 'auth'], function () {
 // });
 
 Auth::routes();
+
+
+Route::get('/enviar/email', function () {
+});

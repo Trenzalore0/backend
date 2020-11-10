@@ -1,7 +1,10 @@
-<label class='display-4'>Criar <small>{{ $tipo }}</small></label>
+<label class='display-4'>{{ $rota == '.store' ? 'Criar' : 'Alterar' }} <small>{{ $tipo }}</small></label>
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route($tipo.'.index') }}">Listagem</a>
+</div>
 <form action="{{ route($tipo.$rota, $dados->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
   @csrf
-  @method('put')
+  {{ isset($dados->id) ? method_field('put') : method_field('post') }}
 
   @if ($tipo == 'cliente')
 
@@ -29,6 +32,10 @@
 
   @endif
 
-  <button type="submit" class="btn btn-success">Salvar</button>
+  @if($tipo != 'cliente')
+
+    <button type="submit" class="btn btn-success mb-5">Salvar</button>
+    
+  @endif
 
 </form>

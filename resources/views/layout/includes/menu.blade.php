@@ -1,5 +1,5 @@
 <style>
-  .navbar-brand, nav {
+  .navbar {
     background-color: #660033;
   }
 </style> 
