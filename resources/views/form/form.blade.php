@@ -32,6 +32,10 @@
 
   @endif
 
-  <button type="submit" class="btn btn-success mb-5">Salvar</button>
+  @if($tipo != 'cliente')
+
+    <button type="submit" class="btn btn-success mb-5">Salvar</button>
+    
+  @endif
 
 </form>

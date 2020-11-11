@@ -133,3 +133,8 @@ Route::get(
   '/imagens/{tipo}',
   'Api\ConsumoController@GetImages'
 );
+
+Route::post(
+  '/sac',
+  'Api\ConsumoController@SAC'
+);

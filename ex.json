@@ -1,18 +1,53 @@
 {
-  "cliente": 12,
-  "endereco_entrega": 15,
-  "tipo_pagamento": "cartão de credito",
+  "cliente": 6,
+  "endereco_entrega": 5,
+  "tipo_pagamento": 2,
   "dados_pagamento": {
-    "id_cartão": 32
+    "id_cartão": 6
   },
   "produtos": [
     {
-      "id_produto": 1,
-      "quantidade": 3
+      "id": 3,
+      "ds_produto": "Elaborado a partir da uva Tempranillo, cultivada na região de Valência e sem passagem em barrica de carvalho, o que faz dele um vinho equilibrado, de paladar leve com taninos suaves. Apresenta o tom rubi médio e brilhante.",
+      "nome_produto": "El Bravo",
+      "ano_produto": "2018",
+      "valor_produto": 49.9,
+      "desconto_produto": 31.41,
+      "cd_pais_origem": 6,
+      "cd_categoria": 3,
+      "ds_imagem": "http://desvinho.herokuapp.com/public/img//products/img_4734412.png",
+      "created_at": "2020-10-24T19:44:47.000000Z",
+      "updated_at": "2020-10-27T13:42:51.000000Z",
+      "quantidade": 4
     },
     {
-      "id_produto": 3,
-      "quantidade": 5
+      "id": 21,
+      "ds_produto": "Bastante frutado, com taninos macios e boa acidez, frutas tropicais como framboesa e groselha.",
+      "nome_produto": "Marchesi del Salento Primitivo",
+      "ano_produto": "2019",
+      "valor_produto": 54.9,
+      "desconto_produto": 54.9,
+      "cd_pais_origem": 18,
+      "cd_categoria": 3,
+      "ds_imagem": "http://desvinho.herokuapp.com/public/img//products/img_8668378.png",
+      "created_at": "2020-10-24T21:48:07.000000Z",
+      "updated_at": "2020-10-27T14:40:21.000000Z",
+      "quantidade": 1
+    },
+    {
+      "id": 19,
+      "ds_produto": "Feita a partir da deliciosa fruta marula da África sub-equatorial, Amarula é um licor destilado e envelhecido em barris de carvalho francês durante dois anos.",
+      "nome_produto": "Licor Amarula",
+      "ano_produto": "--",
+      "valor_produto": 116,
+      "desconto_produto": 116,
+      "cd_pais_origem": 19,
+      "cd_categoria": 15,
+      "ds_imagem": "http://desvinho.herokuapp.com/public/img//products/img_7407306.png",
+      "created_at": "2020-10-24T21:35:37.000000Z",
+      "updated_at": "2020-10-27T14:38:37.000000Z",
+      "quantidade": 2
     }
-  ]
+  ],
+  "valor_total": 412.54
 }

@@ -6,6 +6,7 @@ use App\Models\Endereco;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Uf;
+use Exception;
 
 class EnderecoController extends Controller
 {
@@ -20,7 +21,13 @@ class EnderecoController extends Controller
   {
     $endereco = $req->all();
 
-    return response()->json(Endereco::create($endereco), 201);
+    try {
+      Endereco::create($endereco);
+    } catch (Exception $e) {
+      return response()->json($e, 200);
+    }
+    
+    return response()->json('endereço criado com sucesso' , 201);
   }
 
   public function buscar($id)

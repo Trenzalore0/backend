@@ -28,7 +28,7 @@ class Pedido extends Model
 
   protected $fillable = [
     'id', 'cd_cliente', 'cd_tipo_pagamento',
-    'ds_status', 'cd_pagamento',
-    'cd_endereco_entrega'
+    'cd_status_pedido', 'cd_pagamento',
+    'cd_endereco_entrega', 'valor_total'
   ];
 }
