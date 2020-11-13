@@ -59,11 +59,10 @@ class CadastroController extends Controller
       return response()->json($e->getMessage(), 200);
     }
 
-    $usuario = new stdClass();
+    $usuario = new Cliente();
     $usuario->nome = $cliente['nome'];
     $usuario->email = $cliente['email'];
-    $laravelTips = new newLaravelTips($usuario);
-    Mail::send($laravelTips);
+    Mail::send(new newLaravelTips($usuario));
 
     $contatoscliente = array(
       array(

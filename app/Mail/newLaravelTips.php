@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Cliente;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -19,7 +20,7 @@ class newLaravelTips extends Mailable
      *
      * @return void
      */
-    public function __construct(\stdClass $usuario)
+    public function __construct(Cliente $usuario)
     {
         //
         $this->usuario = $usuario;
