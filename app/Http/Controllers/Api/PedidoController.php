@@ -49,40 +49,36 @@ class PedidoController extends Controller
     $client = Cliente::find($data['cliente']);
 
     if (empty($client)) {
-      return response()->json('cliente não encontrado', 400);
+      return response()->json('cliente não encontrado', 200);
     }
 
     $address = $data['endereco_entrega'];
 
-    if (empty(Endereco::find($address))) {
-      return response()->json('endereço não encontrado', 400);
+    $verify = Endereco::where('id', '=', $address)->get();
+
+    if (\count($verify) == 0) {
+      return response()->json('endereço não encontrado', 200);
     }
 
     $pay = $data['tipo_pagamento'];
 
     if ($pay == 2) {
-      $pay->id = $data['dados_pagamento']['id_cartao'];
-
-      $card = CartaoCredito::find($pay['id']);
-      if (is_null($card)) {
-        return response()->json('cartão não encontrado', 400);
-      }
+      $pay = $data['dados_pagamento']['id_cartao'];
     } else {
       $billet = $data['dados_pagamento']['ds_boleto'];
 
       $pay = Boleto::create([
         'dados_boleto' => $billet
-      ]);
+      ])->id;
     }
 
     $status = 1;
-
     $type_payment = $data['tipo_pagamento'];
 
     $newOrder = [
       'cd_cliente' => $client->id,
       'cd_tipo_pagamento' => $type_payment,
-      'cd_pagamento' => $pay->id,
+      'cd_pagamento' => $pay,
       'cd_endereco_entrega' => $address,
       'cd_status_pedido' => $status,
       'valor_total' => $data['valor_total']
@@ -91,7 +87,7 @@ class PedidoController extends Controller
     try {
       $order = Pedido::create($newOrder);
     } catch (Exception $e) {
-      return response()->json($e, 200);
+      return response()->json($e->getMessage(), 200);
     }
     
     $products = $data['produtos'];

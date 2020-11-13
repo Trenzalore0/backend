@@ -53,6 +53,6 @@ class ConsumoController extends Controller
       return response()->json($e->getMessage(), 200);
     }
 
-    return response()->json($req->all(), 200);
+    return response()->json('mensagem enviada com sucesso!', 202);
   }
 }

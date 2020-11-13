@@ -11,7 +11,6 @@ use App\Models\Login;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Mockery\Expectation;
 use stdClass;
 
 class CadastroController extends Controller
@@ -41,7 +40,7 @@ class CadastroController extends Controller
     try {
       $logincriado = Login::create($clientelogin);
     } catch (Exception $e) {
-      return response()->json($e, 200);
+      return response()->json($e->getMessage(), 200);
     }
 
     $cliente = array(
@@ -57,7 +56,7 @@ class CadastroController extends Controller
     try {
       $clientecriado = Cliente::create($cliente);
     } catch (Exception $e) {
-      return response()->json($e, 200);
+      return response()->json($e->getMessage(), 200);
     }
 
     $usuario = new stdClass();
@@ -97,10 +96,10 @@ class CadastroController extends Controller
     try {
       Endereco::create($clienteend);
     } catch (Exception $e) {
-      return response()->josn($e, 200);
-    }
+      return response()->josn($e->getMessage(), 200);
+    } 
 
-    return response()->json('Cliente criado com sucesso!', 201);
+    return response()->json('Cliente cadastrado com sucesso!', 201);
   } 
 
   public function Login(Request $req)
@@ -110,13 +109,13 @@ class CadastroController extends Controller
     $client = Cliente::where('email', '=', $data['email'])->get();
 
     if (count($client) == 0) {
-      return response()->json('usuario não cadastrado', 404);
+      return response()->json('usuario não cadastrado', 200);
     }
 
     $login = Login::find($client[0]->cd_login);
 
     if ($data['senha'] == $login->senha) {
-      return response()->json($client, 200);
+      return response()->json($client, 202);
     }
 
     return response()->json('senha incorreta', 200);
