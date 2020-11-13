@@ -11,8 +11,6 @@ abstract class BaseController extends Controller
 
     protected $tipo;
 
-    protected $importar;
-
     public function index(Request $req)
     {
         $dados = $this->classe::all();
@@ -28,7 +26,9 @@ abstract class BaseController extends Controller
     {
         $tipo = $this->tipo;
 
-        return view("site.adicionar", compact('tipo'));
+        $rota = '.store';
+
+        return view("site.adicionar", compact('tipo', 'rota'));
     }
 
     public function salvar(Request $req)
@@ -49,9 +49,9 @@ abstract class BaseController extends Controller
 
         $tipo = $this->tipo;
 
-        $editar = true;
+        $rota = '.update';
 
-        return view("site.adicionar", compact('dados', 'tipo', 'editar'));
+        return view("site.adicionar", compact('dados', 'tipo', 'rota'));
     }
 
     public function atualizar(Request $req, $id)

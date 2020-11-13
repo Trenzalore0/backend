@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Uf;
-use App\Endereco;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController;
+use App\Models\Endereco;
 
 class EnderecoController extends BaseController
 {

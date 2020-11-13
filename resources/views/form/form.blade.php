@@ -1,12 +1,10 @@
-
-<form action="{{ route($tipo.'.store') }}" method="post" class="form"
-  enctype="multipart/form-data">
+<label class='display-4'>{{ $rota == '.store' ? 'Criar' : 'Alterar' }} <small>{{ $tipo }}</small></label>
+<div class='float-right mt-3'>
+  <a class='btn btn-outline-secondary' href="{{ route($tipo.'.index') }}">Listagem</a>
+</div>
+<form action="{{ route($tipo.$rota, $dados->id ?? '') }}" method="post" class="form" enctype="multipart/form-data">
   @csrf
-  @method('PUT')
-
-<form action="{{ route($tipo.'.store') }}" method="post" class="form">
-  @csrf
-  @method('put')
+  {{ isset($dados->id) ? method_field('put') : method_field('post') }}
 
   @if ($tipo == 'cliente')
 
@@ -18,12 +16,22 @@
 
   @elseif($tipo == 'endereco')
 
-    @include('form.includes.endereco')  
+    @include('form.includes.endereco')
+
+  @elseif($tipo == 'uf')
+
+    @include('form.includes.uf')
+
+  @elseif($tipo == 'imagem')
+
+    @include('form.includes.imagem')
 
   @else
 
     @include('form.includes.pedido')
 
   @endif
-  <button type="submit" class="btn btn-success">Salvar</button>
+
+  <button type="submit" class="btn btn-success mb-5">Salvar</button>
+
 </form>

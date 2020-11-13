@@ -1,0 +1,18 @@
+{
+  "cliente": 12,
+  "endereco_entrega": 15,
+  "tipo_pagamento": "cartão de credito",
+  "dados_pagamento": {
+    "id_cartão": 32
+  },
+  "produtos": [
+    {
+      "id_produto": 1,
+      "quantidade": 3
+    },
+    {
+      "id_produto": 3,
+      "quantidade": 5
+    }
+  ]
+}

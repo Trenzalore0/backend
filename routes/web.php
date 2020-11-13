@@ -15,147 +15,177 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'Site\HomeController@index')
-    ->name('home.index');
+  ->name('home.index');
 
-// Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
-    //Rotas de cliente
-    Route::get(
-        '/cliente',
-        'Site\ClienteController@index'
-    )->name('cliente.index');
+  //Rotas de cliente
+  Route::get(
+    '/cliente',
+    'Site\ClienteController@index'
+  )->name('cliente.index');
 
-    Route::get(
-        '/cliente/adicionar',
-        'Site\ClienteController@adicionar'
-    )->name('cliente.create');
+  Route::get(
+    '/cliente/editar/{id}',
+    'Site\ClienteController@editar'
+  )->name('cliente.edit');
 
-    Route::post(
-        '/cliente/salvar',
-        'Site\ClienteController@salvar'
-    )->name('cliente.store');
+  Route::put(
+    '/cliente/atualizar',
+    'Site\ClienteController@atualizar'
+  )->name('cliente.update');
 
-    Route::get(
-        '/cliente/editar',
-        'Site\ClienteController@editar'
-    )->name('cliente.edit');
+  Route::delete(
+    '/cliente/deletar',
+    'Site\ClienteController@deletar'
+  )->name('cliente.delete');
 
-    Route::put(
-        '/cliente/atualizar',
-        'Site\ClienteController@atualizar'
-    )->name('cliente.update');
+  //Rotas de produto
+  Route::get(
+    '/produto',
+    'Site\ProdutoController@index'
+  )->name('produto.index');
 
-    Route::delete(
-        '/cliente/deletar',
-        'Site\ClienteController@deletar'
-    )->name('cliente.delete');
+  Route::get(
+    '/produto/adicionar',
+    'Site\ProdutoController@adicionar'
+  )->name('produto.create');
 
-    //Rotas de produto
-    Route::get(
-        '/produto',
-        'Site\ProdutoController@index'
-    )->name('produto.index');
+  Route::post(
+    '/produto/salvar',
+    'Site\ProdutoController@salvar'
+  )->name('produto.store');
 
-    Route::get(
-        '/produto/adicionar',
-        'Site\ProdutoController@adicionar'
-    )->name('produto.create');
+  Route::get(
+    '/produto/editar/{id}',
+    'Site\ProdutoController@editar'
+  )->name('produto.edit');
 
-    Route::put(
-        '/produto/salvar',
-        'Site\ProdutoController@salvar'
-    )->name('produto.store');
+  Route::put(
+    '/produto/atualizar/{id}',
+    'Site\ProdutoController@atualizar'
+  )->name('produto.update');
 
-    Route::get(
-        '/produto/editar/{id}',
-        'Site\ProdutoController@editar'
-    )->name('produto.edit');
+  Route::delete(
+    '/produto/deletar/{id}',
+    'Site\ProdutoController@deletar'
+  )->name('produto.deletar');
 
-    Route::put(
-        '/produto/atualizar/{id}',
-        'Site\ProdutoController@atualizar'
-    )->name('produto.update');
+  // Rotas de pedido
+  Route::get(
+    '/pedido',
+    'Site\PedidoController@index'
+  )->name('pedido.index');
 
-    Route::delete(
-        '/produto/deletar/{id}',
-        'Site\ProdutoController@deletar'
-    )->name('produto.deletar');
+  Route::get(
+    '/pedido/editar/{id}',
+    'Site\PedidoController@editar'
+  )->name('pedido.edit');
 
-    // Rotas de pedido
-    Route::get(
-        '/pedido',
-        'Site\PedidoController@index'
-    )->name('pedido.index');
+  Route::put(
+    '/pedido/atualizarPedido',
+    'Site\PedidoController@atualizar'
+  )->name('pedido.update');
 
-    Route::get(
-        '/pedido/adicionar',
-        'Site\PedidoController@adicionar'
-    )->name('pedido.create');
+  Route::delete(
+    '/pedido/deletarPedido',
+    'Site\PedidoController@deletar'
+  )->name('pedido.delete');
 
-    Route::post(
-        '/pedido/salvar',
-        'Site\PedidoController@salvar'
-    )->name('pedido.store');
+  //Rotas Endereço
+  Route::get(
+    '/endereco',
+    'Site\EnderecoController@index'
+  )->name('endereco.index');
 
-    Route::get(
-        '/pedido/detalharPedido',
-        'Site\PedidoController@detalhar'
-    )->name('pedido.edit');
+  Route::get(
+    '/endereco/adicionar',
+    'Site\EnderecoController@adicionar'
+  )->name('endereco.create');
 
-    Route::put(
-        '/pedido/atualizarPedido',
-        'Site\PedidoController@atualizar'
-    )->name('pedido.update');
+  Route::post(
+    '/endereco/salvar',
+    'Site\EnderecoController@salvar'
+  )->name('endereco.store');
 
-    Route::put(
-        '/pedido/cancelarPedido',
-        'Site\PedidoController@cancelar'
-    )->name('pedido.update.cancel');
+  Route::get(
+    '/endereco/editar/{id}',
+    'Site\EnderecoController@editar'
+  )->name('endereco.edit');
 
-    Route::delete(
-        '/pedido/deletarPedido',
-        'Site\PedidoController@deletar'
-    )->name('pedido.delete');
+  Route::put(
+    '/endereco/atualizar/{id}',
+    'Site\EnderecoController@atualizar'
+  )->name('endereco.update');
+
+  Route::delete(
+    '/endereco/deletar/{id}',
+    'Site\EnderecoController@deletar'
+  )->name('endereco.delete');
+
+  // Rotas de UF
+  Route::get(
+    '/uf',
+    'Site\UfController@index'
+  )->name('uf.index');
+
+  Route::get(
+    '/uf/criar',
+    'Site\UfController@adicionar'
+  )->name('uf.create');
+
+  Route::post(
+    '/uf/salvar',
+    'Site\UfController@salvar'
+  )->name('uf.store');
+
+  Route::get(
+    '/uf/editar/{id}',
+    'Site\UfController@editar'
+  )->name('uf.edit');
+
+  Route::put(
+    '/uf/atualizar/{id}',
+    'Site\UfController@atualizar'
+  )->name('uf.update');
+
+  Route::delete(
+    '/uf/deletar/{id}',
+    'Site\UfController@deletar'
+  )->name('uf.delete');
+
+  // rotas de Imagem
+  Route::get(
+    '/imagem',
+    'Site\ImagemController@index'
+  )->name('imagem.index');
+
+  Route::get(
+    '/imagem/criar',
+    'Site\ImagemController@adicionar'
+  )->name('imagem.create');
+
+  Route::post(
+    '/imagem/salvar',
+    'Site\ImagemController@salvar'
+  )->name('imagem.store');
+
+  Route::get(
+    '/imagem/editar/{id}',
+    'Site\ImagemController@editar'
+  )->name('imagem.edit');
+
+  Route::put(
+    '/imagem/atualizar/{id}',
+    'Site\ImagemController@atualizar'
+  )->name('imagem.update');
+
+  Route::delete(
+    '/imagem/deletar/{id}',
+    'Site\ImagemController@deletar'
+  )->name('imagem.delete');
+
     
-    //Rotas Endereço
-    Route::get(
-        '/endereco',
-        'Site\EnderecoController@index'
-    )->name('endereco.index');
-    
-    Route::get(
-        '/endereco/adicionar',
-        'Site\EnderecoController@adicionar'
-    )->name('endereco.create');
-    
-    Route::put(
-        '/endereco/salvar',
-        'Site\EnderecoController@salvar'
-    )->name('endereco.store');
-    
-    Route::get(
-        '/endereco/editar/{id}',
-        'Site\EnderecoController@editar'
-    )->name('endereco.edit');
-    
-    Route::put(
-        '/endereco/atualizar/{id}',
-        'Site\EnderecoController@atualizar'
-    )->name('endereco.update');
-    
-    Route::delete(
-        '/endereco/deletar/{id}',
-        'Site\EnderecoController@deletar'
-    )->name('endereco.deletar');
-// });
-
-
+});
 
 Auth::routes();
-
-// Route::get(
-//     '/home',
-//     'HomeController@index'
-// )->name('home');
-
-Route::get('/home', 'HomeController@index')->name('home');

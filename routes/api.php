@@ -20,93 +20,121 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// ROTAS API - CLIENTE
 
-Route::get('/listar', 
-'API\ClienteController@listar');
-
-
-Route::post('/salvar', 
-'API\ClienteController@salvar');
-
-
-Route::get('/buscar/{id}', 
-'API\ClienteController@buscar');
-
-
-Route::put('/atualizar/{id}', 
-'Api\ClienteController@atualizar');
-
-// ROTAS API - ITEM PEDIDO
-
-Route::get(
-    '/pedido/listar',
-    'Api\ItemPedidoController@listAll'
-);
-
-Route::get(
-    '/pedido/pedido/{id}',
-    'Api\ItemPedidoController@selectProdutosPedido'
+// Rotas Cliente 
+Route::post(
+  '/cliente/cadastro',
+  'Api\CadastroController@createCadastro'
 );
 
 Route::post(
-    '/pedido/criarLista/',
-    'Api\ItemPedidoController@create'
+  '/cliente/login',
+  'Api\CadastroController@Login'
+);
+
+//Api categoria
+Route::get(
+  '/categoria/listarCategorias',
+  'Api\ApiCategoriaController@listarCategoria'
+);
+
+//Api Cartao Credito
+Route::get(
+  '/cartaoCredito/listarCartao/{id}',
+  'Api\ApiCartaoCredControllerx@listarCartao'
+);
+
+Route::post(
+  '/cartaoCredito/adicionarCartao',
+  'Api\ApiCartaoCredController@adicionarCartao'
+);
+
+Route::get(
+  '/cartaoCredito/buscarCartao/{id}',
+  'Api\ApiCartaoCredController@buscarCartao'
+);
+
+Route::put(
+  '/cartaoCredito/editarCartao/{id}',
+  'Api\ApiCartaoCredController@editarCartao'
+);
+Route::delete(
+  '/cartaoCredito/removerCartao/{id}',
+  'Api\ApiCartaoCredController@removerCartao'
+);
+
+//Api Perfil
+Route::get(
+  '/perfil/buscarTipoPerfil/{id}',
+  'Api\ApiPerfilController@buscarTipoPerfil'
 );
 
 //Rotas Endereços
 Route::get(
-    '/endereco/adicionar',
-    'Api\EnderecoController@adicionar'
-);
-
-Route::get(
-    '/endereco/listar',
-    'Api\EnderecoController@listar'
+  '/endereco/listar',
+  'Api\EnderecoController@listar'
 );
 
 Route::post(
-    '/endereco/salvar',
-    'Api\EnderecoController@salvar'
+  '/endereco/salvar',
+  'Api\EnderecoController@salvar'
 );
 
 Route::get(
-    '/endereco/buscar/{id}',
-    'Api\EnderecoController@buscar'
+  '/endereco/buscar/{id}',
+  'Api\EnderecoController@buscar'
 );
 
 Route::put(
-    '/endereco/atualizar/{id}',
-    'Api\EnderecoController@atualizar'
+  '/endereco/atualizar/{id}',
+  'Api\EnderecoController@atualizar'
 );
 
 //Rotas Produtos
 Route::get(
-    '/produto/listar',
-    'Api\ProdutoController@listar'
+  '/produto/listar',
+  'Api\ProdutoController@listar'
 );
 
 Route::get(
-    '/produto/buscar/{id}',
-    'Api\ProdutoController@buscar'
+  '/produto/buscar/{id}',
+  'Api\ProdutoController@buscar'
 );
 
 Route::get(
-    '/produto/bucarCategoria/{id}',
-    'Api\ProdutoController@buscarCategoria'
+  '/produto/bucarCategoria/{id}',
+  'Api\ProdutoController@buscarCategoria'
 );
 
 Route::get(
-    'produto/index',
-    'Api\ProdutoController@index'
+  '/produto/index',
+  'Api\ProdutoController@index'
 );
 
-Route::get('/cliente/listar', 'API\ClienteController@listar');
-Route::post('/cliente/salvar', 'API\ClienteController@salvar');
-Route::get('/cliente/buscar/{id}', 'API\ClienteController@buscar');
-Route::put('/cliente/atualizar/{id}', 'API\ClienteController@atualizar');
+// Routas de Pedido
+Route::get(
+  '/pedido/listar/{id}',
+  'Api\PedidoController@listAll'
+);
 
+Route::post(
+  '/pedido/criar',
+  'Api\PedidoController@create'
+);
 
-// Rotas Cadastro 
+// Rotas de consumo na page
 
-Route::post('/cliente/cadastro', 'Api\CadastroController@createCadastro');
+Route::get(
+  '/uf',
+  'Api\ConsumoController@listUF'
+);
+
+Route::get(
+  '/imagens/{tipo}',
+  'Api\ConsumoController@GetImages'
+);
+
+Route::get(
+  '/buscar/{pesquisa}',
+  'Api\ConsumoController@Buscar'
+);
