@@ -34,7 +34,7 @@ class ConsumoController extends Controller
     $products = Produto::where('nome_produto', 'like', "%{$pesquisa}%")->get();
 
     if (count($pesquisa) == 0) {
-      return response()->json('produto não localizado', 201);
+      return response()->json('produto não localizado', 200);
     }
 
     foreach($products as $product) {
