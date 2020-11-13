@@ -2,6 +2,12 @@
 <div class='float-right mt-3'>
   <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
 </div>
+  @if(!empty($mensagem))
+    <div class="alert {{ $classe }} ">
+      {{ $mensagem }}
+    </div>
+  @endif
+
 <table class="table">
   <thead>
     <tr>
@@ -18,9 +24,9 @@
       <tr>
         <td>{{ $pedido->id }}</td>
         <td>{{ $pedido->cd_pagamento }}</td>
-        <td>{{ $pedido->cd_cliente }}</td>
-        <td>{{ $pedido->cd_status_pedido }}</td>
-        <td>
+        <td>{{ $pedido->cd_cliente }}</td>       
+        <td>{{ $pedido->cd_status_pedido }}</td>          
+        <td>          
           <div class='d-flex justify-content-around'>
             <a href="{{ route('pedido.edit', $pedido->id) }}" class="btn btn-outline-primary">Ver Pedido</a>
           </div>
@@ -28,6 +34,11 @@
         </td>
       </tr>
     @endforeach
-    {{-- fechar o each --}}
+    
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center align-items-center">
+  {{ $dados->links() }}
+</div>
+

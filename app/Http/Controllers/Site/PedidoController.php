@@ -2,64 +2,138 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Mail\mailPedido;
+use App\Mail\mailStatusPedido;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Models\Produto;
+use App\Models\Status_pedido;
 use Illuminate\Http\Request;
+use App\Models\Item_pedido;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends BaseController
 {
-    public function __construct()
-    {
-        $this->classe = Pedido::class;
-        $this->tipo = 'pedido';
+  public function __construct()
+  {
+    $this->classe = Pedido::class;
+    $this->tipo = 'pedido';
+  }
+
+  public function index(Request $req)
+  {
+    $dados = $this->classe::paginate(5);
+
+    foreach ($dados as $dado) {
+      $cliente = Cliente::find($dado->cd_cliente);
+      $dado->cd_cliente = $cliente->nome;
+
+      $status = Status_pedido::find($dado['cd_status_pedido']);
+      $dado->cd_status_pedido = $status->ds_status;
     }
 
-    public function index(Request $req)
-    {
-        $dados = $this->classe::all();
+    $tipo = $this->tipo;
 
-        foreach ($dados as $dado) {
-            $cliente = Cliente::find($dado['cd_cliente']);
-            $dado->cd_cliente = $cliente->nome;
-        }
+    $mensagem = $req->session()->get('mensagem');
+    $classe = $req->session()->get('classe');
 
+    return view("site.index", compact(
+      'dados',
+      'tipo',
+      'mensagem',
+      'classe'
+    ));
+  }
 
-        $tipo = $this->tipo;
+  public function editar($id)
+  {
+    $dados = $this->classe::find($id);
 
-        $mensagem = $req->session()->get('mensagem');
+    $dados->cd_cliente = Cliente::find($dados->cd_cliente)->nome;
 
-        return view("site.index", compact('dados', 'tipo', 'mensagem'));
+    $dados->valor_total = \number_format(
+      $dados->valor_total,
+      2,
+      ',',
+      ''
+    );
+
+    $produtos = Item_pedido::where('cd_pedido', '=', $id)->paginate(5);
+
+    foreach ($produtos as $produto) {
+      $produto->cd_produto = Produto::find($produto->cd_produto)->nome_produto;
+      $produto->valor_produto = \number_format(
+        $produto->valor_produto,
+        2,
+        ',',
+        ''
+      );
     }
 
-    public function adicionar()
-    {
-        $tipo = $this->tipo;
+    $tipo = $this->tipo;
 
-        // $produtos = Produto::all();
+    $rota = '.update';
 
-        $rota = '.store';
+    $status = Status_pedido::all();
 
-        return view("site.adicionar", compact('tipo', 'rota'));
-    }
+    return view(
+      "site.adicionar",
+      compact(
+        'dados',
+        'tipo',
+        'produtos',
+        'status',
+        'rota'
+      )
+    );
+  }
 
-    public function editar($id)
-    {
-        $dados = $this->classe::find($id);
+  public function atualizar(Request $req, $id)
+  {
+    $dados = $req->all();
 
-        $tipo = $this->tipo;
+    try {
+      $pedido = $this->classe::find($id);
 
-        $rota = '.edit';
+      $pedido->update($dados);
 
-        // $produtos = Produto::all();
+      $req->session()
+        ->flash(
+          'mensagem',
+          "O pedido $id foi atualizado com sucesso"
+        );
 
-        return view(
-            "site.adicionar",
-            compact(
-                'dados',
-                'tipo',
-               'rota'
-            )
+      $req->session()
+        ->flash(
+          'classe',
+          "alert-success"
+        );
+
+      $usuario = Cliente::find($pedido->cd_cliente);
+
+      $status = Status_pedido::find($dados['cd_status_pedido']);
+
+      $emaiSend = new mailStatusPedido(
+        $usuario,
+        $pedido,
+        $status
+      );
+
+      Mail::send($emaiSend);
+      
+    } catch (Exception $e) {
+
+      $req->session()
+        ->flash('mensagem', $e);
+
+      $req->session()
+        ->flash(
+          'classe',
+          "alert-danger"
         );
     }
+
+    return redirect()->route("$this->tipo.index");
+  }
 }

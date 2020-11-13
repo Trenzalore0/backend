@@ -42,7 +42,11 @@ class BaseArquivoController extends BaseController
         "$req->nome adicionado com sucesso"
       );
 
-    $this->PushOrigin();
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
 
     return redirect()->route("$this->tipo.index");
   }
@@ -91,7 +95,11 @@ class BaseArquivoController extends BaseController
         "O produto $req->nome foi atualizado com sucesso"
       );
 
-    $this->PushOrigin();
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
 
     return redirect()->route("$this->tipo.index");
   }
@@ -109,8 +117,6 @@ class BaseArquivoController extends BaseController
         'mensagem',
         "Dados de $dado->nome excluido com sucesso!"
       );
-
-    $this->PushOrigin();
 
     return redirect()->route("$this->tipo.index");
   }
@@ -135,14 +141,5 @@ class BaseArquivoController extends BaseController
   public function deleteImage($image)
   {
     unlink($image);
-  }
-
-  public function PushOrigin()
-  {
-    shell_exec('git init');
-    shell_exec('git remote set-url origin https://Trenzalore0:357789gta@github.com/Trenzalore0/backend.git');
-    shell_exec('git add .');
-    shell_exec('git commit -m "atualizando automaticamente"');
-    shell_exec('git push origin master');
   }
 }

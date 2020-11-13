@@ -7,78 +7,98 @@ use Illuminate\Http\Request;
 
 abstract class BaseController extends Controller
 {
-    protected $classe;
+  protected $classe;
 
-    protected $tipo;
+  protected $tipo;
 
-    public function index(Request $req)
-    {
-        $dados = $this->classe::all();
+  public function index(Request $req)
+  {
+    $dados = $this->classe::all();
 
-        $tipo = $this->tipo;
+    $tipo = $this->tipo;
 
-        $mensagem = $req->session()->get('mensagem');
+    $mensagem = $req->session()->get('mensagem');
 
-        return view("site.index", compact('dados', 'tipo', 'mensagem'));
-    }
+    $classe = $req->session()->get('classe');
 
-    public function adicionar()
-    {
-        $tipo = $this->tipo;
+    return view("site.index", compact(
+      'dados',
+      'tipo',
+      'mensagem',
+      'classe'
+    ));
+  }
 
-        $rota = '.store';
+  public function adicionar()
+  {
+    $tipo = $this->tipo;
 
-        return view("site.adicionar", compact('tipo', 'rota'));
-    }
+    $rota = '.store';
 
-    public function salvar(Request $req)
-    {
-        $this->classe::create($req->all());
-        $req->session()
-            ->flash(
-                'mensagem',
-                "$req->nome adicionado com sucesso"
-            );
+    return view("site.adicionar", compact('tipo', 'rota'));
+  }
 
-        return redirect()->route("$this->tipo.index");
-    }
+  public function salvar(Request $req)
+  {
+    $this->classe::create($req->all());
 
-    public function editar($id)
-    {
-        $dados = $this->classe::find($id);
+    $req->session()
+      ->flash(
+        'mensagem',
+        "$req->nome adicionado com sucesso"
+      );
 
-        $tipo = $this->tipo;
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
 
-        $rota = '.update';
+    return redirect()->route("$this->tipo.index");
+  }
 
-        return view("site.adicionar", compact('dados', 'tipo', 'rota'));
-    }
+  public function editar($id)
+  {
+    $dados = $this->classe::find($id);
 
-    public function atualizar(Request $req, $id)
-    {
-        $dados = $req->all();
-        $this->classe::find($id)->update($dados);
+    $tipo = $this->tipo;
 
-        $req->session()
-            ->flash(
-                'mensagem',
-                "O produto $req->nome foi atualizado com sucesso"
-            );
+    $rota = '.update';
 
-        return redirect()->route("$this->tipo.index");
-    }
+    return view("site.adicionar", compact('dados', 'tipo', 'rota'));
+  }
 
-    public function deletar(Request $req, $id)
-    {
-        $dado = $this->classe::find($id);
-        $dado->delete();
+  public function atualizar(Request $req, $id)
+  {
+    $dados = $req->all();
+    $this->classe::find($id)->update($dados);
 
-        $req->session()
-            ->flash(
-                'mensagem',
-                "Dados de $dado->nome excluido com sucesso!"
-            );
+    $req->session()
+      ->flash(
+        'mensagem',
+        "O produto $req->nome foi atualizado com sucesso"
+      );
 
-        return redirect()->route("$this->tipo.index");
-    }
+    $req->session()
+      ->flash(
+        'classe',
+        "alert-success"
+      );
+
+    return redirect()->route("$this->tipo.index");
+  }
+
+  public function deletar(Request $req, $id)
+  {
+    $dado = $this->classe::find($id);
+    $dado->delete();
+
+    $req->session()
+      ->flash(
+        'mensagem',
+        "Dados de $dado->nome excluido com sucesso!"
+      );
+
+    return redirect()->route("$this->tipo.index");
+  }
 }

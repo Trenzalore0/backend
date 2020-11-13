@@ -6,8 +6,12 @@ use App\Models\Cliente;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
+use App\Mail\newLaravelTips;
 use App\Models\Login;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use stdClass;
 
 class CadastroController extends Controller
 {
@@ -18,7 +22,13 @@ class CadastroController extends Controller
     $hasEmail = Cliente::where('email', '=', $dadosrecebidos['email'])->get();
 
     if (count($hasEmail) != 0) {
-      return response()->json('email já cadatrado', 300);
+      return response()->json('email já cadastrado', 200);
+    }
+
+    $hasEmail = Login::where('login', '=', $dadosrecebidos['email'])->get();
+
+    if (count($hasEmail) != 0) {
+      return response()->json('email já cadastrado', 200);
     }
 
     $clientelogin = array(
@@ -27,7 +37,12 @@ class CadastroController extends Controller
       'cd_perfil' => 1
     );
 
-    $logincriado = Login::create($clientelogin);
+    try {
+      $logincriado = Login::create($clientelogin);
+    } catch (Exception $e) {
+      return response()->json($e->getMessage(), 200);
+    }
+
     $cliente = array(
       'nome' => $dadosrecebidos['nome'],
       'cpf' => $dadosrecebidos['cpf'],
@@ -35,12 +50,20 @@ class CadastroController extends Controller
       'email' => $dadosrecebidos['email'],
       'data_de_nascimento' => $dadosrecebidos['data_nascimento'],
       'genero' => $dadosrecebidos['genero'],
-      'login' => $dadosrecebidos['email'],
-      'senha' => $dadosrecebidos['senha'],
       'cd_login' => $logincriado->id
     );
 
-    $clientecriado = Cliente::create($cliente);
+    try {
+      $clientecriado = Cliente::create($cliente);
+    } catch (Exception $e) {
+      return response()->json($e->getMessage(), 200);
+    }
+
+    $usuario = new stdClass();
+    $usuario->nome = $cliente['nome'];
+    $usuario->email = $cliente['email'];
+    $laravelTips = new newLaravelTips($usuario);
+    Mail::send($laravelTips);
 
     $contatoscliente = array(
       array(
@@ -70,10 +93,14 @@ class CadastroController extends Controller
       'cd_cliente' => $clientecriado->id
     );
 
-    Endereco::create($clienteend);
+    try {
+      Endereco::create($clienteend);
+    } catch (Exception $e) {
+      return response()->josn($e->getMessage(), 200);
+    } 
 
-    return response()->json('Cliente criado com sucesso!', 201);
-  }
+    return response()->json('Cliente cadastrado com sucesso!', 201);
+  } 
 
   public function Login(Request $req)
   {
@@ -82,15 +109,15 @@ class CadastroController extends Controller
     $client = Cliente::where('email', '=', $data['email'])->get();
 
     if (count($client) == 0) {
-      return response()->json('usuario não cadastrado', 404);
+      return response()->json('usuario não cadastrado', 200);
     }
 
     $login = Login::find($client[0]->cd_login);
 
     if ($data['senha'] == $login->senha) {
-      return response()->json($client, 200);
+      return response()->json($client, 202);
     }
 
-    return response()->json('senha incorreta', 300);
+    return response()->json('senha incorreta', 200);
   }
 }

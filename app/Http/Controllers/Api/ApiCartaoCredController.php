@@ -12,6 +12,10 @@ class ApiCartaoCredController extends Controller
   {
     $cartoes = CartaoCredito::where('cd_cliente', '=', $id)->get();
 
+    if(count($cartoes) == 0) {
+      return response()->json('não encontramos cartões para esse usuario', 200);
+    }
+
     return response()->json($cartoes, 200);
   }
 

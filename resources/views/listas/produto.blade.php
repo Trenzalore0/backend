@@ -3,6 +3,11 @@
   <a class='btn btn-outline-secondary' href="{{ route('home.index') }}">Home</a>
   <a href="{{ route('produto.create') }}" class="btn btn-outline-success ">Criar</a>
 </div>
+@if (!empty($mensagem))
+  <div class="alert {{ $classe }} ">
+    {{ $mensagem }}
+  </div>
+@endif
 
 <table class="table">
   <thead>
@@ -21,33 +26,32 @@
   </thead>
   <tbody>
     @foreach ($dados as $produto)
-      <tr>
-        <td class='text-center'>{{ $produto->id }}</td>
-        <td class='text-center'>{{ $produto->ds_produto }}</td>
-        <td class='text-center'>{{ $produto->nome_produto }}</td>
-        <td class='text-center'>{{ $produto->ano_produto }}</td>
-        <td class='text-center'>R$ {{ $produto->valor_produto }}</td>
-        <td class='text-center'>R$ {{ $produto->desconto_produto }}</td>
-        <td class='text-center'>{{ $produto->cd_pais_origem }}</td>
-        <td class='text-center'>{{ $produto->cd_categoria }}</td>
-        <td class='text-center'>
-          <img width="70" height="60" class="w-100" src="{{ url($produto->ds_imagem) }}">
-        </td>
-        <td>
-          <div class="d-flex justify-content-around">
-            <a class="btn btn-outline-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
-            <form action="{{ route('produto.deletar', $produto->id) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-outline-danger">Deletar</button>
-            </form>
-          </div>
-        </td>
+      @if ($produto->status_produto == 'desativado')
+        <tr style='opacity: 50%;'>
+        @else
+        <tr>
+      @endif
+      <td class='text-center'>{{ $produto->id }}</td>
+      <td class='text-center'>{{ $produto->ds_produto }}</td>
+      <td class='text-center'>{{ $produto->nome_produto }}</td>
+      <td class='text-center'>{{ $produto->ano_produto }}</td>
+      <td class='text-center'>R$ {{ $produto->valor_produto }}</td>
+      <td class='text-center'>R$ {{ $produto->desconto_produto }}</td>
+      <td class='text-center'>{{ $produto->cd_pais_origem }}</td>
+      <td class='text-center'>{{ $produto->cd_categoria }}</td>
+      <td class='text-center'>
+        <img width="70" height="60" class="w-100" src="{{ url($produto->ds_imagem) }}">
+      </td>
+      <td>
+        <div class="d-flex justify-content-around">
+          <a class="btn btn-outline-primary" href="{{ route('produto.edit', $produto->id) }}">Editar</a>
+        </div>
+      </td>
 
       </tr>
     @endforeach
   </tbody>
 </table>
 <div class="d-flex justify-content-center">
-{{ $dados->links() }}
+  {{ $dados->links() }}
 </div>

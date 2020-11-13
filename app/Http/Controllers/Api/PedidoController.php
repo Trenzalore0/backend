@@ -7,10 +7,13 @@ use App\Models\CartaoCredito;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
+use App\Mail\mailPedido;
 use App\Models\Item_pedido;
 use App\Models\Pedido;
 use App\Models\Status_pedido;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
@@ -25,18 +28,6 @@ class PedidoController extends Controller
     $orders = Pedido::where('cd_cliente', '=', $id)->get();
 
     foreach ($orders as $order) {
-      $products = Item_pedido::where('cd_pedido', '=', $order->id)->get();
-
-      $valor_total = 0;
-      $quantidade = 0;
-      foreach ($products as $product) {
-        $valor_total += $product->valor_produto;
-        $quantidade += $product->quantidade_produto;
-      }
-
-      $order->valor_total = $valor_total;
-      $order->quantidade_produto = $quantidade;
-
       $status = Status_pedido::find($order->cd_status_pedido);
       $order->cd_status_pedido = $status->ds_status;
     }
@@ -55,61 +46,70 @@ class PedidoController extends Controller
   {
     $data = $req->all();
 
-    $client = $data['cliente'];
+    $client = Cliente::find($data['cliente']);
 
-    if (is_null(Cliente::find($client))) {
-      return response()->json('cliente não encontrado', 400);
+    if (empty($client)) {
+      return response()->json('cliente não encontrado', 200);
     }
 
     $address = $data['endereco_entrega'];
 
-    if (is_null(Endereco::find($address))) {
-      return response()->json('endereço não encontrado', 400);
+    $verify = Endereco::where('id', '=', $address)->get();
+
+    if (\count($verify) == 0) {
+      return response()->json('endereço não encontrado', 200);
     }
 
     $pay = $data['tipo_pagamento'];
 
     if ($pay == 2) {
-      $pay->id = $data['dados_pagamento']['id_cartao'];
-
-      $card = CartaoCredito::find($pay['id']);
-      if (is_null($card)) {
-        return response()->json('cartão não encontrado', 400);
-      }
+      $pay = $data['dados_pagamento']['id_cartao'];
     } else {
       $billet = $data['dados_pagamento']['ds_boleto'];
 
       $pay = Boleto::create([
         'dados_boleto' => $billet
-      ]);
+      ])->id;
     }
 
     $status = 1;
-
     $type_payment = $data['tipo_pagamento'];
 
     $newOrder = [
-      'cd_cliente' => $client,
+      'cd_cliente' => $client->id,
       'cd_tipo_pagamento' => $type_payment,
-      'cd_pagamento' => $pay->id,
+      'cd_pagamento' => $pay,
       'cd_endereco_entrega' => $address,
-      'cd_status_pedido' => $status
+      'cd_status_pedido' => $status,
+      'valor_total' => $data['valor_total']
     ];
 
-    $order = Pedido::create($newOrder);
-
+    try {
+      $order = Pedido::create($newOrder);
+    } catch (Exception $e) {
+      return response()->json($e->getMessage(), 200);
+    }
+    
     $products = $data['produtos'];
 
     foreach ($products as $product) {
       $newProduct = [
         'cd_pedido' => $order->id,
-        'cd_produto' => $product['id_produto'],
+        'cd_produto' => $product['id'],
         'quantidade_produto' => $product['quantidade'],
         'valor_produto' => $product['valor_produto']
       ];
       Item_pedido::create($newProduct);
     }
 
-    return response()->json('Items criados com sucesso', 201);
-  }
+    $sendEmail = new mailPedido($client, $order);
+
+    try {
+      Mail::send($sendEmail);
+    } catch (Exception $e) {
+      return response()->json($e, 200);
+    }
+    
+    return response()->json('Pedido criado com sucesso!', 201);
+  }  
 }
