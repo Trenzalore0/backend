@@ -40,26 +40,26 @@ Route::get(
 
 //Api Cartao Credito
 Route::get(
-  '/cartaoCredito/listarCartao/{id}',
-  'Api\ApiCartaoCredControllerx@listarCartao'
-);
+  '/cartao/listar/{id}',
+  'Api\ApiCartaoCredController@listarCartao'
+);  
 
 Route::post(
-  '/cartaoCredito/adicionarCartao',
+  '/cartao/adicionarCartao',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
 
 Route::get(
-  '/cartaoCredito/buscarCartao/{id}',
+  '/cartao/buscarCartao/{id}',
   'Api\ApiCartaoCredController@buscarCartao'
 );
 
 Route::put(
-  '/cartaoCredito/editarCartao/{id}',
+  '/cartao/editarCartao/{id}',
   'Api\ApiCartaoCredController@editarCartao'
 );
 Route::delete(
-  '/cartaoCredito/removerCartao/{id}',
+  '/cartao/removerCartao/{id}',
   'Api\ApiCartaoCredController@removerCartao'
 );
 

@@ -5,7 +5,7 @@
       {{ config('mail.from.name') }}
     @endcomponent
   @endslot
-
+  
   {{-- Body --}}
   {{ $slot }}
 
