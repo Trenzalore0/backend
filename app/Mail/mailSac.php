@@ -9,32 +9,36 @@ use Illuminate\Queue\SerializesModels;
 
 class mailSac extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
-    private $usuario;
+  private $user, $sendTo, $server;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(\stdClass $usuario)
-    {
-        //
-        $this->usuario = $usuario;
+  /**
+   * Create a new message instance.
+   *
+   * @return void
+   */
+  public function __construct($user, $sendTo, $server)
+  {
+    $this->user = $user;
+    $this->sendTo = $sendTo;
+    $this->server = $server;
+  }
+
+  /**
+   * Build the message.
+   *
+   * @return $this
+   */
+  public function build()
+  {
+    $this->subject("{$this->user->name} - {$this->user->subject}");
+    $this->to($this->sendTo, $this->user->name);
+    $user = $this->user;
+    if ($this->server) {
+      return $this->markdown('mail.mailSacServer', compact('user'));
+    } else {
+      return $this->markdown('mail.mailSacClient', compact('user'));
     }
-
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        $this->subject('SAC');
-        $this->to($this->usuario->email,$this->usuario->nome);
-        return $this->markdown('mail.mailSac', [
-            'usuario' => $this->usuario
-        ]);
-    }
+  }
 }
