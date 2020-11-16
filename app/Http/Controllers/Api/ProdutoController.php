@@ -24,13 +24,17 @@ class ProdutoController extends Controller
 
   public function buscar($id)
   {
-    $produto = Produto::find($id);
+    $products = Produto::where('id', '=', $id)->get();
 
-    if (is_null($produto)) {
-      return response()->json('Produto não encontrado', 404);
+    if (count($products) == 0) {
+      return response()->json('Produto não encontrado', 200);
     }
 
-    return response()->json($produto, 200);
+    foreach($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products[0], 202);
   }
 
   public function buscarCategoria($id)

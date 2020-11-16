@@ -42,7 +42,7 @@ Route::get(
 Route::get(
   '/cartao/listar/{id}',
   'Api\ApiCartaoCredController@listarCartao'
-);  
+);
 
 Route::post(
   '/cartao/adicionarCartao',
@@ -132,6 +132,11 @@ Route::get(
 Route::get(
   '/imagens/{tipo}',
   'Api\ConsumoController@GetImages'
+);
+
+Route::get(
+  '/buscar/{pesquisa}',
+  'Api\ConsumoController@buscar'
 );
 
 Route::post(
