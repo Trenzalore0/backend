@@ -36,14 +36,15 @@
 <div class="form-group">
   <label for="sel1">Tipo pagamento:</label>
   <input type="text" class='form-control' readonly
-    value="{{ $dados->cd_status_pedido ? ($dados->cd_status_pedido == 1 ? 'boleto' : 'cartao') : '' }}">
+    value="{{ $dados->cd_tipo_pagamento ? ($dados->cd_tipo_pagamento == 1 ? 'boleto' : 'cartao') : '' }}">
 </div>
 <div class="from-group">
   <label for="sel1">Status do pedido:</label>
   <select class="form-control" name="cd_status_pedido" id="sel1">
     @foreach ($status as $states)
       <option {{ $dados->cd_status_pedido == $states->id ? 'selected' : '' }} value="{{ $states->id }}">
-        {{ $states->ds_status }}</option>
+        {{ $states->ds_status }}
+      </option>
     @endforeach
   </select>
 </div>

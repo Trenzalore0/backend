@@ -81,6 +81,7 @@ class PedidoController extends Controller
       'cd_pagamento' => $pay,
       'cd_endereco_entrega' => $address,
       'cd_status_pedido' => $status,
+      'frete' => $data['frete'],
       'valor_total' => $data['valor_total']
     ];
 
@@ -97,7 +98,7 @@ class PedidoController extends Controller
         'cd_pedido' => $order->id,
         'cd_produto' => $product['id'],
         'quantidade_produto' => $product['quantidade'],
-        'valor_produto' => $product['valor_produto']
+        'valor_produto' => $product['desconto_produto']
       ];
       Item_pedido::create($newProduct);
     }

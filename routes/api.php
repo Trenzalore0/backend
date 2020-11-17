@@ -45,7 +45,7 @@ Route::get(
 );
 
 Route::post(
-  '/cartao/adicionarCartao',
+  '/cartao/adicionar',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
 
