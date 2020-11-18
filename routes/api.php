@@ -42,7 +42,7 @@ Route::get(
 Route::get(
   '/cartao/listar/{id}',
   'Api\ApiCartaoCredController@listarCartao'
-);  
+);
 
 Route::post(
   '/cartao/adicionarCartao',
@@ -90,6 +90,11 @@ Route::put(
   'Api\EnderecoController@atualizar'
 );
 
+Route::delete(
+  '/endereco/deletar/{id}',
+  'Api\EnderecoController@deletar'
+)
+
 //Rotas Produtos
 Route::get(
   '/produto/listar',
@@ -136,8 +141,9 @@ Route::get(
 
 Route::get(
   '/buscar/{pesquisa}',
-  'Api\ConsumoController@Buscar'
+  'Api\ConsumoController@buscar'
 );
+
 Route::post(
   '/sac',
   'Api\ConsumoController@SAC'

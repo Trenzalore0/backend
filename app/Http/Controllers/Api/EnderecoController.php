@@ -57,4 +57,18 @@ class EnderecoController extends Controller
 
     return response()->json($idendereco->update($endereco), 200);
   }
+
+  public function deletar ($id)
+  {
+    $endereco = $this->class::find($id);
+
+    if (is_null($endereco)){
+      return response()->json(['erro' => 'Endereço não encontrado'], 404)
+    }
+
+    $endereco->delete();
+
+    return response()->json('Endereço excluido', 200);
+
+  }
 }

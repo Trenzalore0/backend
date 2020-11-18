@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Mail\mailSac;
 use App\Models\Imagem;
+use App\Models\Produto;
 use App\Models\Uf;
 use Exception;
 use Illuminate\Http\Request;
@@ -59,15 +60,30 @@ class ConsumoController extends Controller
     $user->message = $data['message'];
 
     $sendClient = new mailSac($user, $user->email, false);
-    $sendServer = new mailSac($user, "desvinho@gmail.com", true);  
+    $sendServer = new mailSac($user, "desvinho@gmail.com", true);
 
     try {
       Mail::send($sendClient);
       Mail::send($sendServer);
-    } catch( Exception $e) {
+    } catch (Exception $e) {
       return response()->json($e->getMessage(), 200);
     }
 
     return response()->json('mensagem enviada com sucesso!', 202);
+  }
+
+  public function buscar($pesquisa)
+  {
+    $products = Produto::where('nome_produto', 'like', "%$pesquisa%")->get();
+
+    if (empty($pesquisa)) {
+      return response()->json('produto não localizado', 200);
+    }
+
+    foreach ($products as $product) {
+      $product['ds_imagem'] = url($product['ds_imagem']);
+    }
+
+    return response()->json($products, 202);
   }
 }

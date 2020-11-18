@@ -36,7 +36,7 @@
 <div class="form-group">
   <label for="sel1">Tipo pagamento:</label>
   <input type="text" class='form-control' readonly
-    value="{{ $dados->cd_status_pedido ? ($dados->cd_status_pedido == 1 ? 'boleto' : 'cartao') : '' }}">
+    value="{{ $dados->cd_status_pedido ? ($dados->cd_status_pedido == 2 ? 'boleto' : 'cartao') : '' }}">
 </div>
 <div class="from-group">
   <label for="sel1">Status do pedido:</label>
