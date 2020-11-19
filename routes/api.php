@@ -143,3 +143,9 @@ Route::post(
   '/sac',
   'Api\ConsumoController@SAC'
 );
+
+//  PASSWORD RESET
+
+Route::post('/password', 'Api\PasswordController@sendMail');
+
+Route::post('/alterPassword', 'Api\PasswordController@alterPassword');
