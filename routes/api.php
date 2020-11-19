@@ -93,7 +93,7 @@ Route::put(
 Route::delete(
   '/endereco/deletar/{id}',
   'Api\EnderecoController@deletar'
-)
+);
 
 //Rotas Produtos
 Route::get(

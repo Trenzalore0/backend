@@ -26,8 +26,8 @@ class EnderecoController extends Controller
     } catch (Exception $e) {
       return response()->json($e, 200);
     }
-    
-    return response()->json('endereço criado com sucesso' , 201);
+
+    return response()->json('endereço criado com sucesso', 201);
   }
 
   public function buscar($id)
@@ -58,17 +58,20 @@ class EnderecoController extends Controller
     return response()->json($idendereco->update($endereco), 200);
   }
 
-  public function deletar ($id)
+  public function deletar($id)
   {
-    $endereco = $this->class::find($id);
 
-    if (is_null($endereco)){
-      return response()->json(['erro' => 'Endereço não encontrado'], 404)
+    $enderecos = Endereco::where('cd_cliente', '=', $id)->get();
+
+    if (count($enderecos) == 0) {
+      return response()->json('Endereco não encontrado', 404);
+    }
+    foreach ($enderecos as $endereco) {
+      $endereco->cd_uf = Uf::find($endereco->cd_uf)->ds_uf;
     }
 
     $endereco->delete();
 
-    return response()->json('Endereço excluido', 200);
-
+    return response()->json(['Endereco excluido'], 200);
   }
 }
