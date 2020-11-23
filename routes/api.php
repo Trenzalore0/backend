@@ -45,7 +45,7 @@ Route::get(
 );
 
 Route::post(
-  '/cartao/adicionarCartao',
+  '/cartao/adicionar',
   'Api\ApiCartaoCredController@adicionarCartao'
 );
 
@@ -148,3 +148,9 @@ Route::post(
   '/sac',
   'Api\ConsumoController@SAC'
 );
+
+//  PASSWORD RESET
+
+Route::post('/password', 'Api\PasswordController@sendMail');
+
+Route::post('/alterPassword', 'Api\PasswordController@alterPassword');
