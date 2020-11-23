@@ -60,18 +60,26 @@ class EnderecoController extends Controller
 
   public function deletar($id)
   {
+    $endereco = Endereco::find($id);
 
-    $enderecos = Endereco::where('cd_cliente', '=', $id)->get();
-
-    if (count($enderecos) == 0) {
-      return response()->json('Endereco não encontrado', 404);
-    }
-    foreach ($enderecos as $endereco) {
-      $endereco->cd_uf = Uf::find($endereco->cd_uf)->ds_uf;
+    if (is_null($endereco)) {
+      return response()->json(['erro' => 'Endereco não encontrado'], 404);
     }
 
     $endereco->delete();
 
-    return response()->json(['Endereco excluido'], 200);
+    return response()->json('Endereco Removido', 200);
+    // $enderecos = Endereco::where('cd_cliente', '=', $id)->get();
+
+    // if (count($enderecos) == 0) {
+    //   return response()->json('Endereco não encontrado', 404);
+    // }
+    // foreach ($enderecos as $endereco) {
+    //   $endereco->cd_uf = Uf::find($endereco->cd_uf)->ds_uf;
+    // }
+
+    // $endereco->delete();
+
+    // return response()->json(['Endereco excluido'], 200);
   }
 }
