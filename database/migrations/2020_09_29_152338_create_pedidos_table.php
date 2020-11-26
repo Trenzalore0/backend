@@ -34,7 +34,7 @@ class CreatePedidosTable extends Migration
       $table->foreign('cd_endereco_entrega')
         ->references('id')->on('enderecos');
 
-      $table->foreing('cd_pagamento')
+      $table->foreign('cd_pagamento')
         ->references('id')->on('pagamentos');
 
       $table->timestamps();

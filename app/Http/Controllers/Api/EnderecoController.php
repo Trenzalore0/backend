@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Endereco;
 use App\Http\Controllers\Controller;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Models\Uf;
 use Exception;
@@ -60,26 +61,37 @@ class EnderecoController extends Controller
 
   public function deletar($id)
   {
-    $endereco = Endereco::find($id);
 
-    if (is_null($endereco)) {
-      return response()->json(['erro' => 'Endereco não encontrado'], 404);
+    $addresses = Endereco::find($id)->get()->each->delete();
+
+    if (is_null($addresses)) {
+      return response()->json('Endereco não encontrado', 404);
     }
 
-    $endereco->delete();
-
-    return response()->json('Endereco Removido', 200);
-    // $enderecos = Endereco::where('cd_cliente', '=', $id)->get();
-
-    // if (count($enderecos) == 0) {
-    //   return response()->json('Endereco não encontrado', 404);
-    // }
-    // foreach ($enderecos as $endereco) {
-    //   $endereco->cd_uf = Uf::find($endereco->cd_uf)->ds_uf;
+    // foreach ($addresses as $address) {
+    //   $address->cd_uf = Uf::find($address->cd_uf)->ds_uf;
     // }
 
-    // $endereco->delete();
+    
 
-    // return response()->json(['Endereco excluido'], 200);
-  }
+    return response()->json($addresses, 200);
+     
+
+    //  $idendereco = Endereco::find($id)->get()->each->delete();
+    
+
+    //  if(is_null($idendereco)){
+     
+    //   return response()->json(['Endereço não encontrado'], 404);
+  
+    //  }
+
+    //  $idendereco->delete($id);
+    // return response()->json(['endereço deletado']);
+    //  }
+      
+    
+     return response()->json( ['Endereço deletado'], 200);
+  
+}
 }

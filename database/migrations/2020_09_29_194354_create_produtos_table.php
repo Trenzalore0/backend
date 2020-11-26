@@ -28,7 +28,6 @@ class CreateProdutosTable extends Migration
       $table->foreign('cd_categoria')
         ->references('id')->on('categorias');
       $table->timestamps();
-      $table->delete();
     });
   }
 
