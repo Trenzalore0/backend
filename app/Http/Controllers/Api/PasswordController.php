@@ -14,7 +14,6 @@ class PasswordController extends Controller
 {
   public function sendMail(Request $request)
   {
-
     $data = $request->all();
 
     $email = $data['email'];
